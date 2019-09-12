@@ -1,0 +1,1438 @@
+update establishment set name='ASC-CountyHall' where id=15886;
+update establishment set name='Adults Wellbeing' where id=52842;
+update establishment set name='ASC-CountyHall' where id=173448;
+update establishment set name='ASC-CountyHall' where id=173449;
+update establishment set name='ASC-CountyHall' where id=173450;
+update establishment set name='ASC-CoalvilleOfficeHighStreet' where id=173456;
+update establishment set name='ASC-CountyHallRoom600' where id=173605;
+update establishment set name='ASC-EasternAnnexe' where id=173609;
+update establishment set name='ASC-BassettStreet' where id=173617;
+update establishment set name='ASC-CountyHallRoom600' where id=173621;
+update establishment set name='ASC-PENNINEHOUSE' where id=173622;
+update establishment set name='ASC-PENNINEHOUSE' where id=173623;
+update establishment set name='ASC-CoalvilleOfficeHighStreet' where id=173624;
+update establishment set name='ASC-CountyHallRoom600' where id=173626;
+update establishment set name='ASC-HinckleyHub' where id=173627;
+update establishment set name='ASC-HinckleyHub' where id=173628;
+update establishment set name='ASC-CountyHallRoom600' where id=173630;
+update establishment set name='ASC-Parkside' where id=173631;
+update establishment set name='ASC-Symington' where id=173633;
+update establishment set name='ASC-CountyHallRoom600' where id=173634;
+update establishment set name='ASC-CountyHall' where id=173635;
+update establishment set name='ASC-PENNINEHOUSE' where id=173641;
+update establishment set name='ASC-CoalvilleOfficeHighStreet' where id=173642;
+update establishment set name='ASC-Symington' where id=173648;
+update establishment set name='ASC-Parkside' where id=173656;
+update establishment set name='Adult Services Manag' where id=174908;
+update establishment set name='Adults Wellbeing' where id=185838;
+update establishment set name='ASC-CountyHall' where id=187640;
+update establishment set name='ASC-CountyHallRoom600' where id=187642;
+update establishment set name='Learning Disabilities & Mental Health' where id=188341;
+update establishment set name='ASC-CountyHall' where id=201064;
+update establishment set name='ASC-CoalvilleOfficeHighStreet' where id=213583;
+update establishment set name='ASC-CountyHallRoom600' where id=213584;
+update establishment set name='ASC-CountyHallRoom600' where id=213585;
+update establishment set name='ASC-CountyHallRoom600' where id=213586;
+update establishment set name='ASC-CountyHall' where id=213587;
+update establishment set name='ASC-CountyHallRoom600' where id=213588;
+update establishment set name='ASC-CountyHallRoom600' where id=213589;
+update establishment set name='ASC-CountyHall' where id=213590;
+update establishment set name='ASC-BassettStreet' where id=213594;
+update establishment set name='ASC-CountyHall' where id=224643;
+update establishment set name='ASC-CountyHall' where id=224644;
+update establishment set name='ASC-CountyHall' where id=224646;
+update establishment set name='ASC-CountyHall' where id=224647;
+update establishment set name='ASC-Parkside' where id=224648;
+update establishment set name='ASC-BassettStreet' where id=224649;
+update establishment set name='ASC-Parkside' where id=224650;
+update establishment set name='ASC-Symington' where id=224651;
+update establishment set name='ASC-Symington' where id=224652;
+update establishment set name='ASC-BassettStreet' where id=224653;
+update establishment set name='ASC-AnsteyFrithHouse' where id=224654;
+update establishment set name='ASC-CountyHallRoom600' where id=224655;
+update establishment set name='ASC-CountyHallRoom600' where id=224656;
+update establishment set name='ASC-CountyHallRoom600' where id=224657;
+update establishment set name='ASC-CountyHall' where id=224658;
+update establishment set name='ASC-CountyHallRoom600' where id=224659;
+update establishment set name='ASC-MELTONAREAOFFICE' where id=224660;
+update establishment set name='ASC-CoalvilleOfficeHighStreet' where id=224661;
+update establishment set name='ASC-CountyHall' where id=224662;
+update establishment set name='ASC-CoalvilleOfficeHighStreet' where id=224663;
+update establishment set name='ASC-HinckleyHub' where id=224664;
+update establishment set name='ASC-HinckleyHub' where id=224665;
+update establishment set name='ASC-PENNINEHOUSE' where id=224666;
+update establishment set name='ASC-PENNINEHOUSE' where id=224667;
+update establishment set name='ASC-CoalvilleOfficeHighStreet' where id=224668;
+update establishment set name='ASC-EasternAnnexe' where id=224670;
+update establishment set name='ASC-PENNINEHOUSE' where id=224671;
+update establishment set name='ASC-AnsteyFrithHouse' where id=224672;
+update establishment set name='ASC-Symington' where id=224673;
+update establishment set name='Community Support' where id=227022;
+update establishment set name='Community Support' where id=227023;
+update establishment set name='Community Support' where id=227024;
+update establishment set name='Policy' where id=237130;
+update establishment set name='Policy' where id=237131;
+update establishment set name='Adult Services Manag' where id=237185;
+update establishment set name='Learning Disabilities & Mental Health' where id=237724;
+update establishment set name='ASC-CountyHall' where id=237848;
+update establishment set name='ASC-CountyHall' where id=237849;
+update establishment set name='ASC-HinckleyHub' where id=237850;
+update establishment set name='ASC-CoalvilleOfficeHighStreet' where id=237851;
+update establishment set name='ASC-CountyHallRoom600' where id=237852;
+update establishment set name='ASC-CountyHallRoom600' where id=237853;
+update establishment set name='ASC-Parkside' where id=237854;
+update establishment set name='ASC-Symington' where id=237855;
+update establishment set name='ASC-BassettStreet' where id=237856;
+update establishment set name='ASC-CountyHall' where id=237857;
+update establishment set name='ASC-CountyHall' where id=237859;
+update establishment set name='ASC-CountyHall' where id=237860;
+update establishment set name='ASC-MillfieldDayCentre' where id=237861;
+update establishment set name='ASC-AnsteyFrithHouse' where id=237866;
+update establishment set name='ASC-MillfieldDayCentre' where id=237867;
+update establishment set name='ASC-CountyHall' where id=237868;
+update establishment set name='ASC-MELTONAREAOFFICE' where id=237869;
+update establishment set name='ASC-Parkside' where id=237870;
+update establishment set name='ASC-BassettStreet' where id=237871;
+update establishment set name='ASC-CountyHall' where id=237874;
+update establishment set name='ASC-AnsteyFrithHouse' where id=237875;
+update establishment set name='ASC-HinckleyHub' where id=237876;
+update establishment set name='PPDMGD Community Projects - Life Skills' where id=238212;
+update establishment set name='PPDMGD Community Projects - Life Skills' where id=238245;
+update establishment set name='Ipswich & East Locality' where id=238283;
+update establishment set name='Ipswich & East Locality' where id=238287;
+update establishment set name='Ipswich & East Locality' where id=238291;
+update establishment set name='Ipswich & East Locality' where id=238295;
+
+
+
+
+update establishment set localidentifier='SVC' where id=240344;
+update establishment set localidentifier='225' where id=4220;
+update establishment set localidentifier='SVC' where id=182581;
+update establishment set localidentifier='SVC' where id=182583;
+update establishment set localidentifier='SVC' where id=182587;
+update establishment set localidentifier='SVC' where id=182588;
+update establishment set localidentifier='234' where id=124162;
+update establishment set localidentifier='SVC' where id=182589;
+update establishment set localidentifier='SVC' where id=182590;
+update establishment set localidentifier='SVC' where id=182595;
+update establishment set localidentifier='Mill House' where id=7922;
+update establishment set localidentifier='62' where id=127854;
+update establishment set localidentifier='HL' where id=101482;
+update establishment set localidentifier='GRO' where id=11624;
+update establishment set localidentifier='104ChurchRd' where id=242602;
+update establishment set localidentifier='F' where id=237125;
+update establishment set localidentifier='F' where id=237126;
+update establishment set localidentifier='PA' where id=159324;
+update establishment set localidentifier='E' where id=237159;
+update establishment set localidentifier='F' where id=237163;
+update establishment set localidentifier='F' where id=237164;
+update establishment set localidentifier='F' where id=237165;
+update establishment set localidentifier='F' where id=237166;
+update establishment set localidentifier='F' where id=237167;
+update establishment set localidentifier='F' where id=237169;
+update establishment set localidentifier='F' where id=237170;
+update establishment set localidentifier='F' where id=237171;
+update establishment set localidentifier='F' where id=237172;
+update establishment set localidentifier='F' where id=237173;
+update establishment set localidentifier='F' where id=237176;
+update establishment set localidentifier='F' where id=237177;
+update establishment set localidentifier='E' where id=237178;
+update establishment set localidentifier='E' where id=237179;
+update establishment set localidentifier='E' where id=237180;
+update establishment set localidentifier='F' where id=237182;
+update establishment set localidentifier='F' where id=237183;
+update establishment set localidentifier='1' where id=137764;
+update establishment set localidentifier='F' where id=237127;
+update establishment set localidentifier='F' where id=237128;
+update establishment set localidentifier='E' where id=237136;
+update establishment set localidentifier='E' where id=237137;
+update establishment set localidentifier='F' where id=237140;
+update establishment set localidentifier='E' where id=237134;
+update establishment set localidentifier='F' where id=237143;
+update establishment set localidentifier='E' where id=237135;
+update establishment set localidentifier='397' where id=169191;
+update establishment set localidentifier='Parent' where id=136452;
+update establishment set localidentifier='386' where id=184898;
+update establishment set localidentifier='F' where id=237152;
+update establishment set localidentifier='192' where id=18028;
+update establishment set localidentifier='The Croft' where id=15803;
+update establishment set localidentifier='SVC' where id=20669;
+update establishment set localidentifier='120' where id=18159;
+update establishment set localidentifier='193' where id=17655;
+update establishment set localidentifier='196' where id=17774;
+update establishment set localidentifier='243' where id=18205;
+update establishment set localidentifier='HQ' where id=202302;
+update establishment set localidentifier='NOR' where id=20177;
+update establishment set localidentifier='Warwick House' where id=20219;
+update establishment set localidentifier='736' where id=100822;
+update establishment set localidentifier='SVC' where id=220982;
+update establishment set localidentifier='383' where id=144121;
+update establishment set localidentifier='SYC' where id=207307;
+update establishment set localidentifier='6' where id=43942;
+update establishment set localidentifier='713' where id=144127;
+update establishment set localidentifier='RE' where id=159602;
+update establishment set localidentifier='Dom Care' where id=152402;
+update establishment set localidentifier='52' where id=224523;
+update establishment set localidentifier='34' where id=156883;
+update establishment set localidentifier='E' where id=224079;
+update establishment set localidentifier='E' where id=224102;
+update establishment set localidentifier='E' where id=224078;
+update establishment set localidentifier='F' where id=224109;
+update establishment set localidentifier='F' where id=224110;
+update establishment set localidentifier='F' where id=224111;
+update establishment set localidentifier='F' where id=224117;
+update establishment set localidentifier='F' where id=224112;
+update establishment set localidentifier='F' where id=224118;
+update establishment set localidentifier='F' where id=224113;
+update establishment set localidentifier='F' where id=224119;
+update establishment set localidentifier='F' where id=224114;
+update establishment set localidentifier='F' where id=224115;
+update establishment set localidentifier='F' where id=224116;
+update establishment set localidentifier='F' where id=224124;
+update establishment set localidentifier='F' where id=224125;
+update establishment set localidentifier='F' where id=224120;
+update establishment set localidentifier='F' where id=224126;
+update establishment set localidentifier='F' where id=224121;
+update establishment set localidentifier='166' where id=168392;
+update establishment set localidentifier='F' where id=224122;
+update establishment set localidentifier='F' where id=224123;
+update establishment set localidentifier='167' where id=168393;
+update establishment set localidentifier='233' where id=297;
+update establishment set localidentifier='104' where id=124155;
+update establishment set localidentifier='400' where id=228763;
+update establishment set localidentifier='712' where id=52;
+update establishment set localidentifier='387' where id=228764;
+update establishment set localidentifier='408' where id=228765;
+update establishment set localidentifier='113' where id=124144;
+update establishment set localidentifier='250' where id=124145;
+update establishment set localidentifier='235' where id=124146;
+update establishment set localidentifier='237' where id=124147;
+update establishment set localidentifier='360' where id=387;
+update establishment set localidentifier='361' where id=396;
+update establishment set localidentifier='220' where id=124149;
+update establishment set localidentifier='254' where id=124150;
+update establishment set localidentifier='175' where id=124152;
+update establishment set localidentifier='FLE' where id=205658;
+update establishment set localidentifier='174' where id=205798;
+update establishment set localidentifier='Parent' where id=584;
+update establishment set localidentifier='612' where id=612;
+update establishment set localidentifier='1' where id=203239;
+update establishment set localidentifier='658' where id=658;
+update establishment set localidentifier='29' where id=473;
+update establishment set localidentifier='764' where id=476;
+update establishment set localidentifier='705' where id=477;
+update establishment set localidentifier='340' where id=479;
+update establishment set localidentifier='730' where id=730;
+update establishment set localidentifier='291' where id=464;
+update establishment set localidentifier='355' where id=235063;
+update establishment set localidentifier='Woodlands' where id=888;
+update establishment set localidentifier='436' where id=466;
+update establishment set localidentifier='Oaklands' where id=891;
+update establishment set localidentifier='248' where id=467;
+update establishment set localidentifier='346' where id=228766;
+update establishment set localidentifier='231' where id=468;
+update establishment set localidentifier='354' where id=1057;
+update establishment set localidentifier='435' where id=193;
+update establishment set localidentifier='Beechwood' where id=1076;
+update establishment set localidentifier='181' where id=199239;
+update establishment set localidentifier='346' where id=236;
+update establishment set localidentifier='HQ' where id=193199;
+update establishment set localidentifier='BNC' where id=255;
+update establishment set localidentifier='10074' where id=95302;
+update establishment set localidentifier='ASP' where id=137567;
+update establishment set localidentifier='205' where id=99482;
+update establishment set localidentifier='710' where id=187481;
+update establishment set localidentifier='302' where id=200342;
+update establishment set localidentifier='235' where id=296;
+update establishment set localidentifier='WAR' where id=234802;
+update establishment set localidentifier='ORCHARD' where id=240843;
+update establishment set localidentifier='1811' where id=1811;
+update establishment set localidentifier='HES' where id=224382;
+update establishment set localidentifier='135' where id=2877;
+update establishment set localidentifier='115' where id=165211;
+update establishment set localidentifier='570' where id=169207;
+update establishment set localidentifier='Supported Living' where id=217485;
+update establishment set localidentifier='340' where id=169197;
+update establishment set localidentifier='Rosedene' where id=208475;
+update establishment set localidentifier='164' where id=96722;
+update establishment set localidentifier='503' where id=169200;
+update establishment set localidentifier='ASG' where id=2057;
+update establishment set localidentifier='504' where id=169201;
+update establishment set localidentifier='Rosedene' where id=244344;
+update establishment set localidentifier='30' where id=211442;
+update establishment set localidentifier='60' where id=211443;
+update establishment set localidentifier='142' where id=211444;
+update establishment set localidentifier='HES' where id=2238;
+update establishment set localidentifier='768' where id=183259;
+update establishment set localidentifier='167' where id=108882;
+update establishment set localidentifier='290' where id=98822;
+update establishment set localidentifier='247' where id=183261;
+update establishment set localidentifier='1' where id=2273;
+update establishment set localidentifier='Willow' where id=3302;
+update establishment set localidentifier='HH' where id=2410;
+update establishment set localidentifier='BEACON' where id=111063;
+update establishment set localidentifier='1' where id=177964;
+update establishment set localidentifier='42' where id=201619;
+update establishment set localidentifier='140' where id=3704;
+update establishment set localidentifier='Bradbury' where id=3439;
+update establishment set localidentifier='MDB' where id=222042;
+update establishment set localidentifier='10061' where id=2477;
+update establishment set localidentifier='LH' where id=3635;
+update establishment set localidentifier='35' where id=2513;
+update establishment set localidentifier='ASG' where id=159125;
+update establishment set localidentifier='Safeguarding' where id=224352;
+update establishment set localidentifier='336' where id=63422;
+update establishment set localidentifier='303' where id=2565;
+update establishment set localidentifier='435' where id=190422;
+update establishment set localidentifier='734' where id=112323;
+update establishment set localidentifier='436' where id=190423;
+update establishment set localidentifier='HEATH' where id=111322;
+update establishment set localidentifier='262' where id=174512;
+update establishment set localidentifier='FLE' where id=215585;
+update establishment set localidentifier='179' where id=190428;
+update establishment set localidentifier='146' where id=190430;
+update establishment set localidentifier='24' where id=4286;
+update establishment set localidentifier='1' where id=3724;
+update establishment set localidentifier='13' where id=4262;
+update establishment set localidentifier='68' where id=4266;
+update establishment set localidentifier='Community Mental Health Team' where id=224776;
+update establishment set localidentifier='103' where id=4270;
+update establishment set localidentifier='36' where id=4277;
+update establishment set localidentifier='144' where id=4279;
+update establishment set localidentifier='116' where id=4281;
+update establishment set localidentifier='35' where id=4282;
+update establishment set localidentifier='25' where id=4284;
+update establishment set localidentifier='767' where id=190433;
+update establishment set localidentifier='22' where id=209702;
+update establishment set localidentifier='403' where id=146784;
+update establishment set localidentifier='CC' where id=161310;
+update establishment set localidentifier='117' where id=146805;
+update establishment set localidentifier='RE' where id=161312;
+update establishment set localidentifier='5' where id=8133;
+update establishment set localidentifier='220' where id=4193;
+update establishment set localidentifier='133' where id=8142;
+update establishment set localidentifier='carewat01' where id=4247;
+update establishment set localidentifier='117' where id=8157;
+update establishment set localidentifier='BR' where id=8078;
+update establishment set localidentifier='466' where id=185573;
+update establishment set localidentifier='416' where id=185574;
+update establishment set localidentifier='NOR' where id=234290;
+update establishment set localidentifier='Safeguarding' where id=212766;
+update establishment set localidentifier='124' where id=190419;
+update establishment set localidentifier='320' where id=185568;
+update establishment set localidentifier='434' where id=190421;
+update establishment set localidentifier='9' where id=196607;
+update establishment set localidentifier='3' where id=200298;
+update establishment set localidentifier='Reablement' where id=212767;
+update establishment set localidentifier='LD' where id=161317;
+update establishment set localidentifier='8' where id=200299;
+update establishment set localidentifier='MH' where id=161343;
+update establishment set localidentifier='389' where id=185577;
+update establishment set localidentifier='9' where id=200300;
+update establishment set localidentifier='119' where id=8212;
+update establishment set localidentifier='3' where id=8127;
+update establishment set localidentifier='417' where id=185578;
+update establishment set localidentifier='412' where id=185570;
+update establishment set localidentifier='413' where id=185571;
+update establishment set localidentifier='115' where id=8217;
+update establishment set localidentifier='1' where id=8730;
+update establishment set localidentifier='419' where id=185580;
+update establishment set localidentifier='4' where id=6933;
+update establishment set localidentifier='FX' where id=8812;
+update establishment set localidentifier='176' where id=176784;
+update establishment set localidentifier='190' where id=213683;
+update establishment set localidentifier='191' where id=213684;
+update establishment set localidentifier='194' where id=213687;
+update establishment set localidentifier='parent' where id=7305;
+update establishment set localidentifier='WL' where id=19250;
+update establishment set localidentifier='Beechlands' where id=156203;
+update establishment set localidentifier='730' where id=6723;
+update establishment set localidentifier='195' where id=213688;
+update establishment set localidentifier='196' where id=213689;
+update establishment set localidentifier='133' where id=7874;
+update establishment set localidentifier='134' where id=7890;
+update establishment set localidentifier='135' where id=7891;
+update establishment set localidentifier='WILLOW' where id=8480;
+update establishment set localidentifier='656' where id=8492;
+update establishment set localidentifier='653' where id=8493;
+update establishment set localidentifier='8' where id=7452;
+update establishment set localidentifier='654' where id=8494;
+update establishment set localidentifier='Shared Lives' where id=158244;
+update establishment set localidentifier='658' where id=8497;
+update establishment set localidentifier='125' where id=7999;
+update establishment set localidentifier='657' where id=8498;
+update establishment set localidentifier='152' where id=106102;
+update establishment set localidentifier='Head Office' where id=6777;
+update establishment set localidentifier='BRI' where id=8662;
+update establishment set localidentifier='7' where id=7433;
+update establishment set localidentifier='Brokerage' where id=187058;
+update establishment set localidentifier='012' where id=179981;
+update establishment set localidentifier='Willow' where id=5127;
+update establishment set localidentifier='610' where id=127833;
+update establishment set localidentifier='333' where id=127846;
+update establishment set localidentifier='146' where id=127834;
+update establishment set localidentifier='344' where id=127848;
+update establishment set localidentifier='330' where id=115085;
+update establishment set localidentifier='207' where id=127849;
+update establishment set localidentifier='387' where id=115090;
+update establishment set localidentifier='733' where id=127850;
+update establishment set localidentifier='160' where id=127835;
+update establishment set localidentifier='342' where id=127836;
+update establishment set localidentifier='169' where id=127851;
+update establishment set localidentifier='265' where id=127838;
+update establishment set localidentifier='LH' where id=101471;
+update establishment set localidentifier='143' where id=127842;
+update establishment set localidentifier='BOA' where id=101475;
+update establishment set localidentifier='181' where id=201987;
+update establishment set localidentifier='BDC' where id=101476;
+update establishment set localidentifier='Head Office' where id=115862;
+update establishment set localidentifier='RH' where id=4629;
+update establishment set localidentifier='HL' where id=4642;
+update establishment set localidentifier='CG' where id=4648;
+update establishment set localidentifier='310' where id=127866;
+update establishment set localidentifier='27' where id=127855;
+update establishment set localidentifier='362' where id=127867;
+update establishment set localidentifier='17' where id=127856;
+update establishment set localidentifier='013' where id=180239;
+update establishment set localidentifier='105' where id=5285;
+update establishment set localidentifier='106' where id=5287;
+update establishment set localidentifier='107' where id=5289;
+update establishment set localidentifier='108' where id=5290;
+update establishment set localidentifier='105' where id=127857;
+update establishment set localidentifier='111' where id=5293;
+update establishment set localidentifier='BROOKFIELD' where id=216124;
+update establishment set localidentifier='112' where id=5294;
+update establishment set localidentifier='114' where id=5297;
+update establishment set localidentifier='150' where id=127859;
+update establishment set localidentifier='115' where id=5298;
+update establishment set localidentifier='133' where id=127860;
+update establishment set localidentifier='186' where id=201992;
+update establishment set localidentifier='88' where id=127861;
+update establishment set localidentifier='134' where id=127868;
+update establishment set localidentifier='380' where id=115047;
+update establishment set localidentifier='352' where id=127874;
+update establishment set localidentifier='119' where id=127875;
+update establishment set localidentifier='192' where id=234846;
+update establishment set localidentifier='136' where id=127876;
+update establishment set localidentifier='134' where id=4711;
+update establishment set localidentifier='129' where id=127879;
+update establishment set localidentifier='111' where id=5938;
+update establishment set localidentifier='116' where id=5300;
+update establishment set localidentifier='117' where id=5301;
+update establishment set localidentifier='118' where id=5302;
+update establishment set localidentifier='Parent' where id=6530;
+update establishment set localidentifier='119' where id=5303;
+update establishment set localidentifier='381' where id=115055;
+update establishment set localidentifier='3' where id=123242;
+update establishment set localidentifier='dom' where id=6614;
+update establishment set localidentifier='6' where id=123243;
+update establishment set localidentifier='106' where id=5439;
+update establishment set localidentifier='7' where id=123244;
+update establishment set localidentifier='149' where id=5443;
+update establishment set localidentifier='8' where id=123245;
+update establishment set localidentifier='142' where id=4320;
+update establishment set localidentifier='9' where id=123246;
+update establishment set localidentifier='103' where id=5460;
+update establishment set localidentifier='150' where id=5462;
+update establishment set localidentifier='3' where id=128393;
+update establishment set localidentifier='101' where id=5464;
+update establishment set localidentifier='336' where id=115050;
+update establishment set localidentifier='186' where id=6130;
+update establishment set localidentifier='341' where id=115051;
+update establishment set localidentifier='134' where id=4745;
+update establishment set localidentifier='114' where id=4288;
+update establishment set localidentifier='338' where id=4289;
+update establishment set localidentifier='154' where id=5348;
+update establishment set localidentifier='122' where id=4291;
+update establishment set localidentifier='342' where id=115054;
+update establishment set localidentifier='44' where id=4292;
+update establishment set localidentifier='12' where id=4314;
+update establishment set localidentifier='46' where id=4294;
+update establishment set localidentifier='763' where id=4304;
+update establishment set localidentifier='339' where id=4322;
+update establishment set localidentifier='50' where id=4307;
+update establishment set localidentifier='Shared Lives' where id=237084;
+update establishment set localidentifier='52' where id=4308;
+update establishment set localidentifier='767' where id=127785;
+update establishment set localidentifier='335' where id=4311;
+update establishment set localidentifier='102' where id=127787;
+update establishment set localidentifier='22' where id=127788;
+update establishment set localidentifier='138' where id=127797;
+update establishment set localidentifier='605' where id=127791;
+update establishment set localidentifier='72' where id=127803;
+update establishment set localidentifier='HO' where id=116643;
+update establishment set localidentifier='WS' where id=212982;
+update establishment set localidentifier='11' where id=6204;
+update establishment set localidentifier='19' where id=4336;
+update establishment set localidentifier='124' where id=4967;
+update establishment set localidentifier='58' where id=4337;
+update establishment set localidentifier='165' where id=127805;
+update establishment set localidentifier='147' where id=127806;
+update establishment set localidentifier='741' where id=4339;
+update establishment set localidentifier='163' where id=127807;
+update establishment set localidentifier='564' where id=115057;
+update establishment set localidentifier='117' where id=127809;
+update establishment set localidentifier='344' where id=115058;
+update establishment set localidentifier='159' where id=127812;
+update establishment set localidentifier='10' where id=4926;
+update establishment set localidentifier='74' where id=127795;
+update establishment set localidentifier='375' where id=115077;
+update establishment set localidentifier='LOND' where id=120682;
+update establishment set localidentifier='108' where id=4453;
+update establishment set localidentifier='HO' where id=198102;
+update establishment set localidentifier='178' where id=168404;
+update establishment set localidentifier='255' where id=204660;
+update establishment set localidentifier='SL' where id=12955;
+update establishment set localidentifier='250' where id=11774;
+update establishment set localidentifier='60' where id=200479;
+update establishment set localidentifier='WDV' where id=234854;
+update establishment set localidentifier='HT' where id=12986;
+update establishment set localidentifier='741' where id=204662;
+update establishment set localidentifier='37' where id=204663;
+update establishment set localidentifier='168' where id=168394;
+update establishment set localidentifier='540' where id=180545;
+update establishment set localidentifier='179' where id=168405;
+update establishment set localidentifier='170' where id=168396;
+update establishment set localidentifier='172' where id=168398;
+update establishment set localidentifier='175' where id=168401;
+update establishment set localidentifier='176' where id=168402;
+update establishment set localidentifier='HEADOFFICE' where id=130522;
+update establishment set localidentifier='177' where id=168403;
+update establishment set localidentifier='124' where id=92242;
+update establishment set localidentifier='62' where id=236722;
+update establishment set localidentifier='5' where id=184039;
+update establishment set localidentifier='71' where id=236723;
+update establishment set localidentifier='194' where id=12845;
+update establishment set localidentifier='122' where id=224542;
+update establishment set localidentifier='155' where id=12683;
+update establishment set localidentifier='AP' where id=104862;
+update establishment set localidentifier='167' where id=12858;
+update establishment set localidentifier='68' where id=200276;
+update establishment set localidentifier='16' where id=162131;
+update establishment set localidentifier='Central' where id=11790;
+update establishment set localidentifier='47' where id=162132;
+update establishment set localidentifier='BOA' where id=235102;
+update establishment set localidentifier='311' where id=184072;
+update establishment set localidentifier='319' where id=184073;
+update establishment set localidentifier='174' where id=168400;
+update establishment set localidentifier='297' where id=184074;
+update establishment set localidentifier='713' where id=212924;
+update establishment set localidentifier='343' where id=184075;
+update establishment set localidentifier='Head Office' where id=11063;
+update establishment set localidentifier='356' where id=184077;
+update establishment set localidentifier='125' where id=184041;
+update establishment set localidentifier='734' where id=212926;
+update establishment set localidentifier='286' where id=184042;
+update establishment set localidentifier='735' where id=212927;
+update establishment set localidentifier='372' where id=184044;
+update establishment set localidentifier='Abbey' where id=232183;
+update establishment set localidentifier='378' where id=184045;
+update establishment set localidentifier='377' where id=184046;
+update establishment set localidentifier='14' where id=184038;
+update establishment set localidentifier='315' where id=184047;
+update establishment set localidentifier='237' where id=184078;
+update establishment set localidentifier='375' where id=184049;
+update establishment set localidentifier='302' where id=184051;
+update establishment set localidentifier='13' where id=10198;
+update establishment set localidentifier='NORWOOD' where id=10339;
+update establishment set localidentifier='321' where id=184055;
+update establishment set localidentifier='279' where id=184059;
+update establishment set localidentifier='315' where id=165158;
+update establishment set localidentifier='HT' where id=10352;
+update establishment set localidentifier='AT' where id=158662;
+update establishment set localidentifier='103' where id=10355;
+update establishment set localidentifier='60' where id=200269;
+update establishment set localidentifier='179' where id=10372;
+update establishment set localidentifier='61' where id=200270;
+update establishment set localidentifier='215' where id=184061;
+update establishment set localidentifier='RH' where id=231983;
+update establishment set localidentifier='316' where id=184062;
+update establishment set localidentifier='14' where id=10468;
+update establishment set localidentifier='283' where id=184063;
+update establishment set localidentifier='130' where id=157546;
+update establishment set localidentifier='63' where id=200272;
+update establishment set localidentifier='10072' where id=10702;
+update establishment set localidentifier='313' where id=184066;
+update establishment set localidentifier='551' where id=184052;
+update establishment set localidentifier='Commissioning' where id=161006;
+update establishment set localidentifier='2' where id=11054;
+update establishment set localidentifier='446' where id=207973;
+update establishment set localidentifier='185' where id=168411;
+update establishment set localidentifier='44' where id=212022;
+update establishment set localidentifier='377' where id=224703;
+update establishment set localidentifier='FX' where id=9616;
+update establishment set localidentifier='228' where id=9394;
+update establishment set localidentifier='Brokerage' where id=9075;
+update establishment set localidentifier='HQ' where id=206960;
+update establishment set localidentifier='7' where id=186280;
+update establishment set localidentifier='Supported Living' where id=9111;
+update establishment set localidentifier='377' where id=207980;
+update establishment set localidentifier='Woodgate' where id=136827;
+update establishment set localidentifier='AST' where id=9547;
+update establishment set localidentifier='1' where id=236643;
+update establishment set localidentifier='157' where id=9775;
+update establishment set localidentifier='719' where id=187485;
+update establishment set localidentifier='HO' where id=111822;
+update establishment set localidentifier='195' where id=224843;
+update establishment set localidentifier='743' where id=207967;
+update establishment set localidentifier='721' where id=187487;
+update establishment set localidentifier='105' where id=207968;
+update establishment set localidentifier='CR' where id=9926;
+update establishment set localidentifier='257' where id=207981;
+update establishment set localidentifier='MR' where id=9928;
+update establishment set localidentifier='109' where id=190579;
+update establishment set localidentifier='Commissioning' where id=186698;
+update establishment set localidentifier='710' where id=207969;
+update establishment set localidentifier='10' where id=9468;
+update establishment set localidentifier='254' where id=207971;
+update establishment set localidentifier='173' where id=9956;
+update establishment set localidentifier='AMHP' where id=213178;
+update establishment set localidentifier='40' where id=9505;
+update establishment set localidentifier='Contact' where id=213180;
+update establishment set localidentifier='138' where id=106858;
+update establishment set localidentifier='509' where id=106859;
+update establishment set localidentifier='12' where id=159697;
+update establishment set localidentifier='Office' where id=14443;
+update establishment set localidentifier='223' where id=97062;
+update establishment set localidentifier='187' where id=14530;
+update establishment set localidentifier='Shared Lives' where id=237682;
+update establishment set localidentifier='HQ' where id=130162;
+update establishment set localidentifier='712' where id=171183;
+update establishment set localidentifier='10026' where id=10026;
+update establishment set localidentifier='153' where id=207986;
+update establishment set localidentifier='363' where id=228767;
+update establishment set localidentifier='Shared Lives' where id=139563;
+update establishment set localidentifier='153' where id=17053;
+update establishment set localidentifier='415' where id=228769;
+update establishment set localidentifier='KNC' where id=17092;
+update establishment set localidentifier='BMH' where id=16302;
+update establishment set localidentifier='ASC' where id=129642;
+update establishment set localidentifier='19' where id=15278;
+update establishment set localidentifier='345' where id=207978;
+update establishment set localidentifier='352' where id=207979;
+update establishment set localidentifier='168' where id=172114;
+update establishment set localidentifier='134' where id=17293;
+update establishment set localidentifier='170' where id=172115;
+update establishment set localidentifier='WH' where id=14728;
+update establishment set localidentifier='CG' where id=14938;
+update establishment set localidentifier='HEADOFFICE' where id=17484;
+update establishment set localidentifier='166' where id=172116;
+update establishment set localidentifier='16' where id=15277;
+update establishment set localidentifier='286' where id=178099;
+update establishment set localidentifier='161' where id=15009;
+update establishment set localidentifier='Adult Social Care' where id=13626;
+update establishment set localidentifier='MH' where id=17619;
+update establishment set localidentifier='Reablement' where id=17555;
+update establishment set localidentifier='BC' where id=195098;
+update establishment set localidentifier='Safeguarding' where id=186712;
+update establishment set localidentifier='386' where id=228772;
+update establishment set localidentifier='194' where id=17605;
+update establishment set localidentifier='45' where id=210844;
+update establishment set localidentifier='18' where id=15982;
+update establishment set localidentifier='416' where id=228773;
+update establishment set localidentifier='BEA' where id=234966;
+update establishment set localidentifier='Pine' where id=15702;
+update establishment set localidentifier='7' where id=14819;
+update establishment set localidentifier='5' where id=204798;
+update establishment set localidentifier='MH' where id=209496;
+update establishment set localidentifier='6' where id=204799;
+update establishment set localidentifier='429' where id=178105;
+update establishment set localidentifier='344' where id=228774;
+update establishment set localidentifier='172' where id=172117;
+update establishment set localidentifier='345' where id=228775;
+update establishment set localidentifier='MH' where id=148046;
+update establishment set localidentifier='163' where id=172158;
+update establishment set localidentifier='551' where id=93622;
+update establishment set localidentifier='164' where id=172159;
+update establishment set localidentifier='410' where id=228776;
+update establishment set localidentifier='171' where id=172160;
+update establishment set localidentifier='186' where id=13425;
+update establishment set localidentifier='397' where id=228777;
+update establishment set localidentifier='360' where id=165199;
+update establishment set localidentifier='412' where id=228778;
+update establishment set localidentifier='174' where id=172164;
+update establishment set localidentifier='347' where id=228779;
+update establishment set localidentifier='162' where id=172165;
+update establishment set localidentifier='343' where id=228782;
+update establishment set localidentifier='165' where id=172166;
+update establishment set localidentifier='187' where id=16510;
+update establishment set localidentifier='22' where id=17014;
+update establishment set localidentifier='OKS' where id=215763;
+update establishment set localidentifier='Warwick House' where id=17029;
+update establishment set localidentifier='BAR' where id=104182;
+update establishment set localidentifier='11' where id=105662;
+update establishment set localidentifier='419' where id=14526;
+update establishment set localidentifier='NORWOOD' where id=125865;
+update establishment set localidentifier='509' where id=15935;
+update establishment set localidentifier='2' where id=165502;
+update establishment set localidentifier='31' where id=207991;
+update establishment set localidentifier='199' where id=14633;
+update establishment set localidentifier='51' where id=200998;
+update establishment set localidentifier='175' where id=172161;
+update establishment set localidentifier='734' where id=178085;
+update establishment set localidentifier='169' where id=172162;
+update establishment set localidentifier='161' where id=178087;
+update establishment set localidentifier='167' where id=172163;
+update establishment set localidentifier='143' where id=136501;
+update establishment set localidentifier='Beechwood' where id=15189;
+update establishment set localidentifier='HO' where id=15200;
+update establishment set localidentifier='25' where id=15284;
+update establishment set localidentifier='1' where id=123222;
+update establishment set localidentifier='26' where id=15287;
+update establishment set localidentifier='Commissioning' where id=199763;
+update establishment set localidentifier='374' where id=170971;
+update establishment set localidentifier='NCC' where id=230704;
+update establishment set localidentifier='23' where id=15300;
+update establishment set localidentifier='3402' where id=183481;
+update establishment set localidentifier='389' where id=170984;
+update establishment set localidentifier='102' where id=17068;
+update establishment set localidentifier='85' where id=178090;
+update establishment set localidentifier='392' where id=170987;
+update establishment set localidentifier='41' where id=201618;
+update establishment set localidentifier='159' where id=178093;
+update establishment set localidentifier='LH' where id=15041;
+update establishment set localidentifier='BNB' where id=17124;
+update establishment set localidentifier='304' where id=15682;
+update establishment set localidentifier='24' where id=15288;
+update establishment set localidentifier='Head Office' where id=15051;
+update establishment set localidentifier='HO' where id=14534;
+update establishment set localidentifier='HQ' where id=206018;
+update establishment set localidentifier='HAR' where id=62242;
+update establishment set localidentifier='190' where id=99462;
+update establishment set localidentifier='BR' where id=13539;
+update establishment set localidentifier='405' where id=184901;
+update establishment set localidentifier='WS' where id=13752;
+update establishment set localidentifier='Shared Lives' where id=160369;
+update establishment set localidentifier='QUEENSWAY' where id=13820;
+update establishment set localidentifier='Office' where id=19697;
+update establishment set localidentifier='17' where id=20442;
+update establishment set localidentifier='Heathlands' where id=15194;
+update establishment set localidentifier='43' where id=20500;
+update establishment set localidentifier='33' where id=15211;
+update establishment set localidentifier='129' where id=25302;
+update establishment set localidentifier='PA' where id=13715;
+update establishment set localidentifier='dom' where id=20957;
+update establishment set localidentifier='406' where id=184900;
+update establishment set localidentifier='AP' where id=197222;
+update establishment set localidentifier='ASL' where id=21479;
+update establishment set localidentifier='222' where id=228464;
+update establishment set localidentifier='Abbey' where id=167877;
+update establishment set localidentifier='Woodgate' where id=157216;
+update establishment set localidentifier='105' where id=25921;
+update establishment set localidentifier='BEA' where id=21140;
+update establishment set localidentifier='104' where id=154084;
+update establishment set localidentifier='BRA' where id=21142;
+update establishment set localidentifier='52' where id=160375;
+update establishment set localidentifier='221' where id=228463;
+update establishment set localidentifier='223' where id=228465;
+update establishment set localidentifier='218' where id=228462;
+update establishment set localidentifier='224' where id=228466;
+update establishment set localidentifier='carewat01' where id=121223;
+update establishment set localidentifier='CAT' where id=21171;
+update establishment set localidentifier='ASC' where id=20538;
+update establishment set localidentifier='106' where id=26232;
+update establishment set localidentifier='107' where id=26234;
+update establishment set localidentifier='SHE' where id=234727;
+update establishment set localidentifier='225' where id=228467;
+update establishment set localidentifier='WAR' where id=21079;
+update establishment set localidentifier='228' where id=228469;
+update establishment set localidentifier='178' where id=18152;
+update establishment set localidentifier='219' where id=228470;
+update establishment set localidentifier='220' where id=228471;
+update establishment set localidentifier='248' where id=170914;
+update establishment set localidentifier='Shared Lives' where id=25824;
+update establishment set localidentifier='130' where id=142991;
+update establishment set localidentifier='Head Office' where id=20671;
+update establishment set localidentifier='WRH' where id=19528;
+update establishment set localidentifier='Hazel' where id=17992;
+update establishment set localidentifier='BNB' where id=21506;
+update establishment set localidentifier='158' where id=171912;
+update establishment set localidentifier='42' where id=25822;
+update establishment set localidentifier='South' where id=17917;
+update establishment set localidentifier='CLA' where id=21198;
+update establishment set localidentifier='20' where id=18417;
+update establishment set localidentifier='413' where id=241137;
+update establishment set localidentifier='160' where id=17780;
+update establishment set localidentifier='140' where id=18155;
+update establishment set localidentifier='HO' where id=19404;
+update establishment set localidentifier='WN' where id=110402;
+update establishment set localidentifier='114' where id=113722;
+update establishment set localidentifier='Safeguarding' where id=19311;
+update establishment set localidentifier='Head Office' where id=18684;
+update establishment set localidentifier='HAW' where id=150609;
+update establishment set localidentifier='CR' where id=20435;
+update establishment set localidentifier='Beechlands' where id=228502;
+update establishment set localidentifier='AMHP' where id=148099;
+update establishment set localidentifier='178' where id=148183;
+update establishment set localidentifier='138' where id=18142;
+update establishment set localidentifier='BEACON' where id=148162;
+update establishment set localidentifier='AST' where id=51863;
+update establishment set localidentifier='29' where id=174447;
+update establishment set localidentifier='Poplars' where id=228503;
+update establishment set localidentifier='34' where id=174450;
+update establishment set localidentifier='867' where id=241523;
+update establishment set localidentifier='382' where id=216928;
+update establishment set localidentifier='1' where id=174419;
+update establishment set localidentifier='35' where id=174451;
+update establishment set localidentifier='372' where id=216926;
+update establishment set localidentifier='383' where id=216929;
+update establishment set localidentifier='36' where id=174452;
+update establishment set localidentifier='2' where id=174420;
+update establishment set localidentifier='37' where id=174453;
+update establishment set localidentifier='3' where id=174421;
+update establishment set localidentifier='108' where id=26322;
+update establishment set localidentifier='325' where id=194576;
+update establishment set localidentifier='326' where id=194577;
+update establishment set localidentifier='283' where id=194619;
+update establishment set localidentifier='45' where id=194571;
+update establishment set localidentifier='349' where id=194620;
+update establishment set localidentifier='322' where id=194573;
+update establishment set localidentifier='39' where id=194621;
+update establishment set localidentifier='324' where id=194575;
+update establishment set localidentifier='61' where id=212883;
+update establishment set localidentifier='5' where id=174423;
+update establishment set localidentifier='171' where id=187410;
+update establishment set localidentifier='8' where id=174426;
+update establishment set localidentifier='30' where id=174448;
+update establishment set localidentifier='9' where id=174427;
+update establishment set localidentifier='11' where id=174429;
+update establishment set localidentifier='10' where id=174428;
+update establishment set localidentifier='Glebelands' where id=32783;
+update establishment set localidentifier='12' where id=174430;
+update establishment set localidentifier='303' where id=19991;
+update establishment set localidentifier='115' where id=18059;
+update establishment set localidentifier='14' where id=174432;
+update establishment set localidentifier='181' where id=17880;
+update establishment set localidentifier='17' where id=174435;
+update establishment set localidentifier='46' where id=159958;
+update establishment set localidentifier='20' where id=174438;
+update establishment set localidentifier='116' where id=18084;
+update establishment set localidentifier='21' where id=174439;
+update establishment set localidentifier='178' where id=189244;
+update establishment set localidentifier='339' where id=109262;
+update establishment set localidentifier='1' where id=18386;
+update establishment set localidentifier='38' where id=174454;
+update establishment set localidentifier='ASC' where id=19187;
+update establishment set localidentifier='39' where id=174455;
+update establishment set localidentifier='22' where id=174440;
+update establishment set localidentifier='24' where id=174442;
+update establishment set localidentifier='40' where id=174456;
+update establishment set localidentifier='422' where id=19640;
+update establishment set localidentifier='25' where id=174443;
+update establishment set localidentifier='415' where id=19641;
+update establishment set localidentifier='26' where id=174444;
+update establishment set localidentifier='159' where id=17675;
+update establishment set localidentifier='27' where id=174445;
+update establishment set localidentifier='605' where id=196819;
+update establishment set localidentifier='199' where id=17922;
+update establishment set localidentifier='206' where id=18659;
+update establishment set localidentifier='385' where id=185163;
+update establishment set localidentifier='171' where id=17824;
+update establishment set localidentifier='407' where id=185164;
+update establishment set localidentifier='164' where id=18135;
+update establishment set localidentifier='HO' where id=18086;
+update establishment set localidentifier='184' where id=17752;
+update establishment set localidentifier='204' where id=18164;
+update establishment set localidentifier='151' where id=2433;
+update establishment set localidentifier='195' where id=18131;
+update establishment set localidentifier='141' where id=2721;
+update establishment set localidentifier='225' where id=18168;
+update establishment set localidentifier='293' where id=2732;
+update establishment set localidentifier='185' where id=18165;
+update establishment set localidentifier='233' where id=3715;
+update establishment set localidentifier='141' where id=18169;
+update establishment set localidentifier='249' where id=3997;
+update establishment set localidentifier='151' where id=18172;
+update establishment set localidentifier='341' where id=7507;
+update establishment set localidentifier='157' where id=18173;
+update establishment set localidentifier='NCC' where id=18243;
+update establishment set localidentifier='109' where id=8130;
+update establishment set localidentifier='WRH' where id=187324;
+update establishment set localidentifier='137' where id=8190;
+update establishment set localidentifier='249' where id=99483;
+update establishment set localidentifier='331' where id=8195;
+update establishment set localidentifier='Transitions' where id=19331;
+update establishment set localidentifier='138' where id=8207;
+update establishment set localidentifier='LD' where id=19332;
+update establishment set localidentifier='223' where id=8208;
+update establishment set localidentifier='135' where id=25304;
+update establishment set localidentifier='290' where id=8210;
+update establishment set localidentifier='283' where id=1864;
+update establishment set localidentifier='439' where id=241125;
+update establishment set localidentifier='255' where id=1865;
+update establishment set localidentifier='225' where id=1866;
+update establishment set localidentifier='320' where id=241127;
+update establishment set localidentifier='374' where id=1869;
+update establishment set localidentifier='319' where id=241128;
+update establishment set localidentifier='235' where id=1870;
+update establishment set localidentifier='Central' where id=229643;
+update establishment set localidentifier='220' where id=1872;
+update establishment set localidentifier='854' where id=31402;
+update establishment set localidentifier='297' where id=6909;
+update establishment set localidentifier='243' where id=7273;
+update establishment set localidentifier='218' where id=6911;
+update establishment set localidentifier='221' where id=7358;
+update establishment set localidentifier='227' where id=6912;
+update establishment set localidentifier='335' where id=7402;
+update establishment set localidentifier='236' where id=8552;
+update establishment set localidentifier='143' where id=6913;
+update establishment set localidentifier='228' where id=8557;
+update establishment set localidentifier='145' where id=6915;
+update establishment set localidentifier='230' where id=8560;
+update establishment set localidentifier='253' where id=8561;
+update establishment set localidentifier='231' where id=6893;
+update establishment set localidentifier='110' where id=6916;
+update establishment set localidentifier='215' where id=6897;
+update establishment set localidentifier='142' where id=6899;
+update establishment set localidentifier='285' where id=6917;
+update establishment set localidentifier='247' where id=6902;
+update establishment set localidentifier='111' where id=5187;
+update establishment set localidentifier='211' where id=6906;
+update establishment set localidentifier='146' where id=6123;
+update establishment set localidentifier='250' where id=6907;
+update establishment set localidentifier='105' where id=6316;
+update establishment set localidentifier='BROOKFIELD' where id=31523;
+update establishment set localidentifier='147' where id=6318;
+update establishment set localidentifier='445' where id=241132;
+update establishment set localidentifier='108' where id=6322;
+update establishment set localidentifier='349' where id=241133;
+update establishment set localidentifier='322' where id=4500;
+update establishment set localidentifier='389' where id=241134;
+update establishment set localidentifier='436' where id=241135;
+update establishment set localidentifier='144' where id=4505;
+update establishment set localidentifier='288' where id=241138;
+update establishment set localidentifier='Adult Social Care' where id=31942;
+update establishment set localidentifier='449' where id=241165;
+update establishment set localidentifier='154' where id=9347;
+update establishment set localidentifier='407' where id=241139;
+update establishment set localidentifier='153' where id=9149;
+update establishment set localidentifier='440' where id=241140;
+update establishment set localidentifier='155' where id=9458;
+update establishment set localidentifier='435' where id=241164;
+update establishment set localidentifier='152' where id=15742;
+update establishment set localidentifier='408' where id=185165;
+update establishment set localidentifier='257' where id=13824;
+update establishment set localidentifier='156' where id=21875;
+update establishment set localidentifier='429' where id=185167;
+update establishment set localidentifier='377' where id=21876;
+update establishment set localidentifier='Mill House' where id=157195;
+update establishment set localidentifier='275' where id=21881;
+update establishment set localidentifier='324' where id=21882;
+update establishment set localidentifier='32' where id=174458;
+update establishment set localidentifier='325' where id=21883;
+update establishment set localidentifier='1' where id=30622;
+update establishment set localidentifier='326' where id=21884;
+update establishment set localidentifier='45' where id=212042;
+update establishment set localidentifier='321' where id=21885;
+update establishment set localidentifier='Glebelands' where id=138585;
+update establishment set localidentifier='379' where id=21887;
+update establishment set localidentifier='376' where id=21888;
+update establishment set localidentifier='MH' where id=22669;
+update establishment set localidentifier='378' where id=21890;
+update establishment set localidentifier='171' where id=21659;
+update establishment set localidentifier='136' where id=25305;
+update establishment set localidentifier='381' where id=76882;
+update establishment set localidentifier='446' where id=241172;
+update establishment set localidentifier='169' where id=136524;
+update establishment set localidentifier='111' where id=26230;
+update establishment set localidentifier='311' where id=535;
+update establishment set localidentifier='Parent' where id=29464;
+update establishment set localidentifier='356' where id=536;
+update establishment set localidentifier='351' where id=530;
+update establishment set localidentifier='313' where id=539;
+update establishment set localidentifier='352' where id=531;
+update establishment set localidentifier='315' where id=540;
+update establishment set localidentifier='310' where id=532;
+update establishment set localidentifier='340' where id=1150;
+update establishment set localidentifier='353' where id=533;
+update establishment set localidentifier='343' where id=1152;
+update establishment set localidentifier='219' where id=1857;
+update establishment set localidentifier='355' where id=534;
+update establishment set localidentifier='237' where id=1860;
+update establishment set localidentifier='302' where id=243622;
+update establishment set localidentifier='South' where id=194564;
+update establishment set localidentifier='1' where id=25182;
+update establishment set localidentifier='WH' where id=147295;
+update establishment set localidentifier='2' where id=236624;
+update establishment set localidentifier='10096' where id=218467;
+update establishment set localidentifier='427' where id=203020;
+update establishment set localidentifier='138' where id=142016;
+update establishment set localidentifier='300' where id=234296;
+update establishment set localidentifier='338' where id=196829;
+update establishment set localidentifier='227' where id=36442;
+update establishment set localidentifier='SHE' where id=24192;
+update establishment set localidentifier='72' where id=212582;
+update establishment set localidentifier='113' where id=26543;
+update establishment set localidentifier='502' where id=24133;
+update establishment set localidentifier='187' where id=168413;
+update establishment set localidentifier='ORCHARD' where id=221208;
+update establishment set localidentifier='191' where id=168417;
+update establishment set localidentifier='741' where id=223698;
+update establishment set localidentifier='740' where id=223697;
+update establishment set localidentifier='62' where id=171195;
+update establishment set localidentifier='743' where id=223700;
+update establishment set localidentifier='117' where id=26422;
+update establishment set localidentifier='003' where id=34382;
+update establishment set localidentifier='264' where id=174525;
+update establishment set localidentifier='012' where id=34383;
+update establishment set localidentifier='013' where id=34384;
+update establishment set localidentifier='118' where id=26442;
+update establishment set localidentifier='288' where id=174533;
+update establishment set localidentifier='1' where id=31967;
+update establishment set localidentifier='hq' where id=26343;
+update establishment set localidentifier='119' where id=26362;
+update establishment set localidentifier='1' where id=24051;
+update establishment set localidentifier='2' where id=171622;
+update establishment set localidentifier='115' where id=26548;
+update establishment set localidentifier='139' where id=25062;
+update establishment set localidentifier='116' where id=26549;
+update establishment set localidentifier='120' where id=26382;
+update establishment set localidentifier='5' where id=152494;
+update establishment set localidentifier='HQ' where id=26783;
+update establishment set localidentifier='152' where id=168378;
+update establishment set localidentifier='41' where id=235762;
+update establishment set localidentifier='Community Mental Health Team' where id=33030;
+update establishment set localidentifier='375' where id=34431;
+update establishment set localidentifier='43' where id=235763;
+update establishment set localidentifier='ASP' where id=150332;
+update establishment set localidentifier='3402' where id=70082;
+update establishment set localidentifier='Pine' where id=67382;
+update establishment set localidentifier='160' where id=168386;
+update establishment set localidentifier='161' where id=168387;
+update establishment set localidentifier='176' where id=72622;
+update establishment set localidentifier='162' where id=168388;
+update establishment set localidentifier='123' where id=158826;
+update establishment set localidentifier='parent' where id=69787;
+update establishment set localidentifier='52' where id=210024;
+update establishment set localidentifier='44' where id=235764;
+update establishment set localidentifier='A' where id=201098;
+update establishment set localidentifier='HO' where id=221390;
+update establishment set localidentifier='653' where id=71342;
+update establishment set localidentifier='101' where id=158828;
+update establishment set localidentifier='654' where id=71362;
+update establishment set localidentifier='124' where id=158829;
+update establishment set localidentifier='786' where id=159663;
+update establishment set localidentifier='125' where id=158830;
+update establishment set localidentifier='102' where id=158801;
+update establishment set localidentifier='10096' where id=176185;
+update establishment set localidentifier='143' where id=159648;
+update establishment set localidentifier='131' where id=158834;
+update establishment set localidentifier='163' where id=168389;
+update establishment set localidentifier='10064' where id=221929;
+update establishment set localidentifier='164' where id=168390;
+update establishment set localidentifier='140' where id=158837;
+update establishment set localidentifier='222' where id=72626;
+update establishment set localidentifier='142' where id=158838;
+update establishment set localidentifier='116' where id=115382;
+update establishment set localidentifier='143' where id=158839;
+update establishment set localidentifier='4' where id=71222;
+update establishment set localidentifier='Enterprise' where id=74604;
+update establishment set localidentifier='504' where id=93202;
+update establishment set localidentifier='ASL' where id=159011;
+update establishment set localidentifier='9' where id=186203;
+update establishment set localidentifier='147' where id=91462;
+update establishment set localidentifier='2' where id=186204;
+update establishment set localidentifier='144' where id=158840;
+update establishment set localidentifier='145' where id=158841;
+update establishment set localidentifier='30' where id=47282;
+update establishment set localidentifier='147' where id=158843;
+update establishment set localidentifier='410' where id=185364;
+update establishment set localidentifier='BC' where id=188679;
+update establishment set localidentifier='23' where id=174292;
+update establishment set localidentifier='Commissioning' where id=79228;
+update establishment set localidentifier='48' where id=174294;
+update establishment set localidentifier='Poplars' where id=69362;
+update establishment set localidentifier='313' where id=200345;
+update establishment set localidentifier='Safeguarding' where id=79238;
+update establishment set localidentifier='342' where id=200346;
+update establishment set localidentifier='333' where id=69783;
+update establishment set localidentifier='27' where id=45984;
+update establishment set localidentifier='WN' where id=233486;
+update establishment set localidentifier='39' where id=54526;
+update establishment set localidentifier='786' where id=196870;
+update establishment set localidentifier='1' where id=54532;
+update establishment set localidentifier='28' where id=47482;
+update establishment set localidentifier='141' where id=158703;
+update establishment set localidentifier='4' where id=54535;
+update establishment set localidentifier='8' where id=54539;
+update establishment set localidentifier='MR' where id=199698;
+update establishment set localidentifier='10' where id=54541;
+update establishment set localidentifier='353' where id=170952;
+update establishment set localidentifier='11' where id=54542;
+update establishment set localidentifier='15' where id=54544;
+update establishment set localidentifier='382' where id=78222;
+update establishment set localidentifier='19' where id=54547;
+update establishment set localidentifier='SHL' where id=207305;
+update establishment set localidentifier='21' where id=54549;
+update establishment set localidentifier='217' where id=216234;
+update establishment set localidentifier='25' where id=54551;
+update establishment set localidentifier='417' where id=196865;
+update establishment set localidentifier='26' where id=54552;
+update establishment set localidentifier='342' where id=62102;
+update establishment set localidentifier='27' where id=54553;
+update establishment set localidentifier='622' where id=63762;
+update establishment set localidentifier='28' where id=54554;
+update establishment set localidentifier='HILL' where id=202528;
+update establishment set localidentifier='29' where id=54555;
+update establishment set localidentifier='30' where id=54556;
+update establishment set localidentifier='49' where id=174296;
+update establishment set localidentifier='50' where id=174297;
+update establishment set localidentifier='769' where id=75742;
+update establishment set localidentifier='5' where id=146065;
+update establishment set localidentifier='264' where id=170939;
+update establishment set localidentifier='Parent' where id=77763;
+update establishment set localidentifier='236' where id=68482;
+update establishment set localidentifier='Hazel' where id=72322;
+update establishment set localidentifier='WILLOW' where id=74904;
+update establishment set localidentifier='230' where id=87842;
+update establishment set localidentifier='434' where id=185361;
+update establishment set localidentifier='5' where id=76083;
+update establishment set localidentifier='5' where id=43949;
+update establishment set localidentifier='7' where id=76090;
+update establishment set localidentifier='3' where id=43963;
+update establishment set localidentifier='16' where id=43965;
+update establishment set localidentifier='8' where id=76091;
+update establishment set localidentifier='4' where id=43967;
+update establishment set localidentifier='165' where id=168391;
+update establishment set localidentifier='466' where id=42242;
+update establishment set localidentifier='41' where id=77662;
+update establishment set localidentifier='656' where id=62502;
+update establishment set localidentifier='34' where id=115547;
+update establishment set localidentifier='40' where id=115553;
+update establishment set localidentifier='817' where id=184839;
+update establishment set localidentifier='8' where id=202380;
+update establishment set localidentifier='137' where id=202220;
+update establishment set localidentifier='9' where id=202381;
+update establishment set localidentifier='382' where id=215888;
+update establishment set localidentifier='7' where id=202379;
+update establishment set localidentifier='741' where id=215889;
+update establishment set localidentifier='379' where id=211424;
+update establishment set localidentifier='10' where id=202382;
+update establishment set localidentifier='705' where id=175139;
+update establishment set localidentifier='11' where id=202383;
+update establishment set localidentifier='61' where id=115574;
+update establishment set localidentifier='353' where id=127873;
+update establishment set localidentifier='11' where id=115596;
+update establishment set localidentifier='14' where id=115599;
+update establishment set localidentifier='8' where id=160026;
+update establishment set localidentifier='134' where id=137933;
+update establishment set localidentifier='SL' where id=161349;
+update establishment set localidentifier='46' where id=212043;
+update establishment set localidentifier='145' where id=88842;
+update establishment set localidentifier='6' where id=160025;
+update establishment set localidentifier='11' where id=160028;
+update establishment set localidentifier='27' where id=160032;
+update establishment set localidentifier='CAT' where id=235019;
+update establishment set localidentifier='24' where id=115609;
+update establishment set localidentifier='4' where id=212803;
+update establishment set localidentifier='177' where id=91082;
+update establishment set localidentifier='10' where id=212804;
+update establishment set localidentifier='360' where id=211423;
+update establishment set localidentifier='13' where id=202385;
+update establishment set localidentifier='74' where id=223090;
+update establishment set localidentifier='2' where id=148122;
+update establishment set localidentifier='415' where id=91278;
+update establishment set localidentifier='293' where id=91268;
+update establishment set localidentifier='Oaklands' where id=225219;
+update establishment set localidentifier='412' where id=91277;
+update establishment set localidentifier='403' where id=89162;
+update establishment set localidentifier='205' where id=146764;
+update establishment set localidentifier='422' where id=91279;
+update establishment set localidentifier='The Croft' where id=225268;
+update establishment set localidentifier='207' where id=146765;
+update establishment set localidentifier='Woodlands' where id=225274;
+update establishment set localidentifier='301' where id=146768;
+update establishment set localidentifier='Bradbury' where id=177518;
+update establishment set localidentifier='51' where id=83523;
+update establishment set localidentifier='354' where id=170953;
+update establishment set localidentifier='hq' where id=85083;
+update establishment set localidentifier='400' where id=170994;
+update establishment set localidentifier='131' where id=93062;
+update establishment set localidentifier='123' where id=95962;
+update establishment set localidentifier='10074' where id=72782;
+update establishment set localidentifier='565' where id=171023;
+update establishment set localidentifier='HILL' where id=120622;
+update establishment set localidentifier='304' where id=146771;
+update establishment set localidentifier='156' where id=95642;
+update establishment set localidentifier='401' where id=146772;
+update establishment set localidentifier='141' where id=81304;
+update establishment set localidentifier='108' where id=146761;
+update establishment set localidentifier='405' where id=146773;
+update establishment set localidentifier='302' where id=146769;
+update establishment set localidentifier='406' where id=146774;
+update establishment set localidentifier='203' where id=146762;
+update establishment set localidentifier='502' where id=146776;
+update establishment set localidentifier='204' where id=146763;
+update establishment set localidentifier='503' where id=146777;
+update establishment set localidentifier='504' where id=146778;
+update establishment set localidentifier='509' where id=146780;
+update establishment set localidentifier='712' where id=171029;
+update establishment set localidentifier='203' where id=194626;
+update establishment set localidentifier='141' where id=138231;
+update establishment set localidentifier='1008' where id=161765;
+update establishment set localidentifier='HH' where id=212802;
+update establishment set localidentifier='172' where id=169250;
+update establishment set localidentifier='559' where id=171021;
+update establishment set localidentifier='DCT' where id=232491;
+update establishment set localidentifier='61' where id=105922;
+update establishment set localidentifier='HQ' where id=90402;
+update establishment set localidentifier='1008' where id=90729;
+update establishment set localidentifier='104' where id=146758;
+update establishment set localidentifier='HO' where id=86746;
+update establishment set localidentifier='105' where id=146759;
+update establishment set localidentifier='Commissioning' where id=186773;
+update establishment set localidentifier='Contracts' where id=186774;
+update establishment set localidentifier='107' where id=146760;
+update establishment set localidentifier='HH' where id=196614;
+update establishment set localidentifier='288' where id=209922;
+update establishment set localidentifier='LOND' where id=95383;
+update establishment set localidentifier='247' where id=99502;
+update establishment set localidentifier='Dom Care' where id=85563;
+update establishment set localidentifier='QUEENSWAY' where id=90770;
+update establishment set localidentifier='622' where id=146474;
+update establishment set localidentifier='331' where id=80862;
+update establishment set localidentifier='2' where id=143667;
+update establishment set localidentifier='107' where id=91482;
+update establishment set localidentifier='49' where id=86536;
+update establishment set localidentifier='646' where id=200598;
+update establishment set localidentifier='Contracts' where id=139482;
+update establishment set localidentifier='Provider Services' where id=145999;
+update establishment set localidentifier='43' where id=207202;
+update establishment set localidentifier='206' where id=237818;
+update establishment set localidentifier='197' where id=224442;
+update establishment set localidentifier='207' where id=237819;
+update establishment set localidentifier='199' where id=224444;
+update establishment set localidentifier='HAW' where id=207370;
+update establishment set localidentifier='200' where id=224445;
+update establishment set localidentifier='38' where id=211509;
+update establishment set localidentifier='201' where id=224446;
+update establishment set localidentifier='401' where id=220724;
+update establishment set localidentifier='204' where id=237816;
+update establishment set localidentifier='353' where id=220725;
+update establishment set localidentifier='205' where id=237817;
+update establishment set localidentifier='2' where id=143963;
+update establishment set localidentifier='203' where id=224448;
+update establishment set localidentifier='392' where id=220723;
+update establishment set localidentifier='CHC' where id=226042;
+update establishment set localidentifier='WRH' where id=223183;
+update establishment set localidentifier='Mental Health' where id=145281;
+update establishment set localidentifier='259' where id=144116;
+update establishment set localidentifier='HEATH' where id=176704;
+update establishment set localidentifier='211' where id=237843;
+update establishment set localidentifier='175' where id=216224;
+update establishment set localidentifier='Mental Health' where id=141223;
+update establishment set localidentifier='176' where id=216225;
+update establishment set localidentifier='149' where id=143705;
+update establishment set localidentifier='177' where id=216226;
+update establishment set localidentifier='174' where id=196980;
+update establishment set localidentifier='178' where id=216227;
+update establishment set localidentifier='HOL' where id=223172;
+update establishment set localidentifier='179' where id=216228;
+update establishment set localidentifier='LAU' where id=223176;
+update establishment set localidentifier='180' where id=216229;
+update establishment set localidentifier='STA' where id=223180;
+update establishment set localidentifier='SYC' where id=223182;
+update establishment set localidentifier='361' where id=211446;
+update establishment set localidentifier='564' where id=211447;
+update establishment set localidentifier='205' where id=211450;
+update establishment set localidentifier='38' where id=160067;
+update establishment set localidentifier='OKS' where id=223178;
+update establishment set localidentifier='39' where id=160068;
+update establishment set localidentifier='3' where id=201118;
+update establishment set localidentifier='40' where id=160069;
+update establishment set localidentifier='23' where id=160072;
+update establishment set localidentifier='HAR' where id=232742;
+update establishment set localidentifier='Reablement' where id=160076;
+update establishment set localidentifier='4' where id=201119;
+update establishment set localidentifier='181' where id=216230;
+update establishment set localidentifier='33' where id=160062;
+update establishment set localidentifier='003' where id=208104;
+update establishment set localidentifier='35' where id=160064;
+update establishment set localidentifier='10055' where id=161790;
+update establishment set localidentifier='37' where id=160066;
+update establishment set localidentifier='1' where id=143947;
+update establishment set localidentifier='291' where id=183268;
+update establishment set localidentifier='15' where id=160048;
+update establishment set localidentifier='Head Office' where id=224844;
+update establishment set localidentifier='10026' where id=161780;
+update establishment set localidentifier='WTH' where id=142082;
+update establishment set localidentifier='31' where id=160036;
+update establishment set localidentifier='18' where id=160051;
+update establishment set localidentifier='32' where id=160037;
+update establishment set localidentifier='1' where id=160059;
+update establishment set localidentifier='28' where id=160033;
+update establishment set localidentifier='283' where id=166428;
+update establishment set localidentifier='3' where id=160044;
+update establishment set localidentifier='Enterprise' where id=166195;
+update establishment set localidentifier='4' where id=160045;
+update establishment set localidentifier='5' where id=160046;
+update establishment set localidentifier='A' where id=186018;
+update establishment set localidentifier='382' where id=235004;
+update establishment set localidentifier='346' where id=165300;
+update establishment set localidentifier='170' where id=165226;
+update establishment set localidentifier='WTH' where id=165308;
+update establishment set localidentifier='BAR' where id=165311;
+update establishment set localidentifier='LAU' where id=165227;
+update establishment set localidentifier='110' where id=165312;
+update establishment set localidentifier='BRO' where id=165271;
+update establishment set localidentifier='281' where id=165327;
+update establishment set localidentifier='HOL' where id=165272;
+update establishment set localidentifier='168' where id=219022;
+update establishment set localidentifier='305' where id=165274;
+update establishment set localidentifier='155' where id=219023;
+update establishment set localidentifier='427' where id=219025;
+update establishment set localidentifier='10061' where id=174594;
+update establishment set localidentifier='139' where id=219026;
+update establishment set localidentifier='10064' where id=174597;
+update establishment set localidentifier='184' where id=236724;
+update establishment set localidentifier='259' where id=166413;
+update establishment set localidentifier='376' where id=165233;
+update establishment set localidentifier='248' where id=165277;
+update establishment set localidentifier='253' where id=166403;
+update establishment set localidentifier='338' where id=165281;
+update establishment set localidentifier='255' where id=166408;
+update establishment set localidentifier='GRO' where id=165283;
+update establishment set localidentifier='163' where id=166410;
+update establishment set localidentifier='262' where id=166411;
+update establishment set localidentifier='PRI' where id=206599;
+update establishment set localidentifier='264' where id=166416;
+update establishment set localidentifier='20' where id=207143;
+update establishment set localidentifier='HQ' where id=179318;
+update establishment set localidentifier='161' where id=192399;
+update establishment set localidentifier='180' where id=192400;
+update establishment set localidentifier='177' where id=192402;
+update establishment set localidentifier='105' where id=165080;
+update establishment set localidentifier='BRI' where id=165083;
+update establishment set localidentifier='47' where id=211364;
+update establishment set localidentifier='153' where id=168379;
+update establishment set localidentifier='265' where id=219027;
+update establishment set localidentifier='Heathlands' where id=148904;
+update establishment set localidentifier='540' where id=219028;
+update establishment set localidentifier='8' where id=185998;
+update establishment set localidentifier='140' where id=219029;
+update establishment set localidentifier='BMH' where id=244868;
+update establishment set localidentifier='319' where id=219030;
+update establishment set localidentifier='BNC' where id=244869;
+update establishment set localidentifier='155' where id=168381;
+update establishment set localidentifier='769' where id=219031;
+update establishment set localidentifier='CAM' where id=244871;
+update establishment set localidentifier='9' where id=153272;
+update establishment set localidentifier='610' where id=196834;
+update establishment set localidentifier='48' where id=209970;
+update establishment set localidentifier='612' where id=196835;
+update establishment set localidentifier='1811' where id=150582;
+update establishment set localidentifier='614' where id=196838;
+update establishment set localidentifier='STA' where id=234442;
+update establishment set localidentifier='PRI' where id=167558;
+update establishment set localidentifier='63' where id=236322;
+update establishment set localidentifier='BDC' where id=167699;
+update establishment set localidentifier='DCT' where id=167700;
+update establishment set localidentifier='64' where id=236323;
+update establishment set localidentifier='BRO' where id=167717;
+update establishment set localidentifier='Commissioning' where id=224604;
+update establishment set localidentifier='570' where id=213605;
+update establishment set localidentifier='156' where id=168382;
+update establishment set localidentifier='200' where id=221928;
+update establishment set localidentifier='23' where id=216445;
+update establishment set localidentifier='215' where id=242202;
+update establishment set localidentifier='320' where id=242203;
+update establishment set localidentifier='385' where id=242204;
+update establishment set localidentifier='105' where id=194666;
+update establishment set localidentifier='37' where id=170053;
+update establishment set localidentifier='Contact' where id=173285;
+update establishment set localidentifier='MH' where id=188678;
+update establishment set localidentifier='SHL' where id=244941;
+update establishment set localidentifier='439' where id=178122;
+update establishment set localidentifier='CAM' where id=242206;
+update establishment set localidentifier='614' where id=169267;
+update establishment set localidentifier='CLA' where id=242207;
+update establishment set localidentifier='250' where id=234342;
+update establishment set localidentifier='CHC' where id=201369;
+update establishment set localidentifier='275' where id=174322;
+update establishment set localidentifier='313' where id=234724;
+update establishment set localidentifier='363' where id=178125;
+update establishment set localidentifier='445' where id=178126;
+update establishment set localidentifier='3' where id=206979;
+update establishment set localidentifier='285' where id=178130;
+update establishment set localidentifier='WDV' where id=244947;
+update establishment set localidentifier='23' where id=169278;
+update establishment set localidentifier='KNC' where id=244965;
+update establishment set localidentifier='26' where id=169279;
+update establishment set localidentifier='MDB' where id=244968;
+update establishment set localidentifier='41' where id=169281;
+update establishment set localidentifier='Head Office' where id=170039;
+update establishment set localidentifier='44' where id=169282;
+update establishment set localidentifier='46' where id=169283;
+update establishment set localidentifier='58' where id=169284;
+update establishment set localidentifier='141' where id=169291;
+update establishment set localidentifier='163' where id=169294;
+update establishment set localidentifier='7' where id=187539;
+update establishment set localidentifier='8' where id=187540;
+update establishment set localidentifier='9' where id=187541;
+update establishment set localidentifier='194' where id=169297;
+update establishment set localidentifier='220' where id=169300;
+update establishment set localidentifier='10' where id=187542;
+update establishment set localidentifier='225' where id=169302;
+update establishment set localidentifier='173' where id=169343;
+update establishment set localidentifier='228' where id=169303;
+update establishment set localidentifier='234' where id=169304;
+update establishment set localidentifier='440' where id=169349;
+update establishment set localidentifier='235' where id=169305;
+update establishment set localidentifier='817' where id=169352;
+update establishment set localidentifier='236' where id=169306;
+update establishment set localidentifier='559' where id=169361;
+update establishment set localidentifier='360' where id=169312;
+update establishment set localidentifier='362' where id=169313;
+update establishment set localidentifier='14' where id=202399;
+update establishment set localidentifier='400' where id=169318;
+update establishment set localidentifier='15' where id=202400;
+update establishment set localidentifier='867' where id=169320;
+update establishment set localidentifier='16' where id=202401;
+update establishment set localidentifier='281' where id=186725;
+update establishment set localidentifier='17' where id=202402;
+update establishment set localidentifier='299' where id=186726;
+update establishment set localidentifier='217' where id=169331;
+update establishment set localidentifier='18' where id=202403;
+update establishment set localidentifier='733' where id=169338;
+update establishment set localidentifier='19' where id=202404;
+update establishment set localidentifier='130' where id=206818;
+update establishment set localidentifier='Provider Services' where id=187618;
+update establishment set localidentifier='173' where id=188583;
+update establishment set localidentifier='204' where id=206819;
+update establishment set localidentifier='194' where id=206820;
+update establishment set localidentifier='195' where id=206821;
+update establishment set localidentifier='199' where id=206827;
+update establishment set localidentifier='196' where id=206822;
+update establishment set localidentifier='646' where id=169366;
+update establishment set localidentifier='200' where id=206823;
+update establishment set localidentifier='72' where id=169368;
+update establishment set localidentifier='347' where id=169374;
+update establishment set localidentifier='201' where id=206824;
+update establishment set localidentifier='449' where id=169376;
+update establishment set localidentifier='197' where id=206826;
+update establishment set localidentifier='658' where id=169377;
+update establishment set localidentifier='854' where id=169419;
+update establishment set localidentifier='721' where id=169378;
+update establishment set localidentifier='147' where id=169386;
+update establishment set localidentifier='131' where id=196939;
+update establishment set localidentifier='279' where id=169387;
+update establishment set localidentifier='97' where id=196940;
+update establishment set localidentifier='719' where id=169389;
+update establishment set localidentifier='AT' where id=224160;
+update establishment set localidentifier='88' where id=169391;
+update establishment set localidentifier='736' where id=169393;
+update establishment set localidentifier='763' where id=169423;
+update establishment set localidentifier='740' where id=169401;
+update establishment set localidentifier='764' where id=169424;
+update establishment set localidentifier='50' where id=201943;
+update establishment set localidentifier='71' where id=169429;
+update establishment set localidentifier='36' where id=201946;
+update establishment set localidentifier='185' where id=235042;
+update establishment set localidentifier='45' where id=201947;
+update establishment set localidentifier='BRA' where id=235104;
+update establishment set localidentifier='185' where id=169413;
+update establishment set localidentifier='40' where id=216089;
+update establishment set localidentifier='299' where id=193651;
+update establishment set localidentifier='301' where id=193654;
+update establishment set localidentifier='305' where id=193656

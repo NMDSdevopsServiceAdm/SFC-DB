@@ -1,0 +1,1 @@
+ALTER TABLE cqc."Establishment" ADD COLUMN "DataOwnershipRequested" TIMESTAMP NULL;

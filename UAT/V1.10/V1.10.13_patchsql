@@ -1,0 +1,12 @@
+-- https://trello.com/c/W7AVdqP7 - PROVID
+ALTER TABLE cqc."Establishment" ADD COLUMN "ProvID" TEXT NULL;
+
+-- https://trello.com/c/2A3BF3Yj - ADDRESS, split into ADDRESS1, ADDRESS2, POSTTOWN and COUNTY.
+ALTER TABLE cqc."Establishment" RENAME COLUMN "Address" TO "Address1";
+ALTER TABLE cqc."Establishment" ADD COLUMN "Address2" TEXT NULL;
+ALTER TABLE cqc."Establishment" ADD COLUMN "Address3" TEXT NULL;
+ALTER TABLE cqc."Establishment" ADD COLUMN "Town" TEXT NULL;
+ALTER TABLE cqc."Establishment" ADD COLUMN "County" TEXT NULL;
+
+-- https://trello.com/c/vNHbfdms - interim reasons for leaving - for bulk upload
+ALTER TABLE cqc."Establishment" ADD COLUMN "ReasonsForLeaving" TEXT NULL;
