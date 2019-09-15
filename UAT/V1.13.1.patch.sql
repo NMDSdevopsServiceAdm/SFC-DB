@@ -1,3 +1,4 @@
+-- https://trello.com/c/0JkDyRHv - removing a workaround on the LA Admin report for commas in primary establishment name
 DROP FUNCTION IF EXISTS cqc.localAuthorityReportAdmin;
 CREATE OR REPLACE FUNCTION cqc.localAuthorityReportAdmin(reportFrom DATE, reportTo DATE)
  RETURNS TABLE (
