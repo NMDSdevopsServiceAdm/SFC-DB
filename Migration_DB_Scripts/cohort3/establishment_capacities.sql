@@ -27,7 +27,7 @@ BEGIN
   RAISE NOTICE 'CurrrentCapacityService: %', CurrrentCapacityService;
 
   INSERT INTO cqc."EstablishmentCapacity" ("EstablishmentID", "ServiceCapacityID","Answer") (
-	select DISTINCT _sfcid,servicecapacityid,answer from (
+	select _sfcid, servicecapacityid, sum(answer) as answer from (
 		SELECT e.id,ms.sfcid, pst.totalcapacity, pst.currentutilisation,cap.capacityType,cap.questionsequence,cap.servicecapacityid,
 		case WHEN capacitytype = 'Capacity' THEN pst.totalcapacity ELSE pst.currentutilisation END as answer
 			FROM establishment e
@@ -51,6 +51,7 @@ BEGIN
 	where answer is not null
 	  AND id NOT in (select "TribalID" from migration.excludecapability)
 	  AND id=_tribalId
+	group by _sfcid, servicecapacityid
   );
 --  ON CONFLICT DO NOTHING;
 
@@ -67,6 +68,7 @@ BEGIN
   END IF;
 END;
 $BODY$;
+
 
 ALTER FUNCTION migration.establishment_capacities(integer, integer)
     OWNER TO postgres;
