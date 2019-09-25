@@ -17,7 +17,19 @@ CREATE TABLE IF NOT EXISTS cqc."OwnerChangeRequest" (
   "created" TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
   "createdByUserUID" UUID NOT NULL,
   "updated" TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
-  "updatedByUserUID" UUID NOT NULL
+  "updatedByUserUID" UUID NOT NULL,
+  CONSTRAINT establishment_owner_change_request_fk FOREIGN KEY ("subEstablishmentID")
+      REFERENCES cqc."Establishment" ("EstablishmentID") MATCH SIMPLE
+      ON UPDATE NO ACTION
+      ON DELETE NO ACTION,
+  CONSTRAINT user_owner_change_request_created_by_fk FOREIGN KEY ("createdByUserUID")
+      REFERENCES cqc."User" ("UserUID") MATCH SIMPLE
+      ON UPDATE NO ACTION
+      ON DELETE NO ACTION,
+  CONSTRAINT user_owner_change_request_updated_by_fk FOREIGN KEY ("updatedByUserUID")
+      REFERENCES cqc."User" ("UserUID") MATCH SIMPLE
+      ON UPDATE NO ACTION
+      ON DELETE NO ACTION
 );
 
 -- only run these on dev, staging and accessibility/demo databases
