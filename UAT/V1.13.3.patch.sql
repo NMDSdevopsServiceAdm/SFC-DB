@@ -1,7 +1,7 @@
 -- https://trello.com/c/BmEiIfud
 
-DROP TYPE IF EXISTS cqc.owner_change_status;
-CREATE TYPE cqc.owner_change_status AS ENUM (
+DROP TYPE IF EXISTS cqc.OwnerChangeStatus;
+CREATE TYPE cqc.OwnerChangeStatus AS ENUM (
   'REQUESTED',
   'APPROVED',
   'DENIED'
@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS cqc."OwnerChangeRequest" (
   "ownerChangeRequestUID" UUID NOT NULL PRIMARY KEY,
   "subEstablishmentID" integer NOT NULL,
   "permissionRequest" cqc.establishment_data_access_permission,
-  "approvalStatus" cqc.owner_change_status,
+  "approvalStatus" cqc.OwnerChangeStatus,
   "approvalReason" TEXT,
   "created" TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
   "createdByUserUID" UUID NOT NULL,
