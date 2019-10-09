@@ -8,3 +8,5 @@ CREATE TYPE cqc.OwnerChangeStatus AS ENUM (
   'CANCELLED'
 );
 
+ALTER TABLE cqc."Login"
+    ADD COLUMN "Status" character varying(20);
