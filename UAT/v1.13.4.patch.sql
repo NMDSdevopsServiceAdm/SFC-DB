@@ -10,3 +10,9 @@ CREATE TYPE cqc.OwnerChangeStatus AS ENUM (
 
 ALTER TABLE cqc."Login"
     ADD COLUMN "Status" character varying(20);
+
+ALTER TABLE cqc."Establishment"
+    ADD COLUMN "Status" character varying(20);
+
+ALTER TABLE cqc."User"
+    ADD COLUMN "Status" character varying(20);
