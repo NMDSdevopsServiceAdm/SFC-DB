@@ -13,6 +13,3 @@ ALTER TABLE cqc."Login"
 
 ALTER TABLE cqc."Establishment"
     ADD COLUMN "Status" character varying(20);
-
-ALTER TABLE cqc."User"
-    ADD COLUMN "Status" character varying(20);
