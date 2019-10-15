@@ -4,8 +4,13 @@ DROP TYPE IF EXISTS cqc.OwnerChangeStatus;
 CREATE TYPE cqc.OwnerChangeStatus AS ENUM (
   'REQUESTED',
   'APPROVED',
-  'DENIED'
+  'DENIED',
+  'CANCELLED'
 );
+
+ALTER TABLE cqc."Login" ADD COLUMN "Status" character varying(20);
+
+ALTER TABLE cqc."Establishment" ADD COLUMN "Status" character varying(20);
 
 DROP TABLE IF EXISTS cqc."OwnerChangeRequest";
 CREATE TABLE IF NOT EXISTS cqc."OwnerChangeRequest" (
