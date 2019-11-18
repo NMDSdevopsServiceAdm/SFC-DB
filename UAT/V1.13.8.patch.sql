@@ -12,19 +12,19 @@ CREATE TABLE IF NOT EXISTS cqc."ParentEstablishmentPermissions" (
   "Updated" TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
   "UpdatedByUserUID" UUID NOT NULL,
   CONSTRAINT establishment_parent_establishment_fk FOREIGN KEY ("ParentEstablishmentID")
-      REFERENCES cqc."Establishment" ("EstablishmentID") MATCH SIMPLE
+      REFERENCES "Establishment" ("EstablishmentID") MATCH SIMPLE
       ON UPDATE NO ACTION
       ON DELETE NO ACTION,
   CONSTRAINT establishment_sub_establishment_fk FOREIGN KEY ("SubEstablishmentID")
-      REFERENCES cqc."Establishment" ("EstablishmentID") MATCH SIMPLE
+      REFERENCES "Establishment" ("EstablishmentID") MATCH SIMPLE
       ON UPDATE NO ACTION
       ON DELETE NO ACTION,
   CONSTRAINT establishment_permission_request_created_by_fk FOREIGN KEY ("CreatedByUserUID")
-      REFERENCES cqc."User" ("UserUID") MATCH SIMPLE
+      REFERENCES "User" ("UserUID") MATCH SIMPLE
       ON UPDATE NO ACTION
       ON DELETE NO ACTION,
   CONSTRAINT user_permission_request_updated_by_fk FOREIGN KEY ("UpdatedByUserUID")
-      REFERENCES cqc."User" ("UserUID") MATCH SIMPLE
+      REFERENCES "User" ("UserUID") MATCH SIMPLE
       ON UPDATE NO ACTION
       ON DELETE NO ACTION  
 );
