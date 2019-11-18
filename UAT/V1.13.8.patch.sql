@@ -1,40 +1,48 @@
+SET SEARCH_PATH TO cqc;
 BEGIN TRANSACTION;
 
 DROP TABLE IF EXISTS cqc."ParentEstablishmentPermissions";
 
 CREATE TABLE IF NOT EXISTS cqc."ParentEstablishmentPermissions" (
-  "parentEstablishmentID" integer NOT NULL,
-  "subEstablishmentID" integer NOT NULL,
-  "permissionRequest" cqc.establishment_data_access_permission,
-  "created" TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
-  "createdByUserUID" UUID NOT NULL,
-  "updated" TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
-  "updatedByUserUID" UUID NOT NULL,
-  CONSTRAINT establishment_parent_establishment_fk FOREIGN KEY ("parentEstablishmentID")
+  "ParentEstablishmentID" integer NOT NULL,
+  "SubEstablishmentID" integer NOT NULL,
+  "PermissionRequest" cqc.establishment_data_access_permission,
+  "Created" TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
+  "CreatedByUserUID" UUID NOT NULL,
+  "Updated" TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
+  "UpdatedByUserUID" UUID NOT NULL,
+  CONSTRAINT establishment_parent_establishment_fk FOREIGN KEY ("ParentEstablishmentID")
       REFERENCES cqc."Establishment" ("EstablishmentID") MATCH SIMPLE
       ON UPDATE NO ACTION
       ON DELETE NO ACTION,
-  CONSTRAINT establishment_sub_establishment_fk FOREIGN KEY ("subEstablishmentID")
+  CONSTRAINT establishment_sub_establishment_fk FOREIGN KEY ("SubEstablishmentID")
       REFERENCES cqc."Establishment" ("EstablishmentID") MATCH SIMPLE
       ON UPDATE NO ACTION
       ON DELETE NO ACTION,
-  CONSTRAINT establishment_permission_request_created_by_fk FOREIGN KEY ("createdByUserUID")
+  CONSTRAINT establishment_permission_request_created_by_fk FOREIGN KEY ("CreatedByUserUID")
       REFERENCES cqc."User" ("UserUID") MATCH SIMPLE
       ON UPDATE NO ACTION
       ON DELETE NO ACTION,
-  CONSTRAINT user_permission_request_updated_by_fk FOREIGN KEY ("updatedByUserUID")
+  CONSTRAINT user_permission_request_updated_by_fk FOREIGN KEY ("UpdatedByUserUID")
       REFERENCES cqc."User" ("UserUID") MATCH SIMPLE
       ON UPDATE NO ACTION
       ON DELETE NO ACTION  
 );
 
-
-
--- only run these on dev, staging and accessibility/demo databases
--- GRANT INSERT, SELECT, UPDATE, DELETE ON TABLE cqc."OwnerChangeRequest" TO "Sfc_App_Role";
--- GRANT INSERT, SELECT, UPDATE, DELETE ON TABLE cqc."OwnerChangeRequest" TO "Sfc_Admin_Role";
--- GRANT ALL ON TABLE cqc."OwnerChangeRequest" TO sfcadmin;
--- GRANT INSERT, SELECT, UPDATE ON TABLE cqc."OwnerChangeRequest" TO "Read_Update_Role";
--- GRANT SELECT ON TABLE cqc."OwnerChangeRequest" TO "Read_Only_Role";
-
 END TRANSACTION;
+
+-- The following would be produced for only dev, staging and accessibility/demo databases - so please execute it accordingly.
+\a \t
+SELECT '';
+SELECT CASE SUBSTRING(CURRENT_DATABASE(),1,3)
+          WHEN 'sfc' THEN
+             'ALTER TABLE "ParentEstablishmentPermissions" OWNER TO sfcadmin;' || E'\n' ||
+             'GRANT ALL ON TABLE "ParentEstablishmentPermissions" TO sfcadmin;' || E'\n' ||
+             'GRANT INSERT, SELECT, UPDATE, DELETE ON TABLE "ParentEstablishmentPermissions" TO "Sfc_Admin_Role";' || E'\n' ||
+             'GRANT INSERT, SELECT, UPDATE, DELETE ON TABLE "ParentEstablishmentPermissions" TO "Sfc_App_Role";' || E'\n' ||
+             'GRANT INSERT, SELECT, UPDATE ON TABLE "ParentEstablishmentPermissions" TO "Read_Update_Role";' || E'\n' ||
+             'GRANT SELECT ON TABLE "ParentEstablishmentPermissions" TO "Read_Only_Role";'
+          ELSE NULL
+       END;
+SELECT '';
+\t \a
