@@ -1,12 +1,12 @@
 SET SEARCH_PATH TO cqc;
 BEGIN TRANSACTION;
 
-DROP TABLE IF EXISTS cqc."ParentEstablishmentPermissions";
+DROP TABLE IF EXISTS "ParentEstablishmentPermissions";
 
-CREATE TABLE IF NOT EXISTS cqc."ParentEstablishmentPermissions" (
+CREATE TABLE IF NOT EXISTS "ParentEstablishmentPermissions" (
   "ParentEstablishmentID" integer NOT NULL,
   "SubEstablishmentID" integer NOT NULL,
-  "PermissionRequest" cqc.establishment_data_access_permission,
+  "PermissionRequest" establishment_data_access_permission,
   "Created" TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
   "CreatedByUserUID" UUID NOT NULL,
   "Updated" TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
