@@ -1,2 +1,7 @@
+SET SEARCH_PATH TO cqc;
+BEGIN TRANSACTION;
+
 ALTER TABLE cqc."Login"
     ADD COLUMN "AgreedUpdatedTerms" boolean NOT NULL DEFAULT False;
+
+END TRANSACTION;
