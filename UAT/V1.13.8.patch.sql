@@ -1,9 +1,10 @@
 SET SEARCH_PATH TO cqc;
 BEGIN TRANSACTION;
 
-DROP TABLE IF EXISTS "ParentEstablishmentPermissions";
+DROP TABLE IF EXISTS "LinkToParent";
 
-CREATE TABLE IF NOT EXISTS "ParentEstablishmentPermissions" (
+CREATE TABLE IF NOT EXISTS "LinkToParent" (
+  "LinkToParentUID" UUID NOT NULL PRIMARY KEY,
   "ParentEstablishmentID" integer NOT NULL,
   "SubEstablishmentID" integer NOT NULL,
   "PermissionRequest" establishment_data_access_permission,
@@ -36,12 +37,12 @@ END TRANSACTION;
 SELECT '';
 SELECT CASE SUBSTRING(CURRENT_DATABASE(),1,3)
           WHEN 'sfc' THEN
-             'ALTER TABLE "ParentEstablishmentPermissions" OWNER TO sfcadmin;' || E'\n' ||
-             'GRANT ALL ON TABLE "ParentEstablishmentPermissions" TO sfcadmin;' || E'\n' ||
-             'GRANT INSERT, SELECT, UPDATE, DELETE ON TABLE "ParentEstablishmentPermissions" TO "Sfc_Admin_Role";' || E'\n' ||
-             'GRANT INSERT, SELECT, UPDATE, DELETE ON TABLE "ParentEstablishmentPermissions" TO "Sfc_App_Role";' || E'\n' ||
-             'GRANT INSERT, SELECT, UPDATE ON TABLE "ParentEstablishmentPermissions" TO "Read_Update_Role";' || E'\n' ||
-             'GRANT SELECT ON TABLE "ParentEstablishmentPermissions" TO "Read_Only_Role";'
+             'ALTER TABLE "LinkToParent" OWNER TO sfcadmin;' || E'\n' ||
+             'GRANT ALL ON TABLE "LinkToParent" TO sfcadmin;' || E'\n' ||
+             'GRANT INSERT, SELECT, UPDATE, DELETE ON TABLE "LinkToParent" TO "Sfc_Admin_Role";' || E'\n' ||
+             'GRANT INSERT, SELECT, UPDATE, DELETE ON TABLE "LinkToParent" TO "Sfc_App_Role";' || E'\n' ||
+             'GRANT INSERT, SELECT, UPDATE ON TABLE "LinkToParent" TO "Read_Update_Role";' || E'\n' ||
+             'GRANT SELECT ON TABLE "LinkToParent" TO "Read_Only_Role";'
           ELSE NULL
        END;
 SELECT '';
