@@ -3,13 +3,20 @@ BEGIN TRANSACTION;
 
 DROP TABLE IF EXISTS "ParentEstablishmentPermissions";
 DROP TABLE IF EXISTS "LinkToParent";
+DROP TYPE IF EXISTS LinkToParentStatus;
+CREATE TYPE LinkToParentStatus AS ENUM (
+  'REQUESTED',
+  'APPROVED',
+  'DENIED',
+  'CANCELLED'
+);
 
 CREATE TABLE IF NOT EXISTS "LinkToParent" (
   "LinkToParentUID" UUID NOT NULL PRIMARY KEY,
   "ParentEstablishmentID" integer NOT NULL,
   "SubEstablishmentID" integer NOT NULL,
   "PermissionRequest" establishment_data_access_permission,
-  "ApprovalStatus" OwnerChangeStatus,
+  "ApprovalStatus" LinkToParentStatus,
   "RejectionReason" TEXT,
   "Created" TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
   "CreatedByUserUID" UUID NOT NULL,
