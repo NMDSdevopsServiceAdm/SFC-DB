@@ -3,8 +3,8 @@ BEGIN TRANSACTION;
 
 DROP TABLE IF EXISTS "ParentEstablishmentPermissions";
 DROP TABLE IF EXISTS "LinkToParent";
-DROP TYPE IF EXISTS LinkToParentStatus;
-CREATE TYPE LinkToParentStatus AS ENUM (
+DROP TYPE IF EXISTS "LinkToParentStatus";
+CREATE TYPE "LinkToParentStatus" AS ENUM (
   'REQUESTED',
   'APPROVED',
   'DENIED',
