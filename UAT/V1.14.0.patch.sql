@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS "LinkToParent" (
   "ParentEstablishmentID" integer NOT NULL,
   "SubEstablishmentID" integer NOT NULL,
   "PermissionRequest" establishment_data_access_permission,
-  "ApprovalStatus" LinkToParentStatus,
+  "ApprovalStatus" "LinkToParentStatus",
   "RejectionReason" TEXT,
   "Created" TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
   "CreatedByUserUID" UUID NOT NULL,
