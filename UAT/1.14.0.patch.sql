@@ -9,6 +9,8 @@ CREATE TABLE IF NOT EXISTS "LinkToParent" (
   "ParentEstablishmentID" integer NOT NULL,
   "SubEstablishmentID" integer NOT NULL,
   "PermissionRequest" establishment_data_access_permission,
+  "approvalStatus" OwnerChangeStatus,
+  "rejectionReason" TEXT,
   "Created" TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
   "CreatedByUserUID" UUID NOT NULL,
   "Updated" TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
@@ -30,7 +32,6 @@ CREATE TABLE IF NOT EXISTS "LinkToParent" (
       ON UPDATE NO ACTION
       ON DELETE NO ACTION  
 );
-
 
 END TRANSACTION;
 
