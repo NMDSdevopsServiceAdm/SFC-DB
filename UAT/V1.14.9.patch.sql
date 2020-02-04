@@ -5,15 +5,15 @@ BEGIN TRANSACTION;
 
 DROP TABLE IF EXISTS "MandatoryTraining";
 CREATE TABLE "MandatoryTraining" (
-	"ID" SERIAL NOT NULL PRIMARY KEY,
-	"WorkplaceFK" INTEGER NOT NULL,
-	"TrainingFK" INTEGER NOT NULL,
-	"JobFK" INTEGER NOT NULL,
-	"CreatedAt" TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
-	"UpdatedAt" TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
+	"ID"               SERIAL NOT NULL PRIMARY KEY,
+	"EstablishmentFK"  INTEGER NOT NULL,
+	"TrainingFK"       INTEGER NOT NULL,
+	"JobFK"            INTEGER NOT NULL,
+	"created"          TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
+	"updated"          TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
 	"CreatedByUserUID" UUID NOT NULL,
 	"UpdatedByUserUID" UUID NOT NULL,
-	CONSTRAINT establishment_mandatory_training_fk FOREIGN KEY ("WorkplaceFK")
+	CONSTRAINT establishment_mandatory_training_fk FOREIGN KEY ("EstablishmentFK")
       REFERENCES "Establishment" ("EstablishmentID") MATCH SIMPLE
       ON UPDATE NO ACTION
       ON DELETE NO ACTION,
