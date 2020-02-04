@@ -9,8 +9,8 @@ CREATE TABLE "MandatoryTraining" (
 	"EstablishmentFK"  INTEGER NOT NULL,
 	"TrainingFK"       INTEGER NOT NULL,
 	"JobFK"            INTEGER NOT NULL,
-	"created"          TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
-	"updated"          TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
+	created            TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
+	updated            TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
 	"CreatedByUserUID" UUID NOT NULL,
 	"UpdatedByUserUID" UUID NOT NULL,
 	CONSTRAINT establishment_mandatory_training_fk FOREIGN KEY ("EstablishmentFK")
