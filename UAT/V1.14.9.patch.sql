@@ -9,10 +9,10 @@ CREATE TABLE "MandatoryTraining" (
 	"WorkplaceFK" INTEGER NOT NULL,
 	"TrainingFK" INTEGER NOT NULL,
 	"JobFK" INTEGER NOT NULL,
-	"CreatedAt" DATE NOT NULL,
-	"UpdatedAt" DATE NOT NULL,
-	"CreatedByUserUID" INTEGER NOT NULL,
-	"UpdatedByUserUID" INTEGER NOT NULL,
+	"CreatedAt" TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
+	"UpdatedAt" TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
+	"CreatedByUserUID" UUID NOT NULL,
+	"UpdatedByUserUID" UUID NOT NULL,
 	CONSTRAINT establishment_mandatory_training_fk FOREIGN KEY ("WorkplaceFK")
       REFERENCES "Establishment" ("EstablishmentID") MATCH SIMPLE
       ON UPDATE NO ACTION
