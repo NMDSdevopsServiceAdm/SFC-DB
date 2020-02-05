@@ -36,3 +36,19 @@ CREATE TABLE "MandatoryTraining" (
 );
 
 END TRANSACTION;
+
+-- The following would be produced for only dev, staging and accessibility/demo databases - so please execute it accordingly.
+\a \t
+SELECT '';
+SELECT CASE SUBSTRING(CURRENT_DATABASE(),1,3)
+          WHEN 'sfc' THEN
+             'ALTER TABLE "MandatoryTraining" OWNER TO sfcadmin;' || E'\n' ||
+             'GRANT ALL ON TABLE "MandatoryTraining" TO sfcadmin;' || E'\n' ||
+             'GRANT INSERT, SELECT, UPDATE, DELETE ON TABLE "MandatoryTraining" TO "Sfc_Admin_Role";' || E'\n' ||
+             'GRANT INSERT, SELECT, UPDATE, DELETE ON TABLE "MandatoryTraining" TO "Sfc_App_Role";' || E'\n' ||
+             'GRANT INSERT, SELECT, UPDATE ON TABLE "MandatoryTraining" TO "Read_Update_Role";' || E'\n' ||
+             'GRANT SELECT ON TABLE "MandatoryTraining" TO "Read_Only_Role";'
+          ELSE NULL
+       END;
+SELECT '';
+\t \a
