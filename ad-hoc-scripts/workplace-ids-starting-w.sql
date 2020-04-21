@@ -1,18 +1,17 @@
-SELECT * FROM cqc."Cssr" c 
-WHERE c."LocalCustodianCode" IN 
-(SELECT p."local_custodian_code" FROM cqcref."pcode" p WHERE UPPER(substring(p."postcode" from '[^ ]+'::text)) 
-    IN (
-        SELECT UPPER(substring(e."PostCode" from '[^ ]+'::text)) FROM cqc."Establishment" e WHERE e."NmdsID" LIKE 'W%'
-    ) 
-    GROUP BY p."local_custodian_code"
-);
-
 SELECT 
-    e."EstablishmentID", 
-    e."NameValue", 
-    e."NmdsID", 
-    e."PostCode" 
+	estab."NmdsID",
+	cssr."NmdsIDLetter" as prefix,
+	concat(cssr."NmdsIDLetter", trim(leading 'W' from estab."NmdsID")) as newWorkplaceId,
+	UPPER(estab."PostCode") as postcode,
+	pcode."local_custodian_code",
+	cssr."LocalAuthority"
 FROM 
-    cqc."Establishment" e 
+	cqc."Establishment" estab 
+LEFT OUTER JOIN
+	cqcref."pcode" pcode 
+		ON UPPER(pcode."postcode") 
+			= UPPER(estab."PostCode")
+LEFT OUTER JOIN
+	cqc."Cssr" cssr ON cssr."LocalCustodianCode" = pcode."local_custodian_code"
 WHERE 
-    "NmdsID" LIKE 'W%';
+	estab."NmdsID" LIKE 'W%'
