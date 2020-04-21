@@ -1,11 +1,11 @@
 SELECT 
+	DISTINCT pcode."local_custodian_code",
     estab."NameValue" as EstabName,
 	estab."NmdsID",
 	cssr."NmdsIDLetter" as prefix,
 	concat(cssr."NmdsIDLetter", trim(leading 'W' from estab."NmdsID")) as newWorkplaceId,
-    UPPER(estab."PostCode") as EstabPostcode
---	pcode."local_custodian_code",
---	cssr."LocalAuthority"
+    UPPER(estab."PostCode") as EstabPostcode,
+	cssr."LocalAuthority"
 FROM 
 	cqc."Establishment" estab 
 LEFT OUTER JOIN
@@ -16,15 +16,8 @@ LEFT OUTER JOIN
 	cqc."Cssr" cssr ON cssr."LocalCustodianCode" = pcode."local_custodian_code"
 WHERE 
 	estab."PostCode" LIKE 'W%'
-GROUP BY 
-	estab."NmdsID", 
-	cssr."NmdsIDLetter",
-	estab."PostCode",
-    estab."NameValue"
 ORDER BY
-	estab."NameValue"
---	pcode."local_custodian_code",
---	cssr."LocalAuthority"	
+	estab."NameValue"	
 
 
 --SELECT 
