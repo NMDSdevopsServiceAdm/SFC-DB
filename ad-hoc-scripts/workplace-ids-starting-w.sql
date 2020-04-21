@@ -5,7 +5,7 @@ SELECT
             ELSE
                 CASE WHEN estab."NmdsID" 
                         IN ('W1007087', 'W1007374', 'W1007556', 'W1007558', 'W1008606')
-                    THEN 'Multiple LAs for this postcode'
+                    THEN concat('Multiple LAs for this postcode, eg ',cssr."NmdsIDLetter")
                     ELSE concat(cssr."NmdsIDLetter", trim(leading 'W' from estab."NmdsID")) 
                 END
     END AS newWorkplaceId,
@@ -40,10 +40,10 @@ ORDER BY
 -- W1008606 - 2
 
 
---SELECT 
---    DISTINCT pcode."local_custodian_code"
---FROM 
---	cqcref."pcode" pcode 
---WHERE
---		 UPPER(substring(pcode."postcode" from '[^ ]+'::text))
---			LIKE 'DN20%'
+SELECT 
+   DISTINCT pcode."local_custodian_code"
+FROM 
+	cqcref."pcode" pcode 
+WHERE
+		 UPPER(substring(pcode."postcode" from '[^ ]+'::text))
+			LIKE 'DN20%'
