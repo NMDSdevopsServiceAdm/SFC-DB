@@ -1,4 +1,5 @@
 SELECT 
+    estab."NameValue" as EstabName,
 	estab."NmdsID",
 	cssr."NmdsIDLetter" as prefix,
 	concat(cssr."NmdsIDLetter", trim(leading 'W' from estab."NmdsID")) as newWorkplaceId,
@@ -18,6 +19,9 @@ WHERE
 GROUP BY 
 	estab."NmdsID", 
 	cssr."NmdsIDLetter",
-	estab."PostCode"
+	estab."PostCode",
+    estab."NameValue"
+ORDER BY
+	estab."NameValue"
 --	pcode."local_custodian_code",
 --	cssr."LocalAuthority"	
