@@ -15,7 +15,7 @@ LEFT OUTER JOIN
 LEFT OUTER JOIN
 	cqc."Cssr" cssr ON cssr."LocalCustodianCode" = pcode."local_custodian_code"
 WHERE 
-	estab."NmdsID" LIKE 'W%'
+	estab."PostCode" LIKE 'W%'
 GROUP BY 
 	estab."NmdsID", 
 	cssr."NmdsIDLetter",
@@ -25,3 +25,12 @@ ORDER BY
 	estab."NameValue"
 --	pcode."local_custodian_code",
 --	cssr."LocalAuthority"	
+
+
+--SELECT 
+--    DISTINCT pcode."local_custodian_code"
+--FROM 
+--	cqcref."pcode" pcode 
+--WHERE
+--		 UPPER(substring(pcode."postcode" from '[^ ]+'::text))
+--			LIKE 'DN20%'
