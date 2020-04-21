@@ -1,6 +1,9 @@
 SELECT 
 	estab."NmdsID",
-	concat(cssr."NmdsIDLetter", trim(leading 'W' from estab."NmdsID")) as newWorkplaceId,
+	CASE WHEN cssr."NmdsIDLetter" IS NULL 
+            THEN "No postcode match" 
+            ELSE concat(cssr."NmdsIDLetter", trim(leading 'W' from estab."NmdsID")) 
+    END AS newWorkplaceId,
 	estab."PostCode",
 	estab."NameValue"
 FROM 
