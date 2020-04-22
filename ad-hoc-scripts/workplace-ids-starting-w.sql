@@ -7,8 +7,8 @@ SELECT
 	estab."PostCode",
     UPPER(substring(estab."PostCode" from '[^ ]+'::text)) AS MatchedPcodePrefix,
 	estab."NameValue",
-    STRING_AGG(DISTINCT cssr."LocalCustodianCode"::text, ','),
-    STRING_AGG(DISTINCT cssr."LocalAuthority", ',')
+    STRING_AGG(DISTINCT cssr."LocalCustodianCode"::text, ',') AS CustodianCodes,
+    STRING_AGG(DISTINCT cssr."LocalAuthority", ',') AS LAs
 FROM 
 	cqc."Establishment" estab 
 LEFT OUTER JOIN
@@ -25,6 +25,8 @@ GROUP BY
 	estab."NameValue"
 ORDER BY 
     estab."NmdsID"
+
+-- SELECT * from cqcref."pcode" pcode WHERE pcode."postcode" = 'EX22 7BN'
 
 
 -- These have postcodes that cross LAs: 
