@@ -5,6 +5,7 @@ SELECT
             ELSE STRING_AGG(DISTINCT concat(cssr."NmdsIDLetter", trim(leading 'W' from estab."NmdsID")), ',')
     END AS newWorkplaceId,
 	estab."PostCode",
+    UPPER(substring(estab."PostCode" from '[^ ]+'::text)) AS MatchedPcodePrefix,
 	estab."NameValue",
     STRING_AGG(DISTINCT cssr."LocalCustodianCode"::text, ','),
     STRING_AGG(DISTINCT cssr."LocalAuthority", ',')
