@@ -5,7 +5,7 @@ SELECT
             ELSE STRING_AGG(DISTINCT concat(cssr."NmdsIDLetter", trim(leading 'W' from estab."NmdsID")), ',')
     END AS newWorkplaceId,
 	estab."PostCode",
-    UPPER(substring(estab."PostCode" from '[^ ]+'::text)) AS MatchedPcodePrefix,
+    REVERSE(substring(REVERSE(estab."postcode") from 4)) AS MatchedPcodePrefix,
 	estab."NameValue",
     STRING_AGG(DISTINCT cssr."LocalCustodianCode"::text, ',') AS CustodianCodes,
     STRING_AGG(DISTINCT cssr."LocalAuthority", ',') AS LAs
@@ -14,7 +14,11 @@ FROM
 LEFT OUTER JOIN
 	cqcref."pcode" pcode 
 		ON UPPER(substring(pcode."postcode" from '[^ ]+'::text))
-			= UPPER(substring(estab."PostCode" from '[^ ]+'::text))
+            -- Some postcodes in the establishment table don't have spaces
+            -- What we want is everything up to the last 3 chars
+            -- We're reversing, taking the first 4 chars, reversing again 
+            -- and then adding '%' to use LIKE to find postcodes that start with the result
+            LIKE concat(REVERSE(substring(REVERSE(UPPER(estab."PostCode")) from 4)),'%')
 LEFT OUTER JOIN
 	cqc."Cssr" cssr ON cssr."LocalCustodianCode" = pcode."local_custodian_code"
 WHERE 
@@ -26,6 +30,19 @@ GROUP BY
 ORDER BY 
     estab."NmdsID"
 
+-- Test string manipulation for postcodes
+-- SELECT 
+-- 	pcode."postcode"
+-- 	-- REVERSE(substring(REVERSE(pcode."postcode") from 4))
+-- FROM
+-- 	cqcref."pcode" AS pcode
+-- WHERE
+-- 	pcode."postcode" LIKE concat(REVERSE(substring(REVERSE('M125SH') from 4)),'%')
+-- 	--pcode."postcode" LIKE 'M12%'
+-- LIMIT 5
+
+
+-- Check the anomalous postcode we spotted iwth no space
 -- SELECT * from cqcref."pcode" pcode WHERE pcode."postcode" = 'EX22 7BN'
 
 
