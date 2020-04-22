@@ -10,7 +10,8 @@ SELECT
                 END
     END AS newWorkplaceId,
 	estab."PostCode",
-	estab."NameValue"
+	estab."NameValue",
+    cssr."LocalCustodianCode"
 FROM 
 	cqc."Establishment" estab 
 LEFT OUTER JOIN
@@ -24,6 +25,7 @@ WHERE
 GROUP BY 
     estab."NmdsID", 
     cssr."NmdsIDLetter",
+    cssr."LocalCustodianCode",
 	estab."PostCode",
 	estab."NameValue"
 ORDER BY 
