@@ -107,3 +107,4 @@ UPDATE cqc."Establishment" SET "NmdsID" = 'J1008606' WHERE  "NmdsID" = 'W1008606
 UPDATE cqc."Establishment" SET "NmdsID" = 'H1007087' WHERE  "NmdsID" = 'W1007087';
 UPDATE cqc."Establishment" SET "NmdsID" = 'G1007556' WHERE  "NmdsID" = 'W1007556';
 
+COMMIT;
