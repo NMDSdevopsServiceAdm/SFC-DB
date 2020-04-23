@@ -101,3 +101,9 @@ UPDATE cqc."Establishment" SET "NmdsID" = "J1006721" WHERE  "NmdsID" = "W1006721
 UPDATE cqc."Establishment" SET "NmdsID" = "J1006895" WHERE  "NmdsID" = "W1006895";
 UPDATE cqc."Establishment" SET "NmdsID" = "J1007378" WHERE  "NmdsID" = "W1007378";
 UPDATE cqc."Establishment" SET "NmdsID" = "J1007428" WHERE  "NmdsID" = "W1007428";
+UPDATE cqc."Establishment" SET "NmdsID" = "J1007374" WHERE  "NmdsID" = "W1007374";
+UPDATE cqc."Establishment" SET "NmdsID" = "J1007558" WHERE  "NmdsID" = "W1007558";
+UPDATE cqc."Establishment" SET "NmdsID" = "J1008606" WHERE  "NmdsID" = "W1008606";
+UPDATE cqc."Establishment" SET "NmdsID" = "H1007087" WHERE  "NmdsID" = "W1007087";
+UPDATE cqc."Establishment" SET "NmdsID" = "G1007556" WHERE  "NmdsID" = "W1007556";
+
