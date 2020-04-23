@@ -39,6 +39,7 @@ LEFT OUTER JOIN
 	cqc."Cssr" cssr ON cssr."LocalCustodianCode" = pcode."local_custodian_code"
 WHERE 
 	estab."NmdsID" LIKE 'W%'
+    AND estab."Archived" = false
 GROUP BY 
     estab."NmdsID", 
 	estab."PostCode",
