@@ -72,10 +72,10 @@ ORDER BY
 -- W1008606 - 2
 
 
-SELECT 
-   DISTINCT pcode."local_custodian_code"
-FROM 
-	cqcref."pcode" pcode 
-WHERE
-		 UPPER(substring(pcode."postcode" from '[^ ]+'::text))
-			LIKE 'DN20%'
+-- SELECT 
+--    DISTINCT pcode."local_custodian_code"
+-- FROM 
+-- 	cqcref."pcode" pcode 
+-- WHERE
+-- 		 UPPER(substring(pcode."postcode" from '[^ ]+'::text))
+-- 			LIKE 'DN20%'
