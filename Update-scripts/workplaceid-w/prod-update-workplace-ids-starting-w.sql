@@ -108,3 +108,5 @@ UPDATE cqc."Establishment" SET "NmdsID" = 'H1007087' WHERE  "NmdsID" = 'W1007087
 UPDATE cqc."Establishment" SET "NmdsID" = 'G1007556' WHERE  "NmdsID" = 'W1007556';
 
 COMMIT;
+
+-- cf conduit sfcuatdb01 -- psql < Update-scripts/workplaceid-w/prod-update-workplace-ids-starting-w.sql
