@@ -17,3 +17,30 @@ select estab."NameValue", estab."Status", estab."NmdsID", estab."PostCode" from 
 select "Active", "Status", "RegistrationID" from cqc."Login" where "Username" = 'claretest005dev';
 select "FullNameValue", "Archived" from cqc."User" where "RegistrationID" = 9524;
 select distinct "Active" from cqc."Login";
+----------
+select 
+	login."Username",
+	usr."FullNameValue",
+	usr."RegistrationID",
+	estab."NameValue",
+	usr."EstablishmentID"
+from 
+	cqc."Login" login
+inner join
+	cqc."User" usr on usr."RegistrationID" = login."RegistrationID"
+inner join
+	cqc."Establishment" estab on usr."EstablishmentID" = estab."EstablishmentID"
+where
+	login."Username" = 'timetest'
+-----------
+select 
+	login."Username"
+from 
+	cqc."Login" login
+inner join
+	cqc."User" usr on usr."RegistrationID" = login."RegistrationID"
+inner join
+	cqc."Establishment" estab on usr."EstablishmentID" = estab."EstablishmentID"
+where
+	estab."IsParent" = true
+-----------
