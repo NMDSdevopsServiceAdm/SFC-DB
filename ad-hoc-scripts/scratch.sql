@@ -12,4 +12,8 @@ select estab."NmdsID", estab."PostCode" from cqc."Establishment" estab where est
 select estab."Status" from cqc."Establishment" estab where estab."NmdsID" = 'W1013455';
 INSERT INTO cqcref."pcodedata" VALUES('100100449541','','',111,'GLADSTONE STREET','ABERTILLERY','NP13 1NE',6910,'BLAENAU GWENT');
 select * from cqc."User" where "FullNameValue" like 'Clare%';
-select estab."IsActive", estab."Status", estab."NmdsID", estab."PostCode" from cqc."Establishment" estab where estab."Status" = 'PENDING' AND UPPER(estab."PostCode") LIKE 'NP13%';
+select estab."Status", estab."NameValue", estab."NmdsID", estab."PostCode" from cqc."Establishment" estab where estab."NameValue" like 'Test WPrefix%';
+select estab."NameValue", estab."Status", estab."NmdsID", estab."PostCode" from cqc."Establishment" estab where estab."Status" = 'PENDING' AND UPPER(estab."PostCode") LIKE 'NP13%';
+select "Active", "Status", "RegistrationID" from cqc."Login" where "Username" = 'claretest005dev';
+select "FullNameValue", "Archived" from cqc."User" where "RegistrationID" = 9524;
+select distinct "Active" from cqc."Login";
