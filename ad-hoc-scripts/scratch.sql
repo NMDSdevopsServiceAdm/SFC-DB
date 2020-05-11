@@ -2,7 +2,6 @@ select estab."NameValue" from cqc."Establishment" estab where estab."NmdsID" = '
 
 cf conduit sfcuatdb02 -- psql < ad-hoc-scripts/scratch.sql
 
-
 SELECT "postcode", "local_custodian_code" from cqcref."pcode" where UPPER("postcode") = 'NP13 1NE';
 SELECT * from cqcref."pcode" where UPPER("postcode") = 'NP13 1NE';
 SELECT "postcode", "local_custodian_code" from cqcref."pcode" where UPPER("postcode") LIKE 'NP13%';
