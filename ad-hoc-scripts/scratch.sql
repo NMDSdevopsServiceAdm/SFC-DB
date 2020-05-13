@@ -55,3 +55,4 @@ where
 -----------
 
 
+cf conduit sfcuatdb02 -- psql -c "select * from cqc.Login login where login.Username = 'ozella53';"
