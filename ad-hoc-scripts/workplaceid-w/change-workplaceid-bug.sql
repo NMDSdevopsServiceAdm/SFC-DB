@@ -7,6 +7,8 @@ select estab."NmdsID", estab."PostCode" from cqc."Establishment" estab where est
 select estab."Status" from cqc."Establishment" estab where estab."NmdsID" = 'W1013455';
 INSERT INTO cqcref."pcodedata" VALUES('100100449541','','',111,'GLADSTONE STREET','ABERTILLERY','NP13 1NE',6910,'BLAENAU GWENT');
 select * from cqc."User" where "FullNameValue" like 'Clare%';
+select "FullNameValue" from cqc."User" where "FullNameValue" like 'Clare%' order by "FullNameValue";
+select "Username" from cqc."Login" where "Username" like 'Clare%' order by "Username";
 select estab."Status", estab."NameValue", estab."NmdsID", estab."PostCode" from cqc."Establishment" estab where estab."NameValue" like 'Test WPrefix%';
 select estab."NameValue", estab."Status", estab."NmdsID", estab."PostCode" from cqc."Establishment" estab where estab."Status" = 'PENDING' AND UPPER(estab."PostCode") LIKE 'NP13%';
 select "Active", "Status", "RegistrationID" from cqc."Login" where "Username" = 'claretest005dev';
@@ -49,7 +51,8 @@ where
 	login."Username" = 'timetest'
 -----------
 select 
-	login."Username"
+	login."Username",
+	estab."NameValue"
 from 
 	cqc."Login" login
 inner join
@@ -57,7 +60,10 @@ inner join
 inner join
 	cqc."Establishment" estab on usr."EstablishmentID" = estab."EstablishmentID"
 where
-	estab."IsParent" = true
+	estab."NameValue" = 'Jackies Home'
+	--estab."IsParent" = true
+-----------
+select "NameValue", "IsParent", "ParentID" from cqc."Establishment" estab where estab."ParentID" is not null;
 -----------
 select 
 	login."Username",
