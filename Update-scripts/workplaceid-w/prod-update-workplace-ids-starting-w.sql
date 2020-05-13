@@ -107,6 +107,14 @@ UPDATE cqc."Establishment" SET "NmdsID" = 'J1008606' WHERE  "NmdsID" = 'W1008606
 UPDATE cqc."Establishment" SET "NmdsID" = 'H1007087' WHERE  "NmdsID" = 'W1007087';
 UPDATE cqc."Establishment" SET "NmdsID" = 'G1007556' WHERE  "NmdsID" = 'W1007556';
 
+UPDATE cqc."Establishment" SET "NmdsID" = 'E1009138' WHERE "NmdsID" = 'W1009138';
+UPDATE cqc."Establishment" SET "NmdsID" = 'G1009050' WHERE "NmdsID" = 'W1009050';
+UPDATE cqc."Establishment" SET "NmdsID" = 'I1008992' WHERE "NmdsID" = 'W1008992';
+UPDATE cqc."Establishment" SET "NmdsID" = 'I1009020' WHERE "NmdsID" = 'W1009020';
+UPDATE cqc."Establishment" SET "NmdsID" = 'I1009048' WHERE "NmdsID" = 'W1009048';
+UPDATE cqc."Establishment" SET "NmdsID" = 'J1009066' WHERE "NmdsID" = 'W1009066';
+UPDATE cqc."Establishment" SET "NmdsID" = 'H1009156' WHERE "NmdsID" = 'W1009156';
+
 COMMIT;
 
 -- cf conduit sfcuatdb01 -- psql < Update-scripts/workplaceid-w/prod-update-workplace-ids-starting-w.sql
