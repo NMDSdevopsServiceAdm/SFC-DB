@@ -1,0 +1,1 @@
+ALTER TYPE cqc."enum_Approvals_ApprovalType" ADD VALUE 'CqcStatusChange';
