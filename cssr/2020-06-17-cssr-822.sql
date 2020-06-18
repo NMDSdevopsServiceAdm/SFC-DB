@@ -8,4 +8,9 @@ WHERE "CssrID" = 810;
 DELETE
 FROM cqc."Cssr"
 WHERE "CssrID" = 811;
+UPDATE cqc."EstablishmentLocalAuthority"
+SET "CssrID" = 822,
+    "CssR"   = 'Bournemouth, Christchurch and Poole'
+WHERE "CssrID" = 811
+   OR "CssrID" = 810;
 END TRANSACTION;
