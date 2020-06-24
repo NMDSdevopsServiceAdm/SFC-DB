@@ -19,10 +19,11 @@ select distinct "Active" from cqc."Login";
 select * from cqc."User" usr where usr."EstablishmentID" = 2299;
 select * from cqc."Login" login where login."Username" = 'ozella53';
 select "NmdsID" from cqc."Establishment" limit 1;
-select "EstablishmentID", "NmdsID" from cqc."Establishment" where "NmdsID" = 'G1002299'
+select "EstablishmentID", "NmdsID" from cqc."Establishment" where "NmdsID" = 'I1003138'
 -- login username 'eryn23' username 'Korey Bashirian' workplace id 'I1002961'
 ----------
 select 
+	estab."EmployerTypeValue",
 	login."Username" as LoginName,
 	usr."FullNameValue" as UserName,
 	usr."RegistrationID",
@@ -41,6 +42,7 @@ inner join
 	cqc."Establishment" estab on usr."EstablishmentID" = estab."EstablishmentID"
 where
 	login."Username" = 'eryn23'
+	-- estab."NmdsID" = 'I1003196'
 -----------
 select 
 	login."Username"
@@ -56,3 +58,5 @@ where
 
 
 cf conduit sfcuatdb02 -- psql -c "select * from cqc.Login login where login.Username = 'ozella53';"
+
+update cqc."Establishment" set "EmployerTypeValue" = null where "NmdsID" = 'I1003197'

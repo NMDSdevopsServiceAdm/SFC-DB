@@ -51,3 +51,29 @@ inner join
 -- Sabina Crooks
 -- rejected
 ----------------------------
+
+INSERT INTO cqc."Approvals"(
+"UUID", "EstablishmentID", "UserID", "ApprovalType", "Status", "RejectionReason", "Data", "createdAt", "updatedAt")
+VALUES 
+('579efbc4-d8cb-4432-8bf9-447cc951f2e4', 2470,   2124, 'CqcStatusChange', 'Pending', '', null, '2020-05-21 09:25:12.896+01', null);
+--------------------
+UPDATE cqc."Approvals" SET "Status" = 'Pending' WHERE "UUID" = '579efbc4-d8cb-4432-8bf9-447cc951f2e4';
+--------------------
+select 
+	login."Username" as LoginName,
+	usr."FullNameValue" as UserName,
+	usr."RegistrationID",
+	estab."NameValue" as EstabName,
+	usr."EstablishmentID",
+    estab."NmdsID" as WorkplaceId
+from 
+	cqc."Login" login
+inner join
+	cqc."User" usr on usr."RegistrationID" = login."RegistrationID"
+inner join
+	cqc."Establishment" estab on usr."EstablishmentID" = estab."EstablishmentID"
+where
+	estab."NmdsID" = 'I1003138'
+----------------------
+SELECT * FROM cqc."Approvals" WHERE "EstablishmentID" = '2470';
+
