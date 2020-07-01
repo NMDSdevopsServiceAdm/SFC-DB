@@ -5,7 +5,7 @@ SELECT
             ELSE STRING_AGG(DISTINCT concat(cssr."NmdsIDLetter", trim(leading 'W' from estab."NmdsID")), ',')
     END AS newWorkplaceId,
 	estab."PostCode",
-    REVERSE(substring(REVERSE(estab."postcode") from 4)) AS MatchedPcodePrefix,
+    trim(trailing from REVERSE(substring(REVERSE(UPPER(estab."PostCode")) from 4))) AS MatchedPcodePrefix,
 	estab."NameValue",
     STRING_AGG(DISTINCT cssr."LocalCustodianCode"::text, ',') AS CustodianCodes,
     STRING_AGG(DISTINCT cssr."LocalAuthority", ',') AS LAs
@@ -13,16 +13,33 @@ FROM
 	cqc."Establishment" estab 
 LEFT OUTER JOIN
 	cqcref."pcode" pcode 
-		ON UPPER(substring(pcode."postcode" from '[^ ]+'::text))
-            -- Some postcodes in the establishment table don't have spaces
-            -- What we want is everything up to the last 3 chars
-            -- We're reversing, taking the first 4 chars, reversing again 
-            -- and then adding '%' to use LIKE to find postcodes that start with the result
-            LIKE concat(REVERSE(substring(REVERSE(UPPER(estab."PostCode")) from 4)),'%')
+		ON trim(trailing from 
+                REVERSE(
+                    substring(
+                        REVERSE(
+                            UPPER(pcode."postcode")
+                        ) 
+                    from 4)
+                )
+            )
+            /* Some postcodes in the establishment table don't have spaces.
+             What we want is everything up to the last 3 chars.
+             We're reversing, removing the first 3 chars, reversing again, 
+             and then adding '%' to use LIKE to find postcodes that start with the result */
+            = trim(trailing from 
+                REVERSE(
+                    substring(
+                        REVERSE(
+                            UPPER(estab."PostCode")
+                        ) 
+                    from 4)
+                )
+            )
 LEFT OUTER JOIN
 	cqc."Cssr" cssr ON cssr."LocalCustodianCode" = pcode."local_custodian_code"
 WHERE 
 	estab."NmdsID" LIKE 'W%'
+    AND estab."Archived" = false
 GROUP BY 
     estab."NmdsID", 
 	estab."PostCode",
@@ -55,10 +72,10 @@ ORDER BY
 -- W1008606 - 2
 
 
-SELECT 
-   DISTINCT pcode."local_custodian_code"
-FROM 
-	cqcref."pcode" pcode 
-WHERE
-		 UPPER(substring(pcode."postcode" from '[^ ]+'::text))
-			LIKE 'DN20%'
+-- SELECT 
+--    DISTINCT pcode."local_custodian_code"
+-- FROM 
+-- 	cqcref."pcode" pcode 
+-- WHERE
+-- 		 UPPER(substring(pcode."postcode" from '[^ ]+'::text))
+-- 			LIKE 'DN20%'
