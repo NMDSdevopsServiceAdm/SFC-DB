@@ -16,6 +16,7 @@
 --      I created a new worksheet that referenced the original with formulas like this: =TRIM(Emails01!B1)
 -- 4. Turn off the psql output redirection with this command: \o
 -- 5. Type exit to exit psql.
+-- 6. !! IMPORTANT! Don't email the results! This would be against GDPR. Instead, send it to Jackie via Slack.
 ----------------------------------------------
 select 
 	usr."EmailValue" as "EmailAddress",
