@@ -34,5 +34,13 @@ WHERE
     T1."EstablishmentLocalAuthorityID" < T2."EstablishmentLocalAuthorityID"
     AND T1."CssrID" = T2."CssrID"
     AND T1."EstablishmentID" = T2."EstablishmentID";
+------------------------------------------------
+-- Update postcode data to refer to new cssr instead of old cssrs
+------------------------------------------------
+UPDATE cqcref."pcodedata" 
+SET "local_custodian_code" = 1260 
+WHERE 
+    "local_custodian_code" = 1250 
+    OR "local_custodian_code" = 1255;
 ----------------
 END TRANSACTION;
