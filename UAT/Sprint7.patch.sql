@@ -1,0 +1,2 @@
+ALTER TABLE cqc."User"
+ADD "LaReportLockHeld" BOOLEAN  NOT NULL DEFAULT FALSE;
