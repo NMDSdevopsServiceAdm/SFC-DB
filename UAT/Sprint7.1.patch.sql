@@ -420,5 +420,5 @@ BEGIN
 END;
 $$;
 
-alter function localauthorityreportadmin(date, date) owner to sfcadmin;
+alter function cqc.localauthorityreportadmin(date, date) owner to sfcadmin;
 
