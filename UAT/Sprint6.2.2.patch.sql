@@ -1,5 +1,5 @@
-DROP FUNCTION IF EXISTS cqc.localAuthorityReportWorker;
-create function localauthorityreportworker(establishmentid integer, reportfrom date, reportto date) returns boolean
+DROP FUNCTION IF EXISTS cqc.localauthorityreportworker;
+create function cqc.localauthorityreportworker(establishmentid integer, reportfrom date, reportto date) returns boolean
     language plpgsql
 as
 $$
