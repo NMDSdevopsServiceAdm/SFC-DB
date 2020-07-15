@@ -16,6 +16,11 @@ COPY cqcref."pcodedata-source" FROM 'C:/skills-for-care/postcodes/AddressBasePlu
 \copy cqcref."pcodedata-source-2" FROM 'C:/skills-for-care/postcodes/AddressBasePlus_COU_2020-03-19_001.csv' WITH (FORMAT csv);
 \copy cqcref."pcodedata-source-2" FROM 'C:/skills-for-care/postcodes/AddressBasePlus_COU_2020-03-19_002.csv' WITH (FORMAT csv);
 
+-- alternative file location on Mac:
+\copy cqcref."pcodedata-source-2" FROM '/Users/claresudbery/skills-for-care/postcodes/AddressBasePlus_COU_2020-03-19_001.csv' WITH (FORMAT csv);
+\copy cqcref."pcodedata-source-2" FROM '/Users/claresudbery/skills-for-care/postcodes/AddressBasePlus_COU_2020-03-19_002.csv' WITH (FORMAT csv);
+select count(uprn) from cqcref."pcodedata-source-2";
+
 /*
 Dummy test with 2002 rows:
 COPY 2002

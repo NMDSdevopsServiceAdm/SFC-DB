@@ -7,7 +7,7 @@ BEGIN TRANSACTION;
 -- !! In Windows Terminal you need to use forward slashes in your path, and surround in single quotes !!
 -- !! This assumes you've edited your dump file to reference a table called "pcodedata_new" instead of pcodedata
 -------------------
-\i 'C:/skills-for-care/postcodes/final-thing/pcodedata-prod-backup.dmp';
+\i '/Users/claresudbery/skills-for-care/postcodes/pcodedata-prod-backup.dmp';
 
 -------------------
 -- Create a temp table, "pcodedata-source", to hold the new postcode data from the csv
