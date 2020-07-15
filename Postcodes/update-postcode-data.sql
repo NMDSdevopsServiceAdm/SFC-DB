@@ -1,7 +1,8 @@
 ----------------
 -- This script will merge old and new postcode data
 -- See confluence page with more info: https://skillsforcare.atlassian.net/wiki/spaces/ASCWDS/pages/89587775/Postcode+data+updates
--- To run the script: cf conduit sfcuatdb02 -- psql < /path/to/update-postcode-data.sql
+-- To run the script in preprod: cf conduit sfcuatdb02 -- psql < /path/to/update-postcode-data.sql
+-- To run the script in prod: cf conduit sfcuatdb01 -- psql < /path/to/update-postcode-data.sql
 ----------------
 
 ----------------
@@ -108,6 +109,9 @@ CREATE TABLE cqcref."pcodedata-source" (
     filler_column_77        varchar
 );
 ALTER TABLE cqcref."pcodedata-source"
+    OWNER to rdsbroker_9a03ef70_950d_437d_8e69_530388b53994_manager; -- prod
+    --OWNER to rdsbroker_ac54a3d5_cffd_4dea_a91c_af8c101d1e15_manager; -- preprod
+ALTER TABLE cqcref."pcodedata_new"
     OWNER to rdsbroker_9a03ef70_950d_437d_8e69_530388b53994_manager; -- prod
     --OWNER to rdsbroker_ac54a3d5_cffd_4dea_a91c_af8c101d1e15_manager; -- preprod
 

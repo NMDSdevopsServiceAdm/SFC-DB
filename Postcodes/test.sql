@@ -62,4 +62,4 @@ ALTER TABLE cqcref."pcodedata_new"
     --OWNER to rdsbroker_9a03ef70_950d_437d_8e69_530388b53994_manager; -- prod*/
 
 
--- cf conduit sfcuatdb02 -- psql < /Users/claresudbery/development/SFC-DB/Postcodes/update-postcode-data.sql
+-- cf conduit sfcuatdb01 -- psql < /Users/claresudbery/development/SFC-DB/Postcodes/update-postcode-data.sql
