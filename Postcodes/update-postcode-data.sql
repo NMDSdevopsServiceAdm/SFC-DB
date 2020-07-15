@@ -1,17 +1,31 @@
 ----------------
+-- This script will merge old and new postcode data
+-- See confluence page with more info: https://skillsforcare.atlassian.net/wiki/spaces/ASCWDS/pages/89587775/Postcode+data+updates
+-- To run the script: cf conduit sfcuatdb02 -- psql < /path/to/update-postcode-data.sql
+----------------
+
+----------------
 BEGIN TRANSACTION;
 
 -------------------
--- Restore backed-up postcode data into pcodedata_new
--- !! Edit the path to the dump file !!
--- !! In Windows Terminal you need to use forward slashes in your path, and surround in single quotes !!
--- !! This assumes you've edited your dump file to reference a table called "pcodedata_new" instead of pcodedata
+-- Turn timing on so we can see how long it took
 -------------------
-\i '/Users/claresudbery/skills-for-care/postcodes/pcodedata-prod-backup.dmp';
+\timing
+
+-------------------
+-- Restore backed-up postcode data into pcodedata_new, so we can merge old and new postcode data
+-- !! Edit the path to the dump file !!
+-- !! This assumes you've edited your dump file to reference a table called "pcodedata_new" instead of pcodedata
+-- !! In Windows Terminal you need to use forward slashes in your path, and surround in single quotes !!
+-------------------
+SELECT 'Creating pcodedata_new table (a backup of the existing pcodedata table) so we can merge old and new postcode data';
+\i '/Users/claresudbery/OneDrive/temp/SFC-postcodes/pcodedata-prod-backup.dmp';
 
 -------------------
 -- Create a temp table, "pcodedata-source", to hold the new postcode data from the csv
 -------------------
+SELECT 'Creating temp source table';
+
 DROP TABLE IF EXISTS cqcref."pcodedata-source";
 
 CREATE TABLE cqcref."pcodedata-source" (
@@ -93,24 +107,23 @@ CREATE TABLE cqcref."pcodedata-source" (
     filler_column_76        varchar,
     filler_column_77        varchar
 );
+ALTER TABLE cqcref."pcodedata-source"
+    --OWNER to rdsbroker_9a03ef70_950d_437d_8e69_530388b53994_manager; -- prod
+    OWNER to rdsbroker_ac54a3d5_cffd_4dea_a91c_af8c101d1e15_manager; -- preprod
 
 -------------------
 -- Import the new postcode data from the csvs into your temp table
 -- !! Edit the path to the csvs !!
 -------------------
+SELECT 'Importing new postcode data from the csvs into temp source table';
 TRUNCATE cqcref."pcodedata-source";
-\copy cqcref."pcodedata-source" FROM 'C:/skills-for-care/postcodes/AddressBasePlus_COU_2020-03-19_001.csv' WITH (FORMAT csv);
-\copy cqcref."pcodedata-source" FROM 'C:/skills-for-care/postcodes/AddressBasePlus_COU_2020-03-19_002.csv' WITH (FORMAT csv);
-
--------------------
--- Alter a row in cqcref."pcodedata_new" so you can verify the merge works
--- !! Find a row that exists !!
--------------------
-UPDATE cqcref."pcodedata_new" set "street_description" = 'updated by me' where postcode = 'BS16 2TW' AND "uprn" = 29719;
+\copy cqcref."pcodedata-source" FROM '/Users/claresudbery/skills-for-care/postcodes/AddressBasePlus_COU_2020-03-19_001.csv' WITH (FORMAT csv);
+\copy cqcref."pcodedata-source" FROM '/Users/claresudbery/skills-for-care/postcodes/AddressBasePlus_COU_2020-03-19_002.csv' WITH (FORMAT csv);
 
 -------------------
 -- Import the new source data from cqcref."pcodedata-source" into cqcref."pcodedata_new"
 -------------------
+SELECT 'Importing new postcode data from temp source table into cqcref."pcodedata_new"';
 INSERT INTO cqcref."pcodedata_new" (
     "uprn",
     "sub_building_name",
@@ -145,5 +158,20 @@ ON CONFLICT ("uprn") DO UPDATE SET
     "county"               = excluded."county",                    
     "rm_organisation_name" = excluded."rm_organisation_name" 
  ;
+
+-------------------
+-- Check new data successfully updated
+-- This should return BRISTOL AVE, NW9 4EW, BARNET
+-------------------
+SELECT 'You should now see BRISTOL AVE, NW9 4EW, BARNET';
+SELECT 
+  "street_description", 
+  "postcode", 
+  "county" 
+FROM 
+  cqcref."pcodedata_new" 
+WHERE 
+  "postcode" = 'NW9 4EW';
+
 ----------------
 END TRANSACTION;

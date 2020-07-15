@@ -82,5 +82,9 @@ CREATE TABLE cqcref."pcodedata-source-2" (
     filler_column_76        varchar,
     filler_column_77        varchar
 );
+ALTER TABLE cqcref."pcodedata-source"
+    --OWNER to rdsbroker_9a03ef70_950d_437d_8e69_530388b53994_manager; -- prod
+    OWNER to rdsbroker_ac54a3d5_cffd_4dea_a91c_af8c101d1e15_manager; -- preprod
+
 
 END TRANSACTION;
