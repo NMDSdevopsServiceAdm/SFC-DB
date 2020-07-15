@@ -1,6 +1,17 @@
-BEGIN TRANSACTION;
 ----------------
+BEGIN TRANSACTION;
 
+-------------------
+-- Restore backed-up postcode data into pcodedata_new
+-- !! Edit the path to the dump file !!
+-- !! In Windows Terminal you need to use forward slashes in your path, and surround in single quotes !!
+-- !! This assumes you've edited your dump file to reference a table called "pcodedata_new" instead of pcodedata
+-------------------
+\i 'C:/skills-for-care/postcodes/final-thing/pcodedata-prod-backup.dmp';
+
+-------------------
+-- Create a temp table, "pcodedata-source", to hold the new postcode data from the csv
+-------------------
 DROP TABLE IF EXISTS cqcref."pcodedata-source";
 
 CREATE TABLE cqcref."pcodedata-source" (
@@ -83,4 +94,56 @@ CREATE TABLE cqcref."pcodedata-source" (
     filler_column_77        varchar
 );
 
+-------------------
+-- Import the new postcode data from the csvs into your temp table
+-- !! Edit the path to the csvs !!
+-------------------
+TRUNCATE cqcref."pcodedata-source";
+\copy cqcref."pcodedata-source" FROM 'C:/skills-for-care/postcodes/AddressBasePlus_COU_2020-03-19_001.csv' WITH (FORMAT csv);
+\copy cqcref."pcodedata-source" FROM 'C:/skills-for-care/postcodes/AddressBasePlus_COU_2020-03-19_002.csv' WITH (FORMAT csv);
+
+-------------------
+-- Alter a row in cqcref."pcodedata_new" so you can verify the merge works
+-- !! Find a row that exists !!
+-------------------
+UPDATE cqcref."pcodedata_new" set "street_description" = 'updated by me' where postcode = 'BS16 2TW' AND "uprn" = 29719;
+
+-------------------
+-- Import the new source data from cqcref."pcodedata-source" into cqcref."pcodedata_new"
+-------------------
+INSERT INTO cqcref."pcodedata_new" (
+    "uprn",
+    "sub_building_name",
+    "building_name",
+    "building_number",
+    "street_description",
+    "post_town",
+    "postcode",
+    "local_custodian_code",
+    "county",
+    "rm_organisation_name") 
+  SELECT
+    "uprn",
+    "sub_building_name",
+    "building_name",
+    "building_number",
+    "street_description",
+    "post_town",
+    "postcode",
+    "local_custodian_code",
+    "county",
+    "rm_organisation_name"
+  FROM cqcref."pcodedata-source" pcode_source
+ON CONFLICT ("uprn") DO UPDATE SET
+    "sub_building_name"    = excluded."sub_building_name",             
+    "building_name"        = excluded."building_name",                
+    "building_number"      = excluded."building_number",                
+    "street_description"   = excluded."street_description",              
+    "post_town"            = excluded."post_town",                    
+    "postcode"             = excluded."postcode",                    
+    "local_custodian_code" = excluded."local_custodian_code",           
+    "county"               = excluded."county",                    
+    "rm_organisation_name" = excluded."rm_organisation_name" 
+ ;
+----------------
 END TRANSACTION;

@@ -4,7 +4,6 @@
 -- Query returned successfully in 1 secs 226 msec.
 -------------------
 -- using full data set of 1,258,152 records:
--- (based on the above, should take approx 770 seconds, which is 12.83 minutes)
 -- INSERT 0 1258152
 -- Query returned successfully in 6 min 28 secs.
 -------------------
