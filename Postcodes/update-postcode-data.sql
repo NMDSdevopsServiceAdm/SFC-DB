@@ -20,7 +20,7 @@ BEGIN TRANSACTION;
 -- !! In Windows Terminal you need to use forward slashes in your path, and surround in single quotes !!
 -------------------
 SELECT 'Creating pcodedata_new table (a backup of the existing pcodedata table) so we can merge old and new postcode data';
-\i '/Users/claresudbery/OneDrive/temp/SFC-postcodes/pcodedata-prod-backup.dmp';
+\i '/path/to/pcodedata-prod-backup.dmp';
 
 -------------------
 -- Create a temp table, "pcodedata-source", to hold the new postcode data from the csv
@@ -109,11 +109,11 @@ CREATE TABLE cqcref."pcodedata-source" (
     filler_column_77        varchar
 );
 ALTER TABLE cqcref."pcodedata-source"
-    OWNER to rdsbroker_9a03ef70_950d_437d_8e69_530388b53994_manager; -- prod
-    --OWNER to rdsbroker_ac54a3d5_cffd_4dea_a91c_af8c101d1e15_manager; -- preprod
+    --OWNER to rdsbroker_9a03ef70_950d_437d_8e69_530388b53994_manager; -- prod
+    OWNER to rdsbroker_ac54a3d5_cffd_4dea_a91c_af8c101d1e15_manager; -- preprod
 ALTER TABLE cqcref."pcodedata_new"
-    OWNER to rdsbroker_9a03ef70_950d_437d_8e69_530388b53994_manager; -- prod
-    --OWNER to rdsbroker_ac54a3d5_cffd_4dea_a91c_af8c101d1e15_manager; -- preprod
+    --OWNER to rdsbroker_9a03ef70_950d_437d_8e69_530388b53994_manager; -- prod
+    OWNER to rdsbroker_ac54a3d5_cffd_4dea_a91c_af8c101d1e15_manager; -- preprod
 
 -------------------
 -- Import the new postcode data from the csvs into your temp table
@@ -121,8 +121,8 @@ ALTER TABLE cqcref."pcodedata_new"
 -------------------
 SELECT 'Importing new postcode data from the csvs into temp source table';
 TRUNCATE cqcref."pcodedata-source";
-\copy cqcref."pcodedata-source" FROM '/Users/claresudbery/skills-for-care/postcodes/AddressBasePlus_COU_2020-03-19_001.csv' WITH (FORMAT csv);
-\copy cqcref."pcodedata-source" FROM '/Users/claresudbery/skills-for-care/postcodes/AddressBasePlus_COU_2020-03-19_002.csv' WITH (FORMAT csv);
+\copy cqcref."pcodedata-source" FROM '/path/to/AddressBasePlus_COU_2020-03-19_001.csv' WITH (FORMAT csv);
+\copy cqcref."pcodedata-source" FROM '/path/to/AddressBasePlus_COU_2020-03-19_002.csv' WITH (FORMAT csv);
 
 -------------------
 -- Add a primary key to the new table, so it has some way of detecting duplicates
