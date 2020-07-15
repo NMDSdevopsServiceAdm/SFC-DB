@@ -121,6 +121,14 @@ TRUNCATE cqcref."pcodedata-source";
 \copy cqcref."pcodedata-source" FROM '/Users/claresudbery/skills-for-care/postcodes/AddressBasePlus_COU_2020-03-19_002.csv' WITH (FORMAT csv);
 
 -------------------
+-- Add a primary key to the new table, so it has some way of detecting duplicates
+-------------------
+SELECT 'Adding a primary key to the new table, so it has some way of detecting duplicates';
+ALTER TABLE cqcref."pcodedata_new"
+  ADD CONSTRAINT pcodedata_uprn_01_pk 
+    PRIMARY KEY (uprn);
+
+-------------------
 -- Import the new source data from cqcref."pcodedata-source" into cqcref."pcodedata_new"
 -------------------
 SELECT 'Importing new postcode data from temp source table into cqcref."pcodedata_new"';

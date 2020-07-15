@@ -43,3 +43,23 @@ ALTER TABLE cqcref."location-backup"
 \i 'C:/skills-for-care/postcodes/location-preprod-backup.dmp';
 
 END TRANSACTION;
+
+
+/*CREATE TABLE cqcref."pcodedata_new" (
+    uprn bigint,
+    sub_building_name character varying,
+    building_name character varying,
+    building_number character varying,
+    street_description character varying,
+    post_town character varying,
+    postcode character varying,
+    local_custodian_code bigint,
+    county character varying,
+    rm_organisation_name character varying
+);
+ALTER TABLE cqcref."pcodedata_new"
+    OWNER to rdsbroker_ac54a3d5_cffd_4dea_a91c_af8c101d1e15_manager; -- preprod
+    --OWNER to rdsbroker_9a03ef70_950d_437d_8e69_530388b53994_manager; -- prod*/
+
+
+-- cf conduit sfcuatdb02 -- psql < /Users/claresudbery/development/SFC-DB/Postcodes/update-postcode-data.sql
