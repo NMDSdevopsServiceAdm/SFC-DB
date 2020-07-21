@@ -43,12 +43,12 @@ CREATE TABLE cqcref."pcodedata-source" (
     filler_column_11        varchar,
     filler_column_12        varchar,
     local_custodian_code    bigint, --: 13
-    filler_column_14        varchar,
+    filler_column_14        varchar, --: country
     filler_column_15        varchar,
     filler_column_16        varchar,
     filler_column_17        varchar,
     rm_organisation_name    character varying COLLATE pg_catalog."default", --: 18
-    filler_column_19        varchar,
+    filler_column_19        varchar, -- LA_ORGANISATION 
     filler_column_20        varchar,
     filler_column_21        varchar,
     sub_building_name       character varying COLLATE pg_catalog."default", --: 22
@@ -58,7 +58,7 @@ CREATE TABLE cqcref."pcodedata-source" (
     filler_column_26        varchar,
     filler_column_27        varchar,
     filler_column_28        varchar,
-    filler_column_29        varchar,
+    filler_column_29        varchar, -- SAO_TEXT
     filler_column_30        varchar,
     filler_column_31        varchar,
     filler_column_32        varchar,
@@ -87,12 +87,12 @@ CREATE TABLE cqcref."pcodedata-source" (
     filler_column_55        varchar,
     filler_column_56        varchar,
     filler_column_57        varchar,
-    filler_column_58        varchar,
-    filler_column_59        varchar,
+    filler_column_58        varchar, -- LOCALITY
+    filler_column_59        varchar, 
     filler_column_60        varchar,
-    post_town               character varying COLLATE pg_catalog."default", --: 61
-    county                  character varying COLLATE pg_catalog."default", --: 62
-    filler_column_63       	varchar,
+    post_town               character varying COLLATE pg_catalog."default", --: 61 ("TOWN_NAME")
+    county                  character varying COLLATE pg_catalog."default", --: 62 ("ADMINISTRATIVE_AREA")
+    filler_column_63       	varchar, -- "POST_TOWN"
     filler_column_64        varchar,
     filler_column_65        varchar,
     postcode                character varying COLLATE pg_catalog."default", --: 66
