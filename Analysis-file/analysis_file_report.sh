@@ -725,8 +725,8 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
        ) lauthid, -- 036
        -- 'na' parliamentaryconstituency, -- 037
        "NumberOfStaffValue" totalstaff****COALESCE****, -- 038
-       TO_CHAR("NumberOfStaffChangedAt",'DD/MM/YYYY') totalstaff****COALESCE****_changedate, -- 039
-       TO_CHAR("NumberOfStaffSavedAt",'DD/MM/YYYY') totalstaff****COALESCE****_savedate, -- 040
+       TO_CHAR("NumberOfStaffChangedAt",'DD/MM/YYYY') totalstaff_changedate, -- 039
+       TO_CHAR("NumberOfStaffSavedAt",'DD/MM/YYYY') totalstaff_savedate, -- 040
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "Archived" = false) wkrrecs, -- 041
        (
           SELECT TO_CHAR(MAX("When"),'DD/MM/YYYY')
@@ -1219,13 +1219,13 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
              (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 24) = 1 THEN
              TO_CHAR("CapacityServicesChangedAt",'DD/MM/YYYY')
           ELSE NULL
-       END st01cap****COALESCE****_changedate, -- 458
+       END st01cap_changedate, -- 458
        CASE
           WHEN "MainServiceFKValue" = 24 OR
              (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 24) = 1 THEN
              TO_CHAR("CapacityServicesSavedAt",'DD/MM/YYYY')
           ELSE NULL
-       END st01cap****COALESCE****_savedate, -- 459
+       END st01cap_savedate, -- 459
        (
           SELECT "Answer"
           FROM   "EstablishmentCapacity" ec
@@ -1237,13 +1237,13 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
              (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 24) = 1 THEN
              TO_CHAR("CapacityServicesChangedAt",'DD/MM/YYYY')
           ELSE NULL
-       END st01util****COALESCE****_changedate, -- 461
+       END st01util_changedate, -- 461
        CASE
           WHEN "MainServiceFKValue" = 24 OR
              (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 24) = 1 THEN
              TO_CHAR("CapacityServicesSavedAt",'DD/MM/YYYY')
           ELSE NULL
-       END st01util****COALESCE****_savedate, -- 462
+       END st01util_savedate, -- 462
        CASE
           WHEN "MainServiceFKValue" = 25 OR
                (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 25) = 1 THEN 1
@@ -1260,13 +1260,13 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
              (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 25) = 1 THEN
              TO_CHAR("CapacityServicesChangedAt",'DD/MM/YYYY')
           ELSE NULL
-       END st02cap****COALESCE****_changedate, -- 465
+       END st02cap_changedate, -- 465
        CASE
           WHEN "MainServiceFKValue" = 25 OR
              (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 25) = 1 THEN
              TO_CHAR("CapacityServicesSavedAt",'DD/MM/YYYY')
           ELSE NULL
-       END st02cap****COALESCE****_savedate, -- 466
+       END st02cap_savedate, -- 466
        (
           SELECT "Answer"
           FROM   "EstablishmentCapacity" ec
@@ -1278,13 +1278,13 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
              (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 25) = 1 THEN
              TO_CHAR("CapacityServicesChangedAt",'DD/MM/YYYY')
           ELSE NULL
-       END st02util****COALESCE****_changedate, -- 468
+       END st02util_changedate, -- 468
        CASE
           WHEN "MainServiceFKValue" = 25 OR
              (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 25) = 1 THEN
              TO_CHAR("CapacityServicesSavedAt",'DD/MM/YYYY')
           ELSE NULL
-       END st02util****COALESCE****_savedate, -- 469
+       END st02util_savedate, -- 469
        CASE
           WHEN "MainServiceFKValue" = 13 OR
                (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 13) = 1 THEN 1
@@ -1301,13 +1301,13 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
              (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 13) = 1 THEN
              TO_CHAR("CapacityServicesChangedAt",'DD/MM/YYYY')
           ELSE NULL
-       END st53util****COALESCE****_changedate, -- 472
+       END st53util_changedate, -- 472
        CASE
           WHEN "MainServiceFKValue" = 13 OR
              (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 13) = 1 THEN
              TO_CHAR("CapacityServicesSavedAt",'DD/MM/YYYY')
           ELSE NULL
-       END st53util****COALESCE****_savedate, -- 473
+       END st53util_savedate, -- 473
        CASE
           WHEN "MainServiceFKValue" = 12 OR
                (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 12) = 1 THEN 1
@@ -1324,13 +1324,13 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
              (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 12) = 1 THEN
              TO_CHAR("CapacityServicesChangedAt",'DD/MM/YYYY')
           ELSE NULL
-       END st05cap****COALESCE****_changedate, -- 476
+       END st05cap_changedate, -- 476
        CASE
           WHEN "MainServiceFKValue" = 12 OR
              (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 12) = 1 THEN
              TO_CHAR("CapacityServicesSavedAt",'DD/MM/YYYY')
           ELSE NULL
-       END st05cap****COALESCE****_savedate, -- 477
+       END st05cap_savedate, -- 477
        (
           SELECT "Answer"
           FROM   "EstablishmentCapacity" ec
@@ -1342,13 +1342,13 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
              (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 12) = 1 THEN
              TO_CHAR("CapacityServicesChangedAt",'DD/MM/YYYY')
           ELSE NULL
-       END st05util****COALESCE****_changedate, -- 479
+       END st05util_changedate, -- 479
        CASE
           WHEN "MainServiceFKValue" = 12 OR
              (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 12) = 1 THEN
              TO_CHAR("CapacityServicesSavedAt",'DD/MM/YYYY')
           ELSE NULL
-       END st05util****COALESCE****_savedate, -- 480
+       END st05util_savedate, -- 480
        CASE
           WHEN "MainServiceFKValue" = 9 OR
                (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 9) = 1 THEN 1
@@ -1365,13 +1365,13 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
              (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 9) = 1 THEN
              TO_CHAR("CapacityServicesChangedAt",'DD/MM/YYYY')
           ELSE NULL
-       END st06cap****COALESCE****_changedate, -- 483
+       END st06cap_changedate, -- 483
        CASE
           WHEN "MainServiceFKValue" = 9 OR
              (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 9) = 1 THEN
              TO_CHAR("CapacityServicesSavedAt",'DD/MM/YYYY')
           ELSE NULL
-       END st06cap****COALESCE****_savedate, -- 484
+       END st06cap_savedate, -- 484
        (
           SELECT "Answer"
           FROM   "EstablishmentCapacity" ec
@@ -1383,13 +1383,13 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
              (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 9) = 1 THEN
              TO_CHAR("CapacityServicesChangedAt",'DD/MM/YYYY')
           ELSE NULL
-       END st06util****COALESCE****_changedate, -- 486
+       END st06util_changedate, -- 486
        CASE
           WHEN "MainServiceFKValue" = 9 OR
              (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 9) = 1 THEN
              TO_CHAR("CapacityServicesSavedAt",'DD/MM/YYYY')
           ELSE NULL
-       END st06util****COALESCE****_savedate, -- 487
+       END st06util_savedate, -- 487
        CASE
           WHEN "MainServiceFKValue" = 10 OR
                (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 10) = 1 THEN 1
@@ -1406,13 +1406,13 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
              (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 10) = 1 THEN
              TO_CHAR("CapacityServicesChangedAt",'DD/MM/YYYY')
           ELSE NULL
-       END st07cap****COALESCE****_changedate, -- 490
+       END st07cap_changedate, -- 490
        CASE
           WHEN "MainServiceFKValue" = 10 OR
              (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 10) = 1 THEN
              TO_CHAR("CapacityServicesSavedAt",'DD/MM/YYYY')
           ELSE NULL
-       END st07cap****COALESCE****_savedate, -- 491
+       END st07cap_savedate, -- 491
        (
           SELECT "Answer"
           FROM   "EstablishmentCapacity" ec
@@ -1424,13 +1424,13 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
              (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 10) = 1 THEN
              TO_CHAR("CapacityServicesChangedAt",'DD/MM/YYYY')
           ELSE NULL
-       END st07util****COALESCE****_changedate, -- 493
+       END st07util_changedate, -- 493
        CASE
           WHEN "MainServiceFKValue" = 10 OR
              (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 10) = 1 THEN
              TO_CHAR("CapacityServicesSavedAt",'DD/MM/YYYY')
           ELSE NULL
-       END st07util****COALESCE****_savedate, -- 494
+       END st07util_savedate, -- 494
        CASE
           WHEN "MainServiceFKValue" = 11 OR
                (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 11) = 1 THEN 1
@@ -1447,13 +1447,13 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
              (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 11) = 1 THEN
              TO_CHAR("CapacityServicesChangedAt",'DD/MM/YYYY')
           ELSE NULL
-       END st10util****COALESCE****_changedate, -- 497
+       END st10util_changedate, -- 497
        CASE
           WHEN "MainServiceFKValue" = 11 OR
              (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 11) = 1 THEN
              TO_CHAR("CapacityServicesSavedAt",'DD/MM/YYYY')
           ELSE NULL
-       END st10util****COALESCE****_savedate, -- 498
+       END st10util_savedate, -- 498
        CASE
           WHEN "MainServiceFKValue" = 20 OR
                (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 20) = 1 THEN 1
@@ -1470,13 +1470,13 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
              (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 20) = 1 THEN
              TO_CHAR("CapacityServicesChangedAt",'DD/MM/YYYY')
           ELSE NULL
-       END st08util****COALESCE****_changedate, -- 501
+       END st08util_changedate, -- 501
        CASE
           WHEN "MainServiceFKValue" = 20 OR
              (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 20) = 1 THEN
              TO_CHAR("CapacityServicesSavedAt",'DD/MM/YYYY')
           ELSE NULL
-       END st08util****COALESCE****_savedate, -- 502
+       END st08util_savedate, -- 502
        CASE
           WHEN "MainServiceFKValue" = 21 OR
                (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 21) = 1 THEN 1
@@ -1493,13 +1493,13 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
              (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 21) = 1 THEN
              TO_CHAR("CapacityServicesChangedAt",'DD/MM/YYYY')
           ELSE NULL
-       END st54util****COALESCE****_changedate, -- 505
+       END st54util_changedate, -- 505
        CASE
           WHEN "MainServiceFKValue" = 21 OR
              (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 21) = 1 THEN
              TO_CHAR("CapacityServicesSavedAt",'DD/MM/YYYY')
           ELSE NULL
-       END st54util****COALESCE****_savedate, -- 506
+       END st54util_savedate, -- 506
        CASE
           WHEN "MainServiceFKValue" = 22 OR
                (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 22) = 1 THEN 1
@@ -1516,13 +1516,13 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
              (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 22) = 1 THEN
              TO_CHAR("CapacityServicesChangedAt",'DD/MM/YYYY')
           ELSE NULL
-       END st74util****COALESCE****_changedate, -- 509
+       END st74util_changedate, -- 509
        CASE
           WHEN "MainServiceFKValue" = 22 OR
              (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 22) = 1 THEN
              TO_CHAR("CapacityServicesSavedAt",'DD/MM/YYYY')
           ELSE NULL
-       END st74util****COALESCE****_savedate, -- 510
+       END st74util_savedate, -- 510
        CASE
           WHEN "MainServiceFKValue" = 23 OR
                (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 23) = 1 THEN 1
@@ -1539,13 +1539,13 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
              (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 23) = 1 THEN
              TO_CHAR("CapacityServicesChangedAt",'DD/MM/YYYY')
           ELSE NULL
-       END st55util****COALESCE****_changedate, -- 513
+       END st55util_changedate, -- 513
        CASE
           WHEN "MainServiceFKValue" = 23 OR
              (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 23) = 1 THEN
              TO_CHAR("CapacityServicesSavedAt",'DD/MM/YYYY')
           ELSE NULL
-       END st55util****COALESCE****_savedate, -- 514
+       END st55util_savedate, -- 514
        CASE
           WHEN "MainServiceFKValue" = 35 OR
                (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 35) = 1 THEN 1
@@ -1562,13 +1562,13 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
              (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 35) = 1 THEN
              TO_CHAR("CapacityServicesChangedAt",'DD/MM/YYYY')
           ELSE NULL
-       END st73util****COALESCE****_changedate, -- 517
+       END st73util_changedate, -- 517
        CASE
           WHEN "MainServiceFKValue" = 35 OR
              (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 35) = 1 THEN
              TO_CHAR("CapacityServicesSavedAt",'DD/MM/YYYY')
           ELSE NULL
-       END st73util****COALESCE****_savedate, -- 518
+       END st73util_savedate, -- 518
        CASE
           WHEN "MainServiceFKValue" = 18 OR
                (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 18) = 1 THEN 1
@@ -1585,13 +1585,13 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
              (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 18) = 1 THEN
              TO_CHAR("CapacityServicesChangedAt",'DD/MM/YYYY')
           ELSE NULL
-       END st12util****COALESCE****_changedate, -- 521
+       END st12util_changedate, -- 521
        CASE
           WHEN "MainServiceFKValue" = 18 OR
              (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 18) = 1 THEN
              TO_CHAR("CapacityServicesSavedAt",'DD/MM/YYYY')
           ELSE NULL
-       END st12util****COALESCE****_savedate, -- 522
+       END st12util_savedate, -- 522
        CASE
           WHEN "MainServiceFKValue" = 1 OR
                (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 1) = 1 THEN 1
@@ -1633,13 +1633,13 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
              (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 19) = 1 THEN
              TO_CHAR("CapacityServicesChangedAt",'DD/MM/YYYY')
           ELSE NULL
-       END st17cap****COALESCE****_changedate, -- 530
+       END st17cap_changedate, -- 530
        CASE
           WHEN "MainServiceFKValue" = 19 OR
              (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 19) = 1 THEN
              TO_CHAR("CapacityServicesSavedAt",'DD/MM/YYYY')
           ELSE NULL
-       END st17cap****COALESCE****_savedate, -- 531
+       END st17cap_savedate, -- 531
        (
           SELECT "Answer"
           FROM   "EstablishmentCapacity" ec
@@ -1651,13 +1651,13 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
              (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 19) = 1 THEN
              TO_CHAR("CapacityServicesChangedAt",'DD/MM/YYYY')
           ELSE NULL
-       END st17util****COALESCE****_changedate, -- 533
+       END st17util_changedate, -- 533
        CASE
           WHEN "MainServiceFKValue" = 19 OR
              (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 19) = 1 THEN
              TO_CHAR("CapacityServicesSavedAt",'DD/MM/YYYY')
           ELSE NULL
-       END st17util****COALESCE****_savedate, -- 534
+       END st17util_savedate, -- 534
        CASE
           WHEN "MainServiceFKValue" = 7 OR
              (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 7) = 1 THEN 1
