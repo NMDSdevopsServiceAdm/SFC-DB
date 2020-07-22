@@ -741,24 +741,24 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
           WHEN "StartersValue" IS NULL THEN -1
           ELSE (SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobType" = 'Starters')
        END totalstarters****COALESCE****, -- 044
-       TO_CHAR("StartersChangedAt",'DD/MM/YYYY') totalstarters****COALESCE****_changedate, -- 045
-       TO_CHAR("StartersSavedAt",'DD/MM/YYYY') totalstarters****COALESCE****_savedate, -- 046
+       TO_CHAR("StartersChangedAt",'DD/MM/YYYY') totalstarters_changedate, -- 045
+       TO_CHAR("StartersSavedAt",'DD/MM/YYYY') totalstarters_savedate, -- 046
        CASE
           WHEN "LeaversValue" = 'None' THEN 0
           WHEN "LeaversValue" = 'Don''t know' THEN -2
           WHEN "LeaversValue" IS NULL THEN -1
           ELSE (SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobType" = 'Leavers')
        END totalleavers****COALESCE****, -- 047
-       TO_CHAR("LeaversChangedAt",'DD/MM/YYYY') totalleavers****COALESCE****_changedate, -- 048
-       TO_CHAR("LeaversSavedAt",'DD/MM/YYYY') totalleavers****COALESCE****_savedate, -- 049
+       TO_CHAR("LeaversChangedAt",'DD/MM/YYYY') totalleavers_changedate, -- 048
+       TO_CHAR("LeaversSavedAt",'DD/MM/YYYY') totalleavers_savedate, -- 049
        CASE
           WHEN "VacanciesValue" = 'None' THEN 0
           WHEN "VacanciesValue" = 'Don''t know' THEN -2
           WHEN "VacanciesValue" IS NULL THEN -1
           ELSE (SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobType" = 'Vacancies')
        END totalvacancies****COALESCE****, -- 050
-       TO_CHAR("VacanciesChangedAt",'DD/MM/YYYY') totalvacancies****COALESCE****_changedate, -- 051
-       TO_CHAR("VacanciesSavedAt",'DD/MM/YYYY') totalvacancies****COALESCE****_savedate, -- 052
+       TO_CHAR("VacanciesChangedAt",'DD/MM/YYYY') totalvacancies_changedate, -- 051
+       TO_CHAR("VacanciesSavedAt",'DD/MM/YYYY') totalvacancies_savedate, -- 052
        (
           SELECT CASE name
                     WHEN 'Care home services with nursing' THEN 1
