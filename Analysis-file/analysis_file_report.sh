@@ -724,7 +724,7 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
           LIMIT 1
        ) lauthid, -- 036
        -- 'na' parliamentaryconstituency, -- 037
-       COALESCE("NumberOfStaffValue", -1) totalstaff, --****COALESCE**** -- 038
+       COALESCE("NumberOfStaffValue", -1) totalstaff, --****COALESCE****  -- 038
        TO_CHAR("NumberOfStaffChangedAt",'DD/MM/YYYY') totalstaff_changedate, -- 039
        TO_CHAR("NumberOfStaffSavedAt",'DD/MM/YYYY') totalstaff_savedate, -- 040
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "Archived" = false) wkrrecs, -- 041
