@@ -38,17 +38,15 @@ ALTER TABLE cqc."Benchmarks_new"
 SELECT 'Importing new benchmark data from the csvs into temp source table';
 TRUNCATE cqc."Benchmarks_new";
 \copy cqc."Benchmarks_new" FROM 'C:\Users\arussell\Downloads\File_format_for_comparisons.csv' WITH (FORMAT csv);
-
 -------------------
 -- Check new data successfully updated
 -------------------
 SELECT 
-  *
+  COUNT(0)
 FROM 
-  cqc."Benchmarks_new" 
-WHERE 
-  "CssrIDFK" = '1';
+  cqc."Benchmarks_new";
 
+DROP TABLE IF EXISTS cqc."Benchmarks-backup";
 ALTER TABLE cqc."Benchmarks" RENAME TO "Benchmarks-backup";
 ----------------
 ALTER TABLE cqc."Benchmarks_new" RENAME TO "Benchmarks";
