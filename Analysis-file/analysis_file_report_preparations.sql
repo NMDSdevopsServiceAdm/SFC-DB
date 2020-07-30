@@ -1,3 +1,6 @@
+------------------------------
+-- If you want to run the analysis file workplace query directly on a database, run the following SQL first (also lifted from the analysis file).
+------------------------------
 SET SEARCH_PATH TO cqc;
 ------------------------------
 CREATE TABLE "Afr1BatchiSkAi0mo" AS
