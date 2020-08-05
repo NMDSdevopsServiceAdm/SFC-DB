@@ -22,7 +22,7 @@ CREATE TABLE cqc."Benchmarks_new"
     "Qualifications" numeric(3,2),
     "Workplaces" integer NOT NULL,
     "Staff" integer NOT NULL,
-    CONSTRAINT benchmarks_pkey PRIMARY KEY ("CssrID", "MainServiceFK"),
+    CONSTRAINT "Benchmarks_pkey" PRIMARY KEY ("CssrID", "MainServiceFK"),
     CONSTRAINT "Benchmarks_MainServiceFK_fkey1" FOREIGN KEY ("MainServiceFK")
         REFERENCES cqc.services ("reportingID") MATCH SIMPLE
         ON UPDATE NO ACTION
