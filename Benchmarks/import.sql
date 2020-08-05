@@ -14,7 +14,7 @@ DROP TABLE IF EXISTS cqc."Benchmarks_new";
 
 CREATE TABLE cqc."Benchmarks_new"
 (
-    "CssrIDFK" integer NOT NULL,
+    "CssrID" integer NOT NULL,
     "MainServiceFK" integer NOT NULL,
     "Pay" integer,
     "Sickness" integer,
@@ -22,7 +22,8 @@ CREATE TABLE cqc."Benchmarks_new"
     "Qualifications" numeric(3,2),
     "Workplaces" integer NOT NULL,
     "Staff" integer NOT NULL,
-    CONSTRAINT "Benchmarks_MainServiceFK_fkey" FOREIGN KEY ("MainServiceFK")
+    CONSTRAINT benchmarks_pkey PRIMARY KEY ("CssrID", "MainServiceFK"),
+    CONSTRAINT "Benchmarks_MainServiceFK_fkey1" FOREIGN KEY ("MainServiceFK")
         REFERENCES cqc.services ("reportingID") MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
