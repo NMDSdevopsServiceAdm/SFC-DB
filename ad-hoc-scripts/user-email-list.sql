@@ -1,5 +1,5 @@
 ----------------------------------------------
--- This will generate the info Jackie needs.
+-- This will generate the info needed.
 -- You can run the full statement below on the command line in psql. 
 -- Just copy and paste and hit enter - it copes fine with multi-line statements.
 -- Run these three commands first (login details are your cloud foundry account login):
@@ -16,7 +16,7 @@
 --      I created a new worksheet that referenced the original with formulas like this: =TRIM(Emails01!B1)
 -- 4. Turn off the psql output redirection with this command: \o
 -- 5. Type exit to exit psql.
--- 6. !! IMPORTANT! Don't email the results! This would be against GDPR. Instead, send it to Jackie via Slack.
+-- 6. !! IMPORTANT! Don't email the results! Instead, send via Slack.
 ----------------------------------------------
 select 
 	usr."EmailValue" as "EmailAddress",
