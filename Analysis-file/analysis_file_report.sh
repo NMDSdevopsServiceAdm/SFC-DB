@@ -33,7 +33,7 @@ working_dir="/efs/sfc-db/report"; sql_filename="`basename $0 .sh`_${rpt_id}.sql"
 [[ "`which cf7`" = "/usr/bin/cf7" ]] && _mycf="cf7" || _mycf="cf"
 run_date=`date "+%d-%m-%Y"` # This has to be the 1st day of following month.
 
-run_date="01-05-2020" # for report of May, 2020.
+run_date="10-09-2020" # for report of May, 2020.
 echo "\nPlease note that the variable assignment i.e., [ \033[0;105mrun_date=${run_date}\033[0m ] is hard-coded at the moment. That need removing.\n"
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 case "${rpt_id}" in
@@ -4042,10 +4042,11 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
        (SELECT COUNT(1) FROM "WorkerTraining" WHERE "WorkerFK" = w."ID" AND "CategoryFK" = 34) tr40count, -- 663
        (SELECT COUNT(1) FROM "WorkerTraining" WHERE "WorkerFK" = w."ID" AND "CategoryFK" = 34 AND "Accredited" = 'Yes') tr40ac, -- 664
        (SELECT COUNT(1) FROM "WorkerTraining" WHERE "WorkerFK" = w."ID" AND "CategoryFK" = 34 AND "Accredited" = 'No') tr40nac, -- 665
-       (SELECT COUNT(1) FROM "WorkerTraining" WHERE "WorkerFK" = w."ID" AND "CategoryFK" = 34 AND "Accredited" = 'Don''t know') tr40dn -- 666
+       (SELECT COUNT(1) FROM "WorkerTraining" WHERE "WorkerFK" = w."ID" AND "CategoryFK" = 34 AND "Accredited" = 'Don''t know') tr40dn, -- 666
+       CASE "FluJabValue" WHEN 'No' THEN 2 WHEN 'Yes' THEN 1 WHEN 'Don''t know' THEN -2 ELSE -1 END FluJab2020 -- 667
 FROM   "Establishment" e
-       JOIN "Worker" w ON e."EstablishmentID" = w."EstablishmentFK" AND e."Archived" = false AND w."Archived" = false
-       JOIN "Afr2BatchiSkAi0mo" b ON e."EstablishmentID" = b."EstablishmentID" AND b."BatchNo" = <batch_id>;
+JOIN "Worker" w ON e."EstablishmentID" = w."EstablishmentFK" AND e."Archived" = false AND w."Archived" = false
+JOIN "Afr2BatchiSkAi0mo" b ON e."EstablishmentID" = b."EstablishmentID" AND b."BatchNo" = <batch_id>;
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 SELECT CURRENT_DATABASE(), NOW(), 'Database view created and started creating CSV file.' status;
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
