@@ -286,7 +286,8 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
               "RegisteredNurseChangedAt",
               "NurseSpecialismFKChangedAt",
               "LocalIdentifierChangedAt",
-              "EstablishmentFkChangedAt")),'DD/MM/YYYY')
+              "EstablishmentFkChangedAt",
+              "FluJabChangedAt")),'DD/MM/YYYY')
        FROM   "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "Archived" = false) workerupdate, -- 016
        TO_CHAR(GREATEST(e.updated,(SELECT MAX(updated) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "Archived" = false)),'DD/MM/YYYY') mupddate, -- 017
        TO_CHAR(GREATEST((CASE WHEN e.updated < GREATEST(e.updated,(SELECT MAX(updated) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "Archived" = false)) THEN e.updated ELSE NULL END),(SELECT MAX(updated) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "Archived" = false AND updated < GREATEST(e.updated,(SELECT MAX(updated) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "Archived" = false)))),'DD/MM/YYYY') previous_mupddate, -- 018
@@ -329,7 +330,8 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
               "RegisteredNurseSavedAt",
               "NurseSpecialismFKSavedAt",
               "LocalIdentifierSavedAt",
-              "EstablishmentFkSavedAt")),'DD/MM/YYYY')
+              "EstablishmentFkSavedAt",
+              "FluJabSavedAt")),'DD/MM/YYYY')
        FROM   "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "Archived" = false) workersavedate, -- 022a
        CASE "ShareDataWithCQC" WHEN true THEN 1 ELSE 0 END cqcpermission, -- 023
        CASE "ShareDataWithLA" WHEN true THEN 1 ELSE 0 END lapermission, -- 024
@@ -1871,7 +1873,8 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
           w."RegisteredNurseChangedAt",
           w."NurseSpecialismFKChangedAt",
           w."LocalIdentifierChangedAt",
-          w."EstablishmentFkChangedAt"),'DD/MM/YYYY') updateddate, -- 011
+          w."EstablishmentFkChangedAt",
+          w."FluJabChangedAt"),'DD/MM/YYYY') updateddate, -- 011
        TO_CHAR(GREATEST(
           w."NameOrIdSavedAt",
           w."ContractSavedAt",
@@ -1906,7 +1909,8 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
           w."RegisteredNurseSavedAt",
           w."NurseSpecialismFKSavedAt",
           w."LocalIdentifierSavedAt",
-          w."EstablishmentFkSavedAt"),'DD/MM/YYYY') savedate, -- 012
+          w."EstablishmentFkSavedAt",
+          w."FluJabSavedAt"),'DD/MM/YYYY') savedate, -- 012
        CASE e."ShareDataWithCQC" WHEN true THEN 1 ELSE 0 END cqcpermission, -- 013
        CASE e."ShareDataWithLA" WHEN true THEN 1 ELSE 0 END lapermission, -- 014
        CASE WHEN e."IsRegulated" is true THEN 2 ELSE 0 END regtype, -- 015
@@ -4044,6 +4048,8 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
        (SELECT COUNT(1) FROM "WorkerTraining" WHERE "WorkerFK" = w."ID" AND "CategoryFK" = 34 AND "Accredited" = 'No') tr40nac, -- 665
        (SELECT COUNT(1) FROM "WorkerTraining" WHERE "WorkerFK" = w."ID" AND "CategoryFK" = 34 AND "Accredited" = 'Don''t know') tr40dn, -- 666
        CASE "FluJabValue" WHEN 'No' THEN 2 WHEN 'Yes' THEN 1 WHEN 'Don''t know' THEN -2 ELSE -1 END FluJab2020 -- 667
+       TO_CHAR("FluJabChangedAt",'DD/MM/YYYY') FluJab2020_changedate, -- 668
+       TO_CHAR("FluJabSavedAt",'DD/MM/YYYY') FluJab2020_savedate, -- 669
 FROM   "Establishment" e
 JOIN "Worker" w ON e."EstablishmentID" = w."EstablishmentFK" AND e."Archived" = false AND w."Archived" = false
 JOIN "Afr2BatchiSkAi0mo" b ON e."EstablishmentID" = b."EstablishmentID" AND b."BatchNo" = <batch_id>;
