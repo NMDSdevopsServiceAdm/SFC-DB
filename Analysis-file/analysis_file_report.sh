@@ -33,7 +33,7 @@ working_dir="/efs/sfc-db/report"; sql_filename="`basename $0 .sh`_${rpt_id}.sql"
 [[ "`which cf7`" = "/usr/bin/cf7" ]] && _mycf="cf7" || _mycf="cf"
 run_date=`date "+%d-%m-%Y"` # This has to be the 1st day of following month.
 
-run_date="01-04-2020" # for report of March, 2020.
+run_date="01-05-2020" # for report of May, 2020.
 echo "\nPlease note that the variable assignment i.e., [ \033[0;105mrun_date=${run_date}\033[0m ] is hard-coded at the moment. That need removing.\n"
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 case "${rpt_id}" in
@@ -1834,7 +1834,7 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
        CASE WHEN e."IsParent" THEN e."EstablishmentID" ELSE CASE WHEN e."ParentID" IS NOT NULL THEN e."ParentID" ELSE e."EstablishmentID" END END orgid, -- 005
        e."NmdsID" nmdsid, -- 006
        w."ID" workerid, -- 007
-       -- UPPER(ENCODE(HMAC(REPLACE("NationalInsuranceNumberValue",' ','') || TO_CHAR("DateOfBirthValue",'YYYYMMDD'),'<gidek>','md5'),'hex')) wrkglbid, -- 008
+       UPPER(MD5(REPLACE("NationalInsuranceNumberValue",' ','') || TO_CHAR("DateOfBirthValue", 'YYYYMMDD'))) wrkglbid, -- 008
        1 wkplacestat, -- 009
        TO_CHAR(w."created",'DD/MM/YYYY') createddate, -- 010
        TO_CHAR(GREATEST(
