@@ -4047,9 +4047,9 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
        (SELECT COUNT(1) FROM "WorkerTraining" WHERE "WorkerFK" = w."ID" AND "CategoryFK" = 34 AND "Accredited" = 'Yes') tr40ac, -- 664
        (SELECT COUNT(1) FROM "WorkerTraining" WHERE "WorkerFK" = w."ID" AND "CategoryFK" = 34 AND "Accredited" = 'No') tr40nac, -- 665
        (SELECT COUNT(1) FROM "WorkerTraining" WHERE "WorkerFK" = w."ID" AND "CategoryFK" = 34 AND "Accredited" = 'Don''t know') tr40dn, -- 666
-       CASE "FluJabValue" WHEN 'No' THEN 2 WHEN 'Yes' THEN 1 WHEN 'Don''t know' THEN -2 ELSE -1 END FluJab2020 -- 667
+       CASE "FluJabValue" WHEN 'No' THEN 2 WHEN 'Yes' THEN 1 WHEN 'Don''t know' THEN -2 ELSE -1 END FluJab2020, -- 667
        TO_CHAR("FluJabChangedAt",'DD/MM/YYYY') FluJab2020_changedate, -- 668
-       TO_CHAR("FluJabSavedAt",'DD/MM/YYYY') FluJab2020_savedate, -- 669
+       TO_CHAR("FluJabSavedAt",'DD/MM/YYYY') FluJab2020_savedate -- 669
 FROM   "Establishment" e
 JOIN "Worker" w ON e."EstablishmentID" = w."EstablishmentFK" AND e."Archived" = false AND w."Archived" = false
 JOIN "Afr2BatchiSkAi0mo" b ON e."EstablishmentID" = b."EstablishmentID" AND b."BatchNo" = <batch_id>;
