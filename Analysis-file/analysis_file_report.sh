@@ -33,7 +33,7 @@ working_dir="/efs/sfc-db/report"; sql_filename="`basename $0 .sh`_${rpt_id}.sql"
 [[ "`which cf7`" = "/usr/bin/cf7" ]] && _mycf="cf7" || _mycf="cf"
 run_date=`date "+%d-%m-%Y"` # This has to be the 1st day of following month.
 
-run_date="01-04-2020" # for report of March, 2020.
+run_date="01-05-2020" # for report of May, 2020.
 echo "\nPlease note that the variable assignment i.e., [ \033[0;105mrun_date=${run_date}\033[0m ] is hard-coded at the moment. That need removing.\n"
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 case "${rpt_id}" in
@@ -724,7 +724,7 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
           LIMIT 1
        ) lauthid, -- 036
        -- 'na' parliamentaryconstituency, -- 037
-       "NumberOfStaffValue" totalstaff, -- 038
+       COALESCE("NumberOfStaffValue", -1) totalstaff,  -- 038
        TO_CHAR("NumberOfStaffChangedAt",'DD/MM/YYYY') totalstaff_changedate, -- 039
        TO_CHAR("NumberOfStaffSavedAt",'DD/MM/YYYY') totalstaff_savedate, -- 040
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "Archived" = false) wkrrecs, -- 041
@@ -810,9 +810,9 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "ContractValue" = 'Other' AND "Archived" = false) jr28oth, -- 061
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "ContractValue" IN ('Permanent','Temporary') AND "Archived" = false) jr28emp, -- 062
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "Archived" = false) jr28work, -- 063
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobType" = 'Starters'),0) jr28strt, -- 064
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobType" = 'Leavers'),0) jr28stop, -- 064a
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobType" = 'Vacancies'),0) jr28vacy, -- 065
+       CASE WHEN "StartersValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobType" = 'Starters'),-1) END jr28strt, -- 064
+       CASE WHEN "LeaversValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobType" = 'Leavers'),-1) END jr28stop, -- 064a
+       CASE WHEN "VacanciesValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobType" = 'Vacancies'),-1) END jr28vacy, -- 065
        COALESCE((SELECT 1 FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" IN (25,10,11,12,3,29,20,16) AND "Archived" = false LIMIT 1),0) jr29flag, -- 066
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" IN (25,10,11,12,3,29,20,16) AND "ContractValue" = 'Permanent' AND "Archived" = false) jr29perm, -- 067
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" IN (25,10,11,12,3,29,20,16) AND "ContractValue" = 'Temporary' AND "Archived" = false) jr29temp, -- 068
@@ -821,9 +821,9 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" IN (25,10,11,12,3,29,20,16) AND "ContractValue" = 'Other' AND "Archived" = false) jr29oth, -- 071
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" IN (25,10,11,12,3,29,20,16) AND "ContractValue" IN ('Permanent','Temporary') AND "Archived" = false) jr29emp, -- 072
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" IN (25,10,11,12,3,29,20,16) AND "Archived" = false) jr29work, -- 073
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" IN (25,10,11,12,3,29,20,16) AND "JobType" = 'Starters'),0) jr29strt, -- 074
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" IN (25,10,11,12,3,29,20,16) AND "JobType" = 'Leavers'),0) jr29stop, -- 075
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" IN (25,10,11,12,3,29,20,16) AND "JobType" = 'Vacancies'),0) jr29vacy, -- 076
+       CASE WHEN "StartersValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" IN (25,10,11,12,3,29,20,16) AND "JobType" = 'Starters'),-1) END jr29strt, -- 074
+       CASE WHEN "LeaversValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" IN (25,10,11,12,3,29,20,16) AND "JobType" = 'Leavers'),-1) END jr29stop, -- 075
+       CASE WHEN "VacanciesValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" IN (25,10,11,12,3,29,20,16) AND "JobType" = 'Vacancies'),-1) END jr29vacy, -- 076
        COALESCE((SELECT 1 FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" IN (26,15,13,22,28,14) AND "Archived" = false LIMIT 1),0) jr30flag, -- 077
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" IN (26,15,13,22,28,14) AND "ContractValue" = 'Permanent' AND "Archived" = false) jr30perm, -- 078
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" IN (26,15,13,22,28,14) AND "ContractValue" = 'Temporary' AND "Archived" = false) jr30temp, -- 079
@@ -832,9 +832,9 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" IN (26,15,13,22,28,14) AND "ContractValue" = 'Other' AND "Archived" = false) jr30oth, -- 082
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" IN (26,15,13,22,28,14) AND "ContractValue" IN ('Permanent','Temporary') AND "Archived" = false) jr30emp, -- 083
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" IN (26,15,13,22,28,14) AND "Archived" = false) jr30work, -- 084
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" IN (26,15,13,22,28,14) AND "JobType" = 'Starters'),0) jr30strt, -- 085
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" IN (26,15,13,22,28,14) AND "JobType" = 'Leavers'),0) jr30stop, -- 086
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" IN (26,15,13,22,28,14) AND "JobType" = 'Vacancies'),0) jr30vacy, -- 087
+       CASE WHEN "StartersValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" IN (26,15,13,22,28,14) AND "JobType" = 'Starters'),-1) END jr30strt, -- 085
+       CASE WHEN "LeaversValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" IN (26,15,13,22,28,14) AND "JobType" = 'Leavers'),-1) END jr30stop, -- 086
+       CASE WHEN "VacanciesValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" IN (26,15,13,22,28,14) AND "JobType" = 'Vacancies'),-1) END jr30vacy, -- 087
        COALESCE((SELECT 1 FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" IN (27,18,23,4,24,17) AND "Archived" = false LIMIT 1),0) jr31flag, -- 088
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" IN (27,18,23,4,24,17) AND "ContractValue" = 'Permanent' AND "Archived" = false) jr31perm, -- 089
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" IN (27,18,23,4,24,17) AND "ContractValue" = 'Temporary' AND "Archived" = false) jr31temp, -- 090
@@ -843,9 +843,9 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" IN (27,18,23,4,24,17) AND "ContractValue" = 'Other' AND "Archived" = false) jr31oth, -- 093
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" IN (27,18,23,4,24,17) AND "ContractValue" IN ('Permanent','Temporary') AND "Archived" = false) jr31emp, -- 094
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" IN (27,18,23,4,24,17) AND "Archived" = false) jr31work, -- 095
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" IN (27,18,23,4,24,17) AND "JobType" = 'Starters'),0) jr31strt, -- 096
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" IN (27,18,23,4,24,17) AND "JobType" = 'Leavers'),0) jr31stop, -- 097
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" IN (27,18,23,4,24,17) AND "JobType" = 'Vacancies'),0) jr31vacy, -- 098
+       CASE WHEN "StartersValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" IN (27,18,23,4,24,17) AND "JobType" = 'Starters'),-1) END jr31strt, -- 096
+       CASE WHEN "LeaversValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" IN (27,18,23,4,24,17) AND "JobType" = 'Leavers'),-1) END jr31stop, -- 097
+       CASE WHEN "VacanciesValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" IN (27,18,23,4,24,17) AND "JobType" = 'Vacancies'),-1) END jr31vacy, -- 098
        COALESCE((SELECT 1 FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" IN (2,5,21,1,19,7,8,9,6) AND "Archived" = false LIMIT 1),0) jr32flag, -- 099
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" IN (2,5,21,1,19,7,8,9,6) AND "ContractValue" = 'Permanent' AND "Archived" = false) jr32perm, -- 100
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" IN (2,5,21,1,19,7,8,9,6) AND "ContractValue" = 'Temporary' AND "Archived" = false) jr32temp, -- 101
@@ -854,9 +854,9 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" IN (2,5,21,1,19,7,8,9,6) AND "ContractValue" = 'Other' AND "Archived" = false) jr32oth, -- 104
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" IN (2,5,21,1,19,7,8,9,6) AND "ContractValue" IN ('Permanent','Temporary') AND "Archived" = false) jr32emp, -- 105
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" IN (2,5,21,1,19,7,8,9,6) AND "Archived" = false) jr32work, -- 106
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" IN (2,5,21,1,19,7,8,9,6) AND "JobType" = 'Starters'),0) jr32strt, -- 107
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" IN (2,5,21,1,19,7,8,9,6) AND "JobType" = 'Leavers'),0) jr32stop, -- 108
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" IN (2,5,21,1,19,7,8,9,6) AND "JobType" = 'Vacancies'),0) jr32vacy, -- 109
+       CASE WHEN "StartersValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" IN (2,5,21,1,19,7,8,9,6) AND "JobType" = 'Starters'),-1) END jr32strt, -- 107
+       CASE WHEN "LeaversValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" IN (2,5,21,1,19,7,8,9,6) AND "JobType" = 'Leavers'),-1) END jr32stop, -- 108
+       CASE WHEN "VacanciesValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" IN (2,5,21,1,19,7,8,9,6) AND "JobType" = 'Vacancies'),-1) END jr32vacy, -- 109
        COALESCE((SELECT 1 FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 26 AND "Archived" = false LIMIT 1),0) jr01flag, -- 110
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 26 AND "ContractValue" = 'Permanent' AND "Archived" = false) jr01perm, -- 111
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 26 AND "ContractValue" = 'Temporary' AND "Archived" = false) jr01temp, -- 112
@@ -865,9 +865,9 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 26 AND "ContractValue" = 'Other' AND "Archived" = false) jr01oth, -- 115
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 26 AND "ContractValue" IN ('Permanent','Temporary') AND "Archived" = false) jr01emp, -- 116
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 26 AND "Archived" = false) jr01work, -- 117
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 26 AND "JobType" = 'Starters'),0) jr01strt, -- 118
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 26 AND "JobType" = 'Leavers'),0) jr01stop, -- 119
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 26 AND "JobType" = 'Vacancies'),0) jr01vacy, -- 120
+       CASE WHEN "StartersValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 26 AND "JobType" = 'Starters'),-1) END jr01strt, -- 118
+       CASE WHEN "LeaversValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 26 AND "JobType" = 'Leavers'),-1) END jr01stop, -- 119
+       CASE WHEN "VacanciesValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 26 AND "JobType" = 'Vacancies'),-1) END jr01vacy, -- 120
        COALESCE((SELECT 1 FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 15 AND "Archived" = false LIMIT 1),0) jr02flag, -- 121
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 15 AND "ContractValue" = 'Permanent' AND "Archived" = false) jr02perm, -- 122
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 15 AND "ContractValue" = 'Temporary' AND "Archived" = false) jr02temp, -- 123
@@ -876,9 +876,9 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 15 AND "ContractValue" = 'Other' AND "Archived" = false) jr02oth, -- 126
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 15 AND "ContractValue" IN ('Permanent','Temporary') AND "Archived" = false) jr02emp, -- 127
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 15 AND "Archived" = false) jr02work, -- 128
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 15 AND "JobType" = 'Starters'),0) jr02strt, -- 129
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 15 AND "JobType" = 'Leavers'),0) jr02stop, -- 130
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 15 AND "JobType" = 'Vacancies'),0) jr02vacy, -- 131
+       CASE WHEN "StartersValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 15 AND "JobType" = 'Starters'),-1) END jr02strt, -- 129
+       CASE WHEN "LeaversValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 15 AND "JobType" = 'Leavers'),-1) END jr02stop, -- 130
+       CASE WHEN "VacanciesValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 15 AND "JobType" = 'Vacancies'),-1) END jr02vacy, -- 131
        COALESCE((SELECT 1 FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 13 AND "Archived" = false LIMIT 1),0) jr03flag, -- 132
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 13 AND "ContractValue" = 'Permanent' AND "Archived" = false) jr03perm, -- 133
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 13 AND "ContractValue" = 'Temporary' AND "Archived" = false) jr03temp, -- 134
@@ -887,9 +887,9 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 13 AND "ContractValue" = 'Other' AND "Archived" = false) jr03oth, -- 137
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 13 AND "ContractValue" IN ('Permanent','Temporary') AND "Archived" = false) jr03emp, -- 138
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 13 AND "Archived" = false) jr03work, -- 139
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 13 AND "JobType" = 'Starters'),0) jr03strt, -- 140
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 13 AND "JobType" = 'Leavers'),0) jr03stop, -- 141
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 13 AND "JobType" = 'Vacancies'),0) jr03vacy, -- 142
+       CASE WHEN "StartersValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 13 AND "JobType" = 'Starters'),-1) END jr03strt, -- 140
+       CASE WHEN "LeaversValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 13 AND "JobType" = 'Leavers'),-1) END jr03stop, -- 141
+       CASE WHEN "VacanciesValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 13 AND "JobType" = 'Vacancies'),-1) END jr03vacy, -- 142
        COALESCE((SELECT 1 FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 22 AND "Archived" = false LIMIT 1),0) jr04flag, -- 143
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 22 AND "ContractValue" = 'Permanent' AND "Archived" = false) jr04perm, -- 144
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 22 AND "ContractValue" = 'Temporary' AND "Archived" = false) jr04temp, -- 145
@@ -898,9 +898,9 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 22 AND "ContractValue" = 'Other' AND "Archived" = false) jr04oth, -- 148
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 22 AND "ContractValue" IN ('Permanent','Temporary') AND "Archived" = false) jr04emp, -- 149
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 22 AND "Archived" = false) jr04work, -- 150
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 22 AND "JobType" = 'Starters'),0) jr04strt, -- 151
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 22 AND "JobType" = 'Leavers'),0) jr04stop, -- 152
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 22 AND "JobType" = 'Vacancies'),0) jr04vacy, -- 153
+       CASE WHEN "StartersValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 22 AND "JobType" = 'Starters'),-1) END jr04strt, -- 151
+       CASE WHEN "LeaversValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 22 AND "JobType" = 'Leavers'),-1) END jr04stop, -- 152
+       CASE WHEN "VacanciesValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 22 AND "JobType" = 'Vacancies'),-1) END jr04vacy, -- 153
        COALESCE((SELECT 1 FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 28 AND "Archived" = false LIMIT 1),0) jr05flag, -- 154
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 28 AND "ContractValue" = 'Permanent' AND "Archived" = false) jr05perm, -- 155
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 28 AND "ContractValue" = 'Temporary' AND "Archived" = false) jr05temp, -- 156
@@ -909,9 +909,9 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 28 AND "ContractValue" = 'Other' AND "Archived" = false) jr05oth, -- 159
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 28 AND "ContractValue" IN ('Permanent','Temporary') AND "Archived" = false) jr05emp, -- 160
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 28 AND "Archived" = false) jr05work, -- 161
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 28 AND "JobType" = 'Starters'),0) jr05strt, -- 162
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 28 AND "JobType" = 'Leavers'),0) jr05stop, -- 163
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 28 AND "JobType" = 'Vacancies'),0) jr05vacy, -- 164
+       CASE WHEN "StartersValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 28 AND "JobType" = 'Starters'),-1) END jr05strt, -- 162
+       CASE WHEN "LeaversValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 28 AND "JobType" = 'Leavers'),-1) END jr05stop, -- 163
+       CASE WHEN "VacanciesValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 28 AND "JobType" = 'Vacancies'),-1) END jr05vacy, -- 164
        COALESCE((SELECT 1 FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 27 AND "Archived" = false LIMIT 1),0) jr06flag, -- 165
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 27 AND "ContractValue" = 'Permanent' AND "Archived" = false) jr06perm, -- 166
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 27 AND "ContractValue" = 'Temporary' AND "Archived" = false) jr06temp, -- 167
@@ -920,9 +920,9 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 27 AND "ContractValue" = 'Other' AND "Archived" = false) jr06oth, -- 170
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 27 AND "ContractValue" IN ('Permanent','Temporary') AND "Archived" = false) jr06emp, -- 171
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 27 AND "Archived" = false) jr06work, -- 172
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 27 AND "JobType" = 'Starters'),0) jr06strt, -- 173
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 27 AND "JobType" = 'Leavers'),0) jr06stop, -- 174
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 27 AND "JobType" = 'Vacancies'),0) jr06vacy, -- 175
+       CASE WHEN "StartersValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 27 AND "JobType" = 'Starters'),-1) END jr06strt, -- 173
+       CASE WHEN "LeaversValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 27 AND "JobType" = 'Leavers'),-1) END jr06stop, -- 174
+       CASE WHEN "VacanciesValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 27 AND "JobType" = 'Vacancies'),-1) END jr06vacy, -- 175
        COALESCE((SELECT 1 FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 25 AND "Archived" = false LIMIT 1),0) jr07flag, -- 176
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 25 AND "ContractValue" = 'Permanent' AND "Archived" = false) jr07perm, -- 177
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 25 AND "ContractValue" = 'Temporary' AND "Archived" = false) jr07temp, -- 178
@@ -931,9 +931,9 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 25 AND "ContractValue" = 'Other' AND "Archived" = false) jr07oth, -- 181
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 25 AND "ContractValue" IN ('Permanent','Temporary') AND "Archived" = false) jr07emp, -- 182
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 25 AND "Archived" = false) jr07work, -- 183
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 25 AND "JobType" = 'Starters'),0) jr07strt, -- 184
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 25 AND "JobType" = 'Leavers'),0) jr07stop, -- 185
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 25 AND "JobType" = 'Vacancies'),0) jr07vacy, -- 186
+       CASE WHEN "StartersValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 25 AND "JobType" = 'Starters'),-1) END jr07strt, -- 184
+       CASE WHEN "LeaversValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 25 AND "JobType" = 'Leavers'),-1) END jr07stop, -- 185
+       CASE WHEN "VacanciesValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 25 AND "JobType" = 'Vacancies'),-1) END jr07vacy, -- 186
        COALESCE((SELECT 1 FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 10 AND "Archived" = false LIMIT 1),0) jr08flag, -- 187
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 10 AND "ContractValue" = 'Permanent' AND "Archived" = false) jr08perm, -- 188
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 10 AND "ContractValue" = 'Temporary' AND "Archived" = false) jr08temp, -- 189
@@ -942,9 +942,9 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 10 AND "ContractValue" = 'Other' AND "Archived" = false) jr08oth, -- 192
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 10 AND "ContractValue" IN ('Permanent','Temporary') AND "Archived" = false) jr08emp, -- 193
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 10 AND "Archived" = false) jr08work, -- 194
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 10 AND "JobType" = 'Starters'),0) jr08strt, -- 195
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 10 AND "JobType" = 'Leavers'),0) jr08stop, -- 196
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 10 AND "JobType" = 'Vacancies'),0) jr08vacy, -- 197
+       CASE WHEN "StartersValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 10 AND "JobType" = 'Starters'),-1) END jr08strt, -- 195
+       CASE WHEN "LeaversValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 10 AND "JobType" = 'Leavers'),-1) END jr08stop, -- 196
+       CASE WHEN "VacanciesValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 10 AND "JobType" = 'Vacancies'),-1) END jr08vacy, -- 197
        COALESCE((SELECT 1 FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 11 AND "Archived" = false LIMIT 1),0) jr09flag, -- 198
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 11 AND "ContractValue" = 'Permanent' AND "Archived" = false) jr09perm, -- 199
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 11 AND "ContractValue" = 'Temporary' AND "Archived" = false) jr09temp, -- 200
@@ -953,9 +953,9 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 11 AND "ContractValue" = 'Other' AND "Archived" = false) jr09oth, -- 203
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 11 AND "ContractValue" IN ('Permanent','Temporary') AND "Archived" = false) jr09emp, -- 204
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 11 AND "Archived" = false) jr09work, -- 205
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 11 AND "JobType" = 'Starters'),0) jr09strt, -- 206
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 11 AND "JobType" = 'Leavers'),0) jr09stop, -- 207
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 11 AND "JobType" = 'Vacancies'),0) jr09vacy, -- 208
+       CASE WHEN "StartersValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 11 AND "JobType" = 'Starters'),-1) END jr09strt, -- 206
+       CASE WHEN "LeaversValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 11 AND "JobType" = 'Leavers'),-1) END jr09stop, -- 207
+       CASE WHEN "VacanciesValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 11 AND "JobType" = 'Vacancies'),-1) END jr09vacy, -- 208
        COALESCE((SELECT 1 FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 12 AND "Archived" = false LIMIT 1),0) jr10flag, -- 209
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 12 AND "ContractValue" = 'Permanent' AND "Archived" = false) jr10perm, -- 210
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 12 AND "ContractValue" = 'Temporary' AND "Archived" = false) jr10temp, -- 211
@@ -964,9 +964,9 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 12 AND "ContractValue" = 'Other' AND "Archived" = false) jr10oth, -- 214
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 12 AND "ContractValue" IN ('Permanent','Temporary') AND "Archived" = false) jr10emp, -- 215
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 12 AND "Archived" = false) jr10work, -- 216
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 12 AND "JobType" = 'Starters'),0) jr10strt, -- 217
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 12 AND "JobType" = 'Leavers'),0) jr10stop, -- 218
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 12 AND "JobType" = 'Vacancies'),0) jr10vacy, -- 219
+       CASE WHEN "StartersValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 12 AND "JobType" = 'Starters'),-1) END jr10strt, -- 217
+       CASE WHEN "LeaversValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 12 AND "JobType" = 'Leavers'),-1) END jr10stop, -- 218
+       CASE WHEN "VacanciesValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 12 AND "JobType" = 'Vacancies'),-1) END jr10vacy, -- 219
        COALESCE((SELECT 1 FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 3 AND "Archived" = false LIMIT 1),0) jr11flag, -- 220
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 3 AND "ContractValue" = 'Permanent' AND "Archived" = false) jr11perm, -- 221
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 3 AND "ContractValue" = 'Temporary' AND "Archived" = false) jr11temp, -- 222
@@ -975,9 +975,9 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 3 AND "ContractValue" = 'Other' AND "Archived" = false) jr11oth, -- 225
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 3 AND "ContractValue" IN ('Permanent','Temporary') AND "Archived" = false) jr11emp, -- 226
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 3 AND "Archived" = false) jr11work, -- 227
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 3 AND "JobType" = 'Starters'),0) jr11strt, -- 228
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 3 AND "JobType" = 'Leavers'),0) jr11stop, -- 229
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 3 AND "JobType" = 'Vacancies'),0) jr11vacy, -- 230
+       CASE WHEN "StartersValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 3 AND "JobType" = 'Starters'),-1) END jr11strt, -- 228
+       CASE WHEN "LeaversValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 3 AND "JobType" = 'Leavers'),-1) END jr11stop, -- 229
+       CASE WHEN "VacanciesValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 3 AND "JobType" = 'Vacancies'),-1) END jr11vacy, -- 230
        COALESCE((SELECT 1 FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 18 AND "Archived" = false LIMIT 1),0) jr15flag, -- 231
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 18 AND "ContractValue" = 'Permanent' AND "Archived" = false) jr15perm, -- 232
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 18 AND "ContractValue" = 'Temporary' AND "Archived" = false) jr15temp, -- 233
@@ -986,9 +986,9 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 18 AND "ContractValue" = 'Other' AND "Archived" = false) jr15oth, -- 236
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 18 AND "ContractValue" IN ('Permanent','Temporary') AND "Archived" = false) jr15emp, -- 237
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 18 AND "Archived" = false) jr15work, -- 238
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 18 AND "JobType" = 'Starters'),0) jr15strt, -- 239
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 18 AND "JobType" = 'Leavers'),0) jr15stop, -- 240
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 18 AND "JobType" = 'Vacancies'),0) jr15vacy, -- 241
+       CASE WHEN "StartersValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 18 AND "JobType" = 'Starters'),-1) END jr15strt, -- 239
+       CASE WHEN "LeaversValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 18 AND "JobType" = 'Leavers'),-1) END jr15stop, -- 240
+       CASE WHEN "VacanciesValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 18 AND "JobType" = 'Vacancies'),-1) END jr15vacy, -- 241
        COALESCE((SELECT 1 FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 23 AND "Archived" = false LIMIT 1),0) jr16flag, -- 242
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 23 AND "ContractValue" = 'Permanent' AND "Archived" = false) jr16perm, -- 243
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 23 AND "ContractValue" = 'Temporary' AND "Archived" = false) jr16temp, -- 244
@@ -997,9 +997,9 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 23 AND "ContractValue" = 'Other' AND "Archived" = false) jr16oth, -- 247
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 23 AND "ContractValue" IN ('Permanent','Temporary') AND "Archived" = false) jr16emp, -- 248
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 23 AND "Archived" = false) jr16work, -- 249
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 23 AND "JobType" = 'Starters'),0) jr16strt, -- 250
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 23 AND "JobType" = 'Leavers'),0) jr16stop, -- 251
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 23 AND "JobType" = 'Vacancies'),0) jr16vacy, -- 252
+       CASE WHEN "StartersValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 23 AND "JobType" = 'Starters'),-1) END jr16strt, -- 250
+       CASE WHEN "LeaversValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 23 AND "JobType" = 'Leavers'),-1) END jr16stop, -- 251
+       CASE WHEN "VacanciesValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 23 AND "JobType" = 'Vacancies'),-1) END jr16vacy, -- 252
        COALESCE((SELECT 1 FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 4 AND "Archived" = false LIMIT 1),0) jr17flag, -- 253
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 4 AND "ContractValue" = 'Permanent' AND "Archived" = false) jr17perm, -- 254
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 4 AND "ContractValue" = 'Temporary' AND "Archived" = false) jr17temp, -- 255
@@ -1008,9 +1008,9 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 4 AND "ContractValue" = 'Other' AND "Archived" = false) jr17oth, -- 258
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 4 AND "ContractValue" IN ('Permanent','Temporary') AND "Archived" = false) jr17emp, -- 259
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 4 AND "Archived" = false) jr17work, -- 260
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 4 AND "JobType" = 'Starters'),0) jr17strt, -- 261
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 4 AND "JobType" = 'Leavers'),0) jr17stop, -- 262
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 4 AND "JobType" = 'Vacancies'),0) jr17vacy, -- 263
+       CASE WHEN "StartersValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 4 AND "JobType" = 'Starters'),-1) END jr17strt, -- 261
+       CASE WHEN "LeaversValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 4 AND "JobType" = 'Leavers'),-1) END jr17stop, -- 262
+       CASE WHEN "VacanciesValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 4 AND "JobType" = 'Vacancies'),-1) END jr17vacy, -- 263
        COALESCE((SELECT 1 FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 29 AND "Archived" = false LIMIT 1),0) jr22flag, -- 264
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 29 AND "ContractValue" = 'Permanent' AND "Archived" = false) jr22perm, -- 265
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 29 AND "ContractValue" = 'Temporary' AND "Archived" = false) jr22temp, -- 266
@@ -1019,9 +1019,9 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 29 AND "ContractValue" = 'Other' AND "Archived" = false) jr22oth, -- 269
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 29 AND "ContractValue" IN ('Permanent','Temporary') AND "Archived" = false) jr22emp, -- 270
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 29 AND "Archived" = false) jr22work, -- 271
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 29 AND "JobType" = 'Starters'),0) jr22strt, -- 272
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 29 AND "JobType" = 'Leavers'),0) jr22stop, -- 273
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 29 AND "JobType" = 'Vacancies'),0) jr22vacy, -- 274
+       CASE WHEN "StartersValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 29 AND "JobType" = 'Starters'),-1) END jr22strt, -- 272
+       CASE WHEN "LeaversValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 29 AND "JobType" = 'Leavers'),-1) END jr22stop, -- 273
+       CASE WHEN "VacanciesValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 29 AND "JobType" = 'Vacancies'),-1) END jr22vacy, -- 274
        COALESCE((SELECT 1 FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 20 AND "Archived" = false LIMIT 1),0) jr23flag, -- 275
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 20 AND "ContractValue" = 'Permanent' AND "Archived" = false) jr23perm, -- 276
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 20 AND "ContractValue" = 'Temporary' AND "Archived" = false) jr23temp, -- 277
@@ -1030,9 +1030,9 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 20 AND "ContractValue" = 'Other' AND "Archived" = false) jr23oth, -- 280
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 20 AND "ContractValue" IN ('Permanent','Temporary') AND "Archived" = false) jr23emp, -- 281
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 20 AND "Archived" = false) jr23work, -- 282
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 20 AND "JobType" = 'Starters'),0) jr23strt, -- 283
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 20 AND "JobType" = 'Leavers'),0) jr23stop, -- 284
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 20 AND "JobType" = 'Vacancies'),0) jr23vacy, -- 285
+       CASE WHEN "StartersValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 20 AND "JobType" = 'Starters'),-1) END jr23strt, -- 283
+       CASE WHEN "LeaversValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 20 AND "JobType" = 'Leavers'),-1) END jr23stop, -- 284
+       CASE WHEN "VacanciesValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 20 AND "JobType" = 'Vacancies'),-1) END jr23vacy, -- 285
        COALESCE((SELECT 1 FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 14 AND "Archived" = false LIMIT 1),0) jr24flag, -- 286
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 14 AND "ContractValue" = 'Permanent' AND "Archived" = false) jr24perm, -- 287
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 14 AND "ContractValue" = 'Temporary' AND "Archived" = false) jr24temp, -- 288
@@ -1041,9 +1041,9 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 14 AND "ContractValue" = 'Other' AND "Archived" = false) jr24oth, -- 291
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 14 AND "ContractValue" IN ('Permanent','Temporary') AND "Archived" = false) jr24emp, -- 292
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 14 AND "Archived" = false) jr24work, -- 293
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 14 AND "JobType" = 'Starters'),0) jr24strt, -- 294
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 14 AND "JobType" = 'Leavers'),0) jr24stop, -- 295
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 14 AND "JobType" = 'Vacancies'),0) jr24vacy, -- 296
+       CASE WHEN "StartersValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 14 AND "JobType" = 'Starters'),-1) END jr24strt, -- 294
+       CASE WHEN "LeaversValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 14 AND "JobType" = 'Leavers'),-1) END jr24stop, -- 295
+       CASE WHEN "VacanciesValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 14 AND "JobType" = 'Vacancies'),-1) END jr24vacy, -- 296
        COALESCE((SELECT 1 FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 2 AND "Archived" = false LIMIT 1),0) jr25flag, -- 297
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 2 AND "ContractValue" = 'Permanent' AND "Archived" = false) jr25perm, -- 298
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 2 AND "ContractValue" = 'Temporary' AND "Archived" = false) jr25temp, -- 299
@@ -1052,9 +1052,9 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 2 AND "ContractValue" = 'Other' AND "Archived" = false) jr25oth, -- 302
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 2 AND "ContractValue" IN ('Permanent','Temporary') AND "Archived" = false) jr25emp, -- 303
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 2 AND "Archived" = false) jr25work, -- 304
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 2 AND "JobType" = 'Starters'),0) jr25strt, -- 305
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 2 AND "JobType" = 'Leavers'),0) jr25stop, -- 306
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 2 AND "JobType" = 'Vacancies'),0) jr25vacy, -- 307
+       CASE WHEN "StartersValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 2 AND "JobType" = 'Starters'),-1) END jr25strt, -- 305
+       CASE WHEN "LeaversValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 2 AND "JobType" = 'Leavers'),-1) END jr25stop, -- 306
+       CASE WHEN "VacanciesValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 2 AND "JobType" = 'Vacancies'),-1) END jr25vacy, -- 307
        COALESCE((SELECT 1 FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 5 AND "Archived" = false LIMIT 1),0) jr26flag, -- 308
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 5 AND "ContractValue" = 'Permanent' AND "Archived" = false) jr26perm, -- 309
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 5 AND "ContractValue" = 'Temporary' AND "Archived" = false) jr26temp, -- 310
@@ -1063,9 +1063,9 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 5 AND "ContractValue" = 'Other' AND "Archived" = false) jr26oth, -- 313
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 5 AND "ContractValue" IN ('Permanent','Temporary') AND "Archived" = false) jr26emp, -- 314
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 5 AND "Archived" = false) jr26work, -- 315
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 5 AND "JobType" = 'Starters'),0) jr26strt, -- 316
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 5 AND "JobType" = 'Leavers'),0) jr26stop, -- 317
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 5 AND "JobType" = 'Vacancies'),0) jr26vacy, -- 318
+       CASE WHEN "StartersValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 5 AND "JobType" = 'Starters'),-1) END jr26strt, -- 316
+       CASE WHEN "LeaversValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 5 AND "JobType" = 'Leavers'),-1) END jr26stop, -- 317
+       CASE WHEN "VacanciesValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 5 AND "JobType" = 'Vacancies'),-1) END jr26vacy, -- 318
        COALESCE((SELECT 1 FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 21 AND "Archived" = false LIMIT 1),0) jr27flag, -- 319
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 21 AND "ContractValue" = 'Permanent' AND "Archived" = false) jr27perm, -- 320
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 21 AND "ContractValue" = 'Temporary' AND "Archived" = false) jr27temp, -- 321
@@ -1074,9 +1074,9 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 21 AND "ContractValue" = 'Other' AND "Archived" = false) jr27oth, -- 324
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 21 AND "ContractValue" IN ('Permanent','Temporary') AND "Archived" = false) jr27emp, -- 325
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 21 AND "Archived" = false) jr27work, -- 326
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 21 AND "JobType" = 'Starters'),0) jr27strt, -- 327
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 21 AND "JobType" = 'Leavers'),0) jr27stop, -- 328
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 21 AND "JobType" = 'Vacancies'),0) jr27vacy, -- 329
+       CASE WHEN "StartersValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 21 AND "JobType" = 'Starters'),-1) END jr27strt, -- 327
+       CASE WHEN "LeaversValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 21 AND "JobType" = 'Leavers'),-1) END jr27stop, -- 328
+       CASE WHEN "VacanciesValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 21 AND "JobType" = 'Vacancies'),-1) END jr27vacy, -- 329
        COALESCE((SELECT 1 FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 1 AND "Archived" = false LIMIT 1),0) jr34flag, -- 330
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 1 AND "ContractValue" = 'Permanent' AND "Archived" = false) jr34perm, -- 331
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 1 AND "ContractValue" = 'Temporary' AND "Archived" = false) jr34temp, -- 332
@@ -1085,9 +1085,9 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 1 AND "ContractValue" = 'Other' AND "Archived" = false) jr34oth, -- 335
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 1 AND "ContractValue" IN ('Permanent','Temporary') AND "Archived" = false) jr34emp, -- 336
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 1 AND "Archived" = false) jr34work, -- 337
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 1 AND "JobType" = 'Starters'),0) jr34strt, -- 338
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 1 AND "JobType" = 'Leavers'),0) jr34stop, -- 339
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 1 AND "JobType" = 'Vacancies'),0) jr34vacy, -- 340
+       CASE WHEN "StartersValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 1 AND "JobType" = 'Starters'),-1) END jr34strt, -- 338
+       CASE WHEN "LeaversValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 1 AND "JobType" = 'Leavers'),-1) END jr34stop, -- 339
+       CASE WHEN "VacanciesValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 1 AND "JobType" = 'Vacancies'),-1) END jr34vacy, -- 340
        COALESCE((SELECT 1 FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 24 AND "Archived" = false LIMIT 1),0) jr35flag, -- 341
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 24 AND "ContractValue" = 'Permanent' AND "Archived" = false) jr35perm, -- 342
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 24 AND "ContractValue" = 'Temporary' AND "Archived" = false) jr35temp, -- 343
@@ -1096,9 +1096,9 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 24 AND "ContractValue" = 'Other' AND "Archived" = false) jr35oth, -- 346
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 24 AND "ContractValue" IN ('Permanent','Temporary') AND "Archived" = false) jr35emp, -- 347
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 24 AND "Archived" = false) jr35work, -- 348
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 24 AND "JobType" = 'Starters'),0) jr35strt, -- 349
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 24 AND "JobType" = 'Leavers'),0) jr35stop, -- 350
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 24 AND "JobType" = 'Vacancies'),0) jr35vacy, -- 351
+       CASE WHEN "StartersValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 24 AND "JobType" = 'Starters'),-1) END jr35strt, -- 349
+       CASE WHEN "LeaversValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 24 AND "JobType" = 'Leavers'),-1) END jr35stop, -- 350
+       CASE WHEN "VacanciesValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 24 AND "JobType" = 'Vacancies'),-1) END jr35vacy, -- 351
        COALESCE((SELECT 1 FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 19 AND "Archived" = false LIMIT 1),0) jr36flag, -- 352
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 19 AND "ContractValue" = 'Permanent' AND "Archived" = false) jr36perm, -- 353
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 19 AND "ContractValue" = 'Temporary' AND "Archived" = false) jr36temp, -- 354
@@ -1107,9 +1107,9 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 19 AND "ContractValue" = 'Other' AND "Archived" = false) jr36oth, -- 357
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 19 AND "ContractValue" IN ('Permanent','Temporary') AND "Archived" = false) jr36emp, -- 358
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 19 AND "Archived" = false) jr36work, -- 359
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 19 AND "JobType" = 'Starters'),0) jr36strt, -- 360
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 19 AND "JobType" = 'Leavers'),0) jr36stop, -- 361
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 19 AND "JobType" = 'Vacancies'),0) jr36vacy, -- 362
+       CASE WHEN "StartersValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 19 AND "JobType" = 'Starters'),-1) END jr36strt, -- 360
+       CASE WHEN "LeaversValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 19 AND "JobType" = 'Leavers'),-1) END jr36stop, -- 361
+       CASE WHEN "VacanciesValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 19 AND "JobType" = 'Vacancies'),-1) END jr36vacy, -- 362
        COALESCE((SELECT 1 FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 17 AND "Archived" = false LIMIT 1),0) jr37flag, -- 363
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 17 AND "ContractValue" = 'Permanent' AND "Archived" = false) jr37perm, -- 364
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 17 AND "ContractValue" = 'Temporary' AND "Archived" = false) jr37temp, -- 365
@@ -1118,9 +1118,9 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 17 AND "ContractValue" = 'Other' AND "Archived" = false) jr37oth, -- 368
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 17 AND "ContractValue" IN ('Permanent','Temporary') AND "Archived" = false) jr37emp, -- 369
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 17 AND "Archived" = false) jr37work, -- 370
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 17 AND "JobType" = 'Starters'),0) jr37strt, -- 371
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 17 AND "JobType" = 'Leavers'),0) jr37stop, -- 372
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 17 AND "JobType" = 'Vacancies'),0) jr37vacy, -- 373
+       CASE WHEN "StartersValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 17 AND "JobType" = 'Starters'),-1) END jr37strt, -- 371
+       CASE WHEN "LeaversValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 17 AND "JobType" = 'Leavers'),-1) END jr37stop, -- 372
+       CASE WHEN "VacanciesValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 17 AND "JobType" = 'Vacancies'),-1) END jr37vacy, -- 373
        COALESCE((SELECT 1 FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 16 AND "Archived" = false LIMIT 1),0) jr38flag, -- 374
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 16 AND "ContractValue" = 'Permanent' AND "Archived" = false) jr38perm, -- 375
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 16 AND "ContractValue" = 'Temporary' AND "Archived" = false) jr38temp, -- 376
@@ -1129,9 +1129,9 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 16 AND "ContractValue" = 'Other' AND "Archived" = false) jr38oth, -- 379
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 16 AND "ContractValue" IN ('Permanent','Temporary') AND "Archived" = false) jr38emp, -- 380
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 16 AND "Archived" = false) jr38work, -- 381
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 16 AND "JobType" = 'Starters'),0) jr38strt, -- 382
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 16 AND "JobType" = 'Leavers'),0) jr38stop, -- 383
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 16 AND "JobType" = 'Vacancies'),0) jr38vacy, -- 384
+       CASE WHEN "StartersValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 16 AND "JobType" = 'Starters'),-1) END jr38strt, -- 382
+       CASE WHEN "LeaversValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 16 AND "JobType" = 'Leavers'),-1) END jr38stop, -- 383
+       CASE WHEN "VacanciesValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 16 AND "JobType" = 'Vacancies'),-1) END jr38vacy, -- 384
        COALESCE((SELECT 1 FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 7 AND "Archived" = false LIMIT 1),0) jr39flag, -- 385
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 7 AND "ContractValue" = 'Permanent' AND "Archived" = false) jr39perm, -- 386
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 7 AND "ContractValue" = 'Temporary' AND "Archived" = false) jr39temp, -- 387
@@ -1140,9 +1140,9 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 7 AND "ContractValue" = 'Other' AND "Archived" = false) jr39oth, -- 390
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 7 AND "ContractValue" IN ('Permanent','Temporary') AND "Archived" = false) jr39emp, -- 391
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 7 AND "Archived" = false) jr39work, -- 392
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 7 AND "JobType" = 'Starters'),0) jr39strt, -- 393
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 7 AND "JobType" = 'Leavers'),0) jr39stop, -- 394
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 7 AND "JobType" = 'Vacancies'),0) jr39vacy, -- 395
+       CASE WHEN "StartersValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 7 AND "JobType" = 'Starters'),-1) END jr39strt, -- 393
+       CASE WHEN "LeaversValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 7 AND "JobType" = 'Leavers'),-1) END jr39stop, -- 394
+       CASE WHEN "VacanciesValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 7 AND "JobType" = 'Vacancies'),-1) END jr39vacy, -- 395
        COALESCE((SELECT 1 FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 8 AND "Archived" = false LIMIT 1),0) jr40flag, -- 396
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 8 AND "ContractValue" = 'Permanent' AND "Archived" = false) jr40perm, -- 397
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 8 AND "ContractValue" = 'Temporary' AND "Archived" = false) jr40temp, -- 398
@@ -1151,9 +1151,9 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 8 AND "ContractValue" = 'Other' AND "Archived" = false) jr40oth, -- 401
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 8 AND "ContractValue" IN ('Permanent','Temporary') AND "Archived" = false) jr40emp, -- 402
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 8 AND "Archived" = false) jr40work, -- 403
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 8 AND "JobType" = 'Starters'),0) jr40strt, -- 404
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 8 AND "JobType" = 'Leavers'),0) jr40stop, -- 405
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 8 AND "JobType" = 'Vacancies'),0) jr40vacy, -- 406
+       CASE WHEN "StartersValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 8 AND "JobType" = 'Starters'),-1) END jr40strt, -- 404
+       CASE WHEN "LeaversValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 8 AND "JobType" = 'Leavers'),-1) END jr40stop, -- 405
+       CASE WHEN "VacanciesValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 8 AND "JobType" = 'Vacancies'),-1) END jr40vacy, -- 406
        COALESCE((SELECT 1 FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 9 AND "Archived" = false LIMIT 1),0) jr41flag, -- 407
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 9 AND "ContractValue" = 'Permanent' AND "Archived" = false) jr41perm, -- 408
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 9 AND "ContractValue" = 'Temporary' AND "Archived" = false) jr41temp, -- 409
@@ -1162,9 +1162,9 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 9 AND "ContractValue" = 'Other' AND "Archived" = false) jr41oth, -- 412
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 9 AND "ContractValue" IN ('Permanent','Temporary') AND "Archived" = false) jr41emp, -- 413
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 9 AND "Archived" = false) jr41work, -- 414
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 9 AND "JobType" = 'Starters'),0) jr41strt, -- 415
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 9 AND "JobType" = 'Leavers'),0) jr41stop, -- 416
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 9 AND "JobType" = 'Vacancies'),0) jr41vacy, -- 417
+       CASE WHEN "StartersValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 9 AND "JobType" = 'Starters'),-1) END jr41strt, -- 415
+       CASE WHEN "LeaversValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 9 AND "JobType" = 'Leavers'),-1) END jr41stop, -- 416
+       CASE WHEN "VacanciesValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 9 AND "JobType" = 'Vacancies'),-1) END jr41vacy, -- 417
        COALESCE((SELECT 1 FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 6 AND "Archived" = false LIMIT 1),0) jr42flag, -- 418
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 6 AND "ContractValue" = 'Permanent' AND "Archived" = false) jr42perm, -- 419
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 6 AND "ContractValue" = 'Temporary' AND "Archived" = false) jr42temp, -- 420
@@ -1173,9 +1173,9 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 6 AND "ContractValue" = 'Other' AND "Archived" = false) jr42oth, -- 423
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 6 AND "ContractValue" IN ('Permanent','Temporary') AND "Archived" = false) jr42emp, -- 424
        (SELECT COUNT(1) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "MainJobFKValue" = 6 AND "Archived" = false) jr42work, -- 425
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 6 AND "JobType" = 'Starters'),0) jr42strt, -- 426
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 6 AND "JobType" = 'Leavers'),0) jr42stop, -- 427
-       COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 6 AND "JobType" = 'Vacancies'),0) jr42vacy, -- 428
+       CASE WHEN "StartersValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 6 AND "JobType" = 'Starters'),-1) END jr42strt, -- 426
+       CASE WHEN "LeaversValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 6 AND "JobType" = 'Leavers'),-1) END jr42stop, -- 427
+       CASE WHEN "VacanciesValue" = 'None' THEN 0 ELSE COALESCE((SELECT SUM("Total") FROM "EstablishmentJobs" WHERE "EstablishmentID" = e."EstablishmentID" AND "JobID" = 6 AND "JobType" = 'Vacancies'),-1) END jr42vacy, -- 428
        TO_CHAR("ServiceUsersChangedAt",'DD/MM/YYYY') ut_changedate, -- 429
        TO_CHAR("ServiceUsersSavedAt",'DD/MM/YYYY') ut_savedate, -- 430
        COALESCE((SELECT 1 FROM "EstablishmentServiceUsers" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceUserID" = 1 LIMIT 1),0) ut01flag, -- 431
@@ -1208,12 +1208,12 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
                (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 24) = 1 THEN 1
           ELSE 0
        END st01flag, -- 456
-       (
+       COALESCE((
           SELECT "Answer"
           FROM   "EstablishmentCapacity" ec
                  JOIN "ServicesCapacity" sc ON ec."ServiceCapacityID" = sc."ServiceCapacityID" AND sc."ServiceID" = 24 AND sc."Type" = 'Capacity'
           WHERE  ec."EstablishmentID" = e."EstablishmentID"
-       ) st01cap, -- 457
+       ), -1) st01cap, -- 457
        CASE
           WHEN "MainServiceFKValue" = 24 OR
              (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 24) = 1 THEN
@@ -1226,12 +1226,12 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
              TO_CHAR("CapacityServicesSavedAt",'DD/MM/YYYY')
           ELSE NULL
        END st01cap_savedate, -- 459
-       (
+       COALESCE((
           SELECT "Answer"
           FROM   "EstablishmentCapacity" ec
                  JOIN "ServicesCapacity" sc ON ec."ServiceCapacityID" = sc."ServiceCapacityID" AND sc."ServiceID" = 24 AND sc."Type" = 'Utilisation'
           WHERE  ec."EstablishmentID" = e."EstablishmentID"
-       ) st01util, -- 460
+       ), -1) st01util, -- 460
        CASE
           WHEN "MainServiceFKValue" = 24 OR
              (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 24) = 1 THEN
@@ -1249,12 +1249,12 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
                (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 25) = 1 THEN 1
           ELSE 0
        END st02flag, -- 463
-       (
+       COALESCE((
           SELECT "Answer"
           FROM   "EstablishmentCapacity" ec
                  JOIN "ServicesCapacity" sc ON ec."ServiceCapacityID" = sc."ServiceCapacityID" AND sc."ServiceID" = 25 AND sc."Type" = 'Capacity'
           WHERE  ec."EstablishmentID" = e."EstablishmentID"
-       ) st02cap, -- 464
+       ), -1) st02cap, -- 464
        CASE
           WHEN "MainServiceFKValue" = 25 OR
              (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 25) = 1 THEN
@@ -1267,12 +1267,12 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
              TO_CHAR("CapacityServicesSavedAt",'DD/MM/YYYY')
           ELSE NULL
        END st02cap_savedate, -- 466
-       (
+       COALESCE((
           SELECT "Answer"
           FROM   "EstablishmentCapacity" ec
                  JOIN "ServicesCapacity" sc ON ec."ServiceCapacityID" = sc."ServiceCapacityID" AND sc."ServiceID" = 25 AND sc."Type" = 'Utilisation'
           WHERE  ec."EstablishmentID" = e."EstablishmentID"
-       ) st02util, -- 467
+       ), -1) st02util, -- 467
        CASE
           WHEN "MainServiceFKValue" = 25 OR
              (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 25) = 1 THEN
@@ -1290,12 +1290,12 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
                (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 13) = 1 THEN 1
           ELSE 0
        END st53flag, -- 470
-       (
+       COALESCE((
           SELECT "Answer"
           FROM   "EstablishmentCapacity" ec
                  JOIN "ServicesCapacity" sc ON ec."ServiceCapacityID" = sc."ServiceCapacityID" AND sc."ServiceID" = 13 AND sc."Type" = 'Utilisation'
           WHERE  ec."EstablishmentID" = e."EstablishmentID"
-       ) st53util, -- 471
+       ), -1) st53util, -- 471
        CASE
           WHEN "MainServiceFKValue" = 13 OR
              (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 13) = 1 THEN
@@ -1313,12 +1313,12 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
                (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 12) = 1 THEN 1
           ELSE 0
        END st05flag, -- 474
-       (
+       COALESCE((
           SELECT "Answer"
           FROM   "EstablishmentCapacity" ec
                  JOIN "ServicesCapacity" sc ON ec."ServiceCapacityID" = sc."ServiceCapacityID" AND sc."ServiceID" = 12 AND sc."Type" = 'Capacity'
           WHERE  ec."EstablishmentID" = e."EstablishmentID"
-       ) st05cap, -- 475
+       ), -1) st05cap, -- 475
        CASE
           WHEN "MainServiceFKValue" = 12 OR
              (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 12) = 1 THEN
@@ -1331,12 +1331,12 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
              TO_CHAR("CapacityServicesSavedAt",'DD/MM/YYYY')
           ELSE NULL
        END st05cap_savedate, -- 477
-       (
+       COALESCE((
           SELECT "Answer"
           FROM   "EstablishmentCapacity" ec
                  JOIN "ServicesCapacity" sc ON ec."ServiceCapacityID" = sc."ServiceCapacityID" AND sc."ServiceID" = 12 AND sc."Type" = 'Utilisation'
           WHERE  ec."EstablishmentID" = e."EstablishmentID"
-       ) st05util, -- 478
+       ), -1) st05util, -- 478
        CASE
           WHEN "MainServiceFKValue" = 12 OR
              (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 12) = 1 THEN
@@ -1354,12 +1354,12 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
                (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 9) = 1 THEN 1
           ELSE 0
        END st06flag, -- 481
-       (
+       COALESCE((
           SELECT "Answer"
           FROM   "EstablishmentCapacity" ec
                  JOIN "ServicesCapacity" sc ON ec."ServiceCapacityID" = sc."ServiceCapacityID" AND sc."ServiceID" = 9 AND sc."Type" = 'Capacity'
           WHERE  ec."EstablishmentID" = e."EstablishmentID"
-       ) st06cap, -- 482
+       ), -1) st06cap, -- 482
        CASE
           WHEN "MainServiceFKValue" = 9 OR
              (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 9) = 1 THEN
@@ -1372,12 +1372,12 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
              TO_CHAR("CapacityServicesSavedAt",'DD/MM/YYYY')
           ELSE NULL
        END st06cap_savedate, -- 484
-       (
+       COALESCE((
           SELECT "Answer"
           FROM   "EstablishmentCapacity" ec
                  JOIN "ServicesCapacity" sc ON ec."ServiceCapacityID" = sc."ServiceCapacityID" AND sc."ServiceID" = 9 AND sc."Type" = 'Utilisation'
           WHERE  ec."EstablishmentID" = e."EstablishmentID"
-       ) st06util, -- 485
+       ), -1) st06util, -- 485
        CASE
           WHEN "MainServiceFKValue" = 9 OR
              (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 9) = 1 THEN
@@ -1395,12 +1395,12 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
                (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 10) = 1 THEN 1
           ELSE 0
        END st07flag, -- 488
-       (
+       COALESCE((
           SELECT "Answer"
           FROM   "EstablishmentCapacity" ec
                  JOIN "ServicesCapacity" sc ON ec."ServiceCapacityID" = sc."ServiceCapacityID" AND sc."ServiceID" = 10 AND sc."Type" = 'Capacity'
           WHERE  ec."EstablishmentID" = e."EstablishmentID"
-       ) st07cap, -- 489
+       ), -1) st07cap, -- 489
        CASE
           WHEN "MainServiceFKValue" = 10 OR
              (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 10) = 1 THEN
@@ -1413,12 +1413,12 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
              TO_CHAR("CapacityServicesSavedAt",'DD/MM/YYYY')
           ELSE NULL
        END st07cap_savedate, -- 491
-       (
+       COALESCE((
           SELECT "Answer"
           FROM   "EstablishmentCapacity" ec
                  JOIN "ServicesCapacity" sc ON ec."ServiceCapacityID" = sc."ServiceCapacityID" AND sc."ServiceID" = 10 AND sc."Type" = 'Utilisation'
           WHERE  ec."EstablishmentID" = e."EstablishmentID"
-       ) st07util, -- 492
+       ), -1) st07util, -- 492
        CASE
           WHEN "MainServiceFKValue" = 10 OR
              (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 10) = 1 THEN
@@ -1436,12 +1436,12 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
                (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 11) = 1 THEN 1
           ELSE 0
        END st10flag, -- 495
-       (
+       COALESCE((
           SELECT "Answer"
           FROM   "EstablishmentCapacity" ec
                  JOIN "ServicesCapacity" sc ON ec."ServiceCapacityID" = sc."ServiceCapacityID" AND sc."ServiceID" = 11 AND sc."Type" = 'Utilisation'
           WHERE  ec."EstablishmentID" = e."EstablishmentID"
-       ) st10util, -- 496
+       ), -1) st10util, -- 496
        CASE
           WHEN "MainServiceFKValue" = 11 OR
              (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 11) = 1 THEN
@@ -1459,12 +1459,12 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
                (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 20) = 1 THEN 1
           ELSE 0
        END st08flag, -- 499
-       (
+       COALESCE((
           SELECT "Answer"
           FROM   "EstablishmentCapacity" ec
                  JOIN "ServicesCapacity" sc ON ec."ServiceCapacityID" = sc."ServiceCapacityID" AND sc."ServiceID" = 20 AND sc."Type" = 'Utilisation'
           WHERE  ec."EstablishmentID" = e."EstablishmentID"
-       ) st08util, -- 500
+       ), -1) st08util, -- 500
        CASE
           WHEN "MainServiceFKValue" = 20 OR
              (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 20) = 1 THEN
@@ -1482,12 +1482,12 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
                (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 21) = 1 THEN 1
           ELSE 0
        END st54flag, -- 503
-       (
+       COALESCE((
           SELECT "Answer"
           FROM   "EstablishmentCapacity" ec
                  JOIN "ServicesCapacity" sc ON ec."ServiceCapacityID" = sc."ServiceCapacityID" AND sc."ServiceID" = 21 AND sc."Type" = 'Utilisation'
           WHERE  ec."EstablishmentID" = e."EstablishmentID"
-       ) st54util, -- 504
+       ), -1) st54util, -- 504
        CASE
           WHEN "MainServiceFKValue" = 21 OR
              (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 21) = 1 THEN
@@ -1505,12 +1505,12 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
                (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 22) = 1 THEN 1
           ELSE 0
        END st74flag, -- 507
-       (
+       COALESCE((
           SELECT "Answer"
           FROM   "EstablishmentCapacity" ec
                  JOIN "ServicesCapacity" sc ON ec."ServiceCapacityID" = sc."ServiceCapacityID" AND sc."ServiceID" = 22 AND sc."Type" = 'Utilisation'
           WHERE  ec."EstablishmentID" = e."EstablishmentID"
-       ) st74util, -- 508
+       ), -1) st74util, -- 508
        CASE
           WHEN "MainServiceFKValue" = 22 OR
              (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 22) = 1 THEN
@@ -1528,12 +1528,12 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
                (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 23) = 1 THEN 1
           ELSE 0
        END st55flag, -- 511
-       (
+       COALESCE((
           SELECT "Answer"
           FROM   "EstablishmentCapacity" ec
                  JOIN "ServicesCapacity" sc ON ec."ServiceCapacityID" = sc."ServiceCapacityID" AND sc."ServiceID" = 23 AND sc."Type" = 'Utilisation'
           WHERE  ec."EstablishmentID" = e."EstablishmentID"
-       ) st55util, -- 512
+       ), -1) st55util, -- 512
        CASE
           WHEN "MainServiceFKValue" = 23 OR
              (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 23) = 1 THEN
@@ -1551,12 +1551,12 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
                (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 35) = 1 THEN 1
           ELSE 0
        END st73flag, -- 515
-       (
+       COALESCE((
           SELECT "Answer"
           FROM   "EstablishmentCapacity" ec
                  JOIN "ServicesCapacity" sc ON ec."ServiceCapacityID" = sc."ServiceCapacityID" AND sc."ServiceID" = 35 AND sc."Type" = 'Utilisation'
           WHERE  ec."EstablishmentID" = e."EstablishmentID"
-       ) st73util, -- 516
+       ), -1) st73util, -- 516
        CASE
           WHEN "MainServiceFKValue" = 35 OR
              (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 35) = 1 THEN
@@ -1574,12 +1574,12 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
                (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 18) = 1 THEN 1
           ELSE 0
        END st12flag, -- 519
-       (
+       COALESCE((
           SELECT "Answer"
           FROM   "EstablishmentCapacity" ec
                  JOIN "ServicesCapacity" sc ON ec."ServiceCapacityID" = sc."ServiceCapacityID" AND sc."ServiceID" = 18 AND sc."Type" = 'Utilisation'
           WHERE  ec."EstablishmentID" = e."EstablishmentID"
-       ) st12util, -- 520
+       ), -1) st12util, -- 520
        CASE
           WHEN "MainServiceFKValue" = 18 OR
              (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 18) = 1 THEN
@@ -1622,12 +1622,12 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
                (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 19) = 1 THEN 1
           ELSE 0
        END st17flag, -- 528
-       (
+       COALESCE((
           SELECT "Answer"
           FROM   "EstablishmentCapacity" ec
                  JOIN "ServicesCapacity" sc ON ec."ServiceCapacityID" = sc."ServiceCapacityID" AND sc."ServiceID" = 19 AND sc."Type" = 'Capacity'
           WHERE  ec."EstablishmentID" = e."EstablishmentID"
-       ) st17cap, -- 529
+       ), -1) st17cap, -- 529
        CASE
           WHEN "MainServiceFKValue" = 19 OR
              (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 19) = 1 THEN
@@ -1640,12 +1640,12 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
              TO_CHAR("CapacityServicesSavedAt",'DD/MM/YYYY')
           ELSE NULL
        END st17cap_savedate, -- 531
-       (
+       COALESCE((
           SELECT "Answer"
           FROM   "EstablishmentCapacity" ec
                  JOIN "ServicesCapacity" sc ON ec."ServiceCapacityID" = sc."ServiceCapacityID" AND sc."ServiceID" = 19 AND sc."Type" = 'Utilisation'
           WHERE  ec."EstablishmentID" = e."EstablishmentID"
-       ) st17util, -- 532
+       ), -1) st17util, -- 532
        CASE
           WHEN "MainServiceFKValue" = 19 OR
              (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 19) = 1 THEN
@@ -1834,7 +1834,7 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
        CASE WHEN e."IsParent" THEN e."EstablishmentID" ELSE CASE WHEN e."ParentID" IS NOT NULL THEN e."ParentID" ELSE e."EstablishmentID" END END orgid, -- 005
        e."NmdsID" nmdsid, -- 006
        w."ID" workerid, -- 007
-       -- UPPER(ENCODE(HMAC(REPLACE("NationalInsuranceNumberValue",' ','') || TO_CHAR("DateOfBirthValue",'YYYYMMDD'),'<gidek>','md5'),'hex')) wrkglbid, -- 008
+       UPPER(MD5(REPLACE("NationalInsuranceNumberValue",' ','') || TO_CHAR("DateOfBirthValue", 'YYYYMMDD'))) wrkglbid, -- 008
        1 wkplacestat, -- 009
        TO_CHAR(w."created",'DD/MM/YYYY') createddate, -- 010
        TO_CHAR(GREATEST(
