@@ -20,27 +20,27 @@
 ----------------------------------------------
 select 
 	usr."EmailValue" as "EmailAddress",
-    usr."FullNameValue" as "UserName",
+  usr."FullNameValue" as "UserName",
 	usr."EstablishmentID",
 	estab."NmdsID",
-    usr."UserRoleValue" as "UserType",
-    estab."NameValue" as "WorkplaceName",
-    CASE 
-      WHEN estab."IsParent" = true  THEN 'Parent'
-      WHEN estab."IsParent" = false AND estab."ParentID" is not null  THEN 'Sub'
-      ELSE 'Standalone'
-    END AS "ParentStatus",
-    estab."ParentID",
-    CASE 
-      WHEN estab."ParentID" is not null THEN estab."DataOwner"
-      ELSE null
-    END AS "DataOwner"
+  usr."UserRoleValue" as "UserType",
+  estab."NameValue" as "WorkplaceName",
+  CASE 
+    WHEN estab."IsParent" = true  THEN 'Parent'
+    WHEN estab."IsParent" = false AND estab."ParentID" is not null  THEN 'Sub'
+    ELSE 'Standalone'
+  END AS "ParentStatus",
+  estab."ParentID",
+  CASE 
+    WHEN estab."ParentID" is not null THEN estab."DataOwner"
+    ELSE null
+  END AS "DataOwner"
 from 
 	cqc."User" usr 
 inner join
 	cqc."Establishment" estab on usr."EstablishmentID" = estab."EstablishmentID"
 where
-    usr."EmailValue" is not null
-    and usr."EmailValue" <> ''
+  usr."EmailValue" is not null
+  and usr."EmailValue" <> ''
 order by 
 	"ParentStatus", usr."EmailValue";
