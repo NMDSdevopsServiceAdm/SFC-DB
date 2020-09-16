@@ -33,7 +33,7 @@ working_dir="/efs/sfc-db/report"; sql_filename="`basename $0 .sh`_${rpt_id}.sql"
 [[ "`which cf7`" = "/usr/bin/cf7" ]] && _mycf="cf7" || _mycf="cf"
 run_date=`date "+%d-%m-%Y"` # This has to be the 1st day of following month.
 
-run_date="10-09-2020" # for report of May, 2020.
+run_date="16-09-2020" # for report of May, 2020.
 echo "\nPlease note that the variable assignment i.e., [ \033[0;105mrun_date=${run_date}\033[0m ] is hard-coded at the moment. That need removing.\n"
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 case "${rpt_id}" in
@@ -1744,7 +1744,8 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
           WHEN "MainServiceFKValue" = 15 OR
              (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 15) = 1 THEN 1
           ELSE 0
-       END st52flag -- 551
+       END st52flag, -- 551
+       COALESCE((SELECT 1 FROM cqc."MandatoryTraining" WHERE "EstablishmentFK" = e."EstablishmentID" LIMIT 1),0) hasmandatorytraining -- 552
 FROM   "Establishment" e JOIN "Afr1BatchiSkAi0mo" b ON e."EstablishmentID" = b."EstablishmentID" AND b."BatchNo" = <batch_id>;
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 SELECT CURRENT_DATABASE(), NOW(), 'Database view created and started creating CSV file.' status;
