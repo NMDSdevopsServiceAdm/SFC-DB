@@ -38,7 +38,7 @@ CREATE TABLE cqc."Benchmarks"
 -------------------
 SELECT 'Importing new benchmark data from the csvs into temp source table';
 TRUNCATE cqc."Benchmarks";
-\copy cqc."Benchmarks" FROM '/mnt/c/Users/arussell/Downloads/benchmark-data2.csv' WITH (FORMAT csv, ENCODING 'UTF8');
+\copy cqc."Benchmarks" FROM '/mnt/c/Users/arussell/Downloads/benchmarks-aug2020.csv' WITH (FORMAT csv, ENCODING 'UTF8', HEADER);
 -------------------
 -- Check new data successfully updated
 -------------------
