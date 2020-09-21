@@ -33,7 +33,7 @@ working_dir="/efs/sfc-db/report"; sql_filename="`basename $0 .sh`_${rpt_id}.sql"
 [[ "`which cf7`" = "/usr/bin/cf7" ]] && _mycf="cf7" || _mycf="cf"
 run_date=`date "+%d-%m-%Y"` # This has to be the 1st day of following month.
 
-run_date="01-04-2020" # for report of March, 2020.
+run_date="16-09-2020" # for report of May, 2020.
 echo "\nPlease note that the variable assignment i.e., [ \033[0;105mrun_date=${run_date}\033[0m ] is hard-coded at the moment. That need removing.\n"
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 case "${rpt_id}" in
@@ -286,7 +286,8 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
               "RegisteredNurseChangedAt",
               "NurseSpecialismFKChangedAt",
               "LocalIdentifierChangedAt",
-              "EstablishmentFkChangedAt")),'DD/MM/YYYY')
+              "EstablishmentFkChangedAt",
+              "FluJabChangedAt")),'DD/MM/YYYY')
        FROM   "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "Archived" = false) workerupdate, -- 016
        TO_CHAR(GREATEST(e.updated,(SELECT MAX(updated) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "Archived" = false)),'DD/MM/YYYY') mupddate, -- 017
        TO_CHAR(GREATEST((CASE WHEN e.updated < GREATEST(e.updated,(SELECT MAX(updated) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "Archived" = false)) THEN e.updated ELSE NULL END),(SELECT MAX(updated) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "Archived" = false AND updated < GREATEST(e.updated,(SELECT MAX(updated) FROM "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "Archived" = false)))),'DD/MM/YYYY') previous_mupddate, -- 018
@@ -329,7 +330,8 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
               "RegisteredNurseSavedAt",
               "NurseSpecialismFKSavedAt",
               "LocalIdentifierSavedAt",
-              "EstablishmentFkSavedAt")),'DD/MM/YYYY')
+              "EstablishmentFkSavedAt",
+              "FluJabSavedAt")),'DD/MM/YYYY')
        FROM   "Worker" WHERE "EstablishmentFK" = e."EstablishmentID" AND "Archived" = false) workersavedate, -- 022a
        CASE "ShareDataWithCQC" WHEN true THEN 1 ELSE 0 END cqcpermission, -- 023
        CASE "ShareDataWithLA" WHEN true THEN 1 ELSE 0 END lapermission, -- 024
@@ -1742,7 +1744,8 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
           WHEN "MainServiceFKValue" = 15 OR
              (SELECT COUNT(1) FROM "EstablishmentServices" WHERE "EstablishmentID" = e."EstablishmentID" AND "ServiceID" = 15) = 1 THEN 1
           ELSE 0
-       END st52flag -- 551
+       END st52flag, -- 551
+       COALESCE((SELECT 1 FROM cqc."MandatoryTraining" WHERE "EstablishmentFK" = e."EstablishmentID" LIMIT 1),0) hasmandatorytraining -- 552
 FROM   "Establishment" e JOIN "Afr1BatchiSkAi0mo" b ON e."EstablishmentID" = b."EstablishmentID" AND b."BatchNo" = <batch_id>;
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 SELECT CURRENT_DATABASE(), NOW(), 'Database view created and started creating CSV file.' status;
@@ -1834,7 +1837,7 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
        CASE WHEN e."IsParent" THEN e."EstablishmentID" ELSE CASE WHEN e."ParentID" IS NOT NULL THEN e."ParentID" ELSE e."EstablishmentID" END END orgid, -- 005
        e."NmdsID" nmdsid, -- 006
        w."ID" workerid, -- 007
-       -- UPPER(ENCODE(HMAC(REPLACE("NationalInsuranceNumberValue",' ','') || TO_CHAR("DateOfBirthValue",'YYYYMMDD'),'<gidek>','md5'),'hex')) wrkglbid, -- 008
+       UPPER(MD5(REPLACE("NationalInsuranceNumberValue",' ','') || TO_CHAR("DateOfBirthValue", 'YYYYMMDD'))) wrkglbid, -- 008
        1 wkplacestat, -- 009
        TO_CHAR(w."created",'DD/MM/YYYY') createddate, -- 010
        TO_CHAR(GREATEST(
@@ -1871,7 +1874,8 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
           w."RegisteredNurseChangedAt",
           w."NurseSpecialismFKChangedAt",
           w."LocalIdentifierChangedAt",
-          w."EstablishmentFkChangedAt"),'DD/MM/YYYY') updateddate, -- 011
+          w."EstablishmentFkChangedAt",
+          w."FluJabChangedAt"),'DD/MM/YYYY') updateddate, -- 011
        TO_CHAR(GREATEST(
           w."NameOrIdSavedAt",
           w."ContractSavedAt",
@@ -1906,7 +1910,8 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
           w."RegisteredNurseSavedAt",
           w."NurseSpecialismFKSavedAt",
           w."LocalIdentifierSavedAt",
-          w."EstablishmentFkSavedAt"),'DD/MM/YYYY') savedate, -- 012
+          w."EstablishmentFkSavedAt",
+          w."FluJabSavedAt"),'DD/MM/YYYY') savedate, -- 012
        CASE e."ShareDataWithCQC" WHEN true THEN 1 ELSE 0 END cqcpermission, -- 013
        CASE e."ShareDataWithLA" WHEN true THEN 1 ELSE 0 END lapermission, -- 014
        CASE WHEN e."IsRegulated" is true THEN 2 ELSE 0 END regtype, -- 015
@@ -4042,10 +4047,13 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
        (SELECT COUNT(1) FROM "WorkerTraining" WHERE "WorkerFK" = w."ID" AND "CategoryFK" = 34) tr40count, -- 663
        (SELECT COUNT(1) FROM "WorkerTraining" WHERE "WorkerFK" = w."ID" AND "CategoryFK" = 34 AND "Accredited" = 'Yes') tr40ac, -- 664
        (SELECT COUNT(1) FROM "WorkerTraining" WHERE "WorkerFK" = w."ID" AND "CategoryFK" = 34 AND "Accredited" = 'No') tr40nac, -- 665
-       (SELECT COUNT(1) FROM "WorkerTraining" WHERE "WorkerFK" = w."ID" AND "CategoryFK" = 34 AND "Accredited" = 'Don''t know') tr40dn -- 666
+       (SELECT COUNT(1) FROM "WorkerTraining" WHERE "WorkerFK" = w."ID" AND "CategoryFK" = 34 AND "Accredited" = 'Don''t know') tr40dn, -- 666
+       CASE "FluJabValue" WHEN 'No' THEN 2 WHEN 'Yes' THEN 1 WHEN 'Don''t know' THEN -2 ELSE -1 END FluJab2020, -- 667
+       TO_CHAR("FluJabChangedAt",'DD/MM/YYYY') FluJab2020_changedate, -- 668
+       TO_CHAR("FluJabSavedAt",'DD/MM/YYYY') FluJab2020_savedate -- 669
 FROM   "Establishment" e
-       JOIN "Worker" w ON e."EstablishmentID" = w."EstablishmentFK" AND e."Archived" = false AND w."Archived" = false
-       JOIN "Afr2BatchiSkAi0mo" b ON e."EstablishmentID" = b."EstablishmentID" AND b."BatchNo" = <batch_id>;
+JOIN "Worker" w ON e."EstablishmentID" = w."EstablishmentFK" AND e."Archived" = false AND w."Archived" = false
+JOIN "Afr2BatchiSkAi0mo" b ON e."EstablishmentID" = b."EstablishmentID" AND b."BatchNo" = <batch_id>;
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 SELECT CURRENT_DATABASE(), NOW(), 'Database view created and started creating CSV file.' status;
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
