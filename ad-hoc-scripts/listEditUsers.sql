@@ -6,9 +6,11 @@ SELECT
 		WHEN usr."IsPrimary" = true THEN 'Yes'
 		ELSE 'No'
 	END as primaryuser,
-    usr."EmailValue"
+    usr."EmailValue",
+    srv."name" mainservice
 FROM cqc."Establishment" as est
 FULL OUTER JOIN cqc."User" as usr ON est."EstablishmentID" = usr."EstablishmentID"
+LEFT JOIN cqc."services" as srv ON est."MainServiceFKValue" = srv."id"
 WHERE
     est."DataOwner" = 'Workplace'
 AND
