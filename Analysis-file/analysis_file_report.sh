@@ -5594,7 +5594,7 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
           LIMIT 1
        ),-1) homelauthid, -- 063
        'na' homeparliamentaryconstituency, -- 064
-       'na' distwrkk, -- 065
+       (select (point(e."Longitude",e."Latitude") <@> point(w."Longitude",w."Latitude")) as "distwrkk") distwrkk, -- 65
        CASE
           WHEN "RecruitedFromValue" IS NULL THEN -1
           WHEN "RecruitedFromValue" = 'No' THEN 225
