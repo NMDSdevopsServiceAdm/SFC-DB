@@ -4079,6 +4079,9 @@ SELECT CURRENT_DATABASE(), NOW(), 'Started creating batch table.' status;
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 DROP TABLE IF EXISTS cqc."Afr3BatchiSkAi0mo" CASCADE; -- afr stands for Analysis File Report.
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+CREATE EXTENSION IF NOT EXISTS cube SCHEMA cqc;
+CREATE EXTENSION IF NOT EXISTS earthdistance SCHEMA cqc;
+
 CREATE TABLE "Afr3BatchiSkAi0mo" AS
 SELECT "EstablishmentID",
        "NoOfWorkers",
