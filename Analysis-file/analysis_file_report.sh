@@ -1828,6 +1828,9 @@ SET SEARCH_PATH TO cqc;
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 SELECT CURRENT_DATABASE(), NOW(), 'Started creating database view.' status;
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+CREATE EXTENSION IF NOT EXISTS cube SCHEMA cqc;
+CREATE EXTENSION IF NOT EXISTS earthdistance SCHEMA cqc;
+
 CREATE OR REPLACE TEMPORARY VIEW v_afr_worker_<batch_id> AS
 SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PART('month',(b."RunDate" - INTERVAL '1 day'))::TEXT,2,'0') period, -- 001
        e."EstablishmentID" establishmentid, -- 002
@@ -3287,7 +3290,7 @@ SELECT 'M' || DATE_PART('year',(b."RunDate" - INTERVAL '1 day')) || LPAD(DATE_PA
           LIMIT 1
        ),-1) homelauthid, -- 061
        'na' homeparliamentaryconstituency, -- 062
-       'na' distwrkk, -- 063
+       (select (point(e."Longitude",e."Latitude") <@> point(w."Longitude",w."Latitude")) as "distwrkk") distwrkk, -- 065
        CASE
           WHEN "RecruitedFromValue" IS NULL THEN -1
           WHEN "RecruitedFromValue" = 'No' THEN 225
