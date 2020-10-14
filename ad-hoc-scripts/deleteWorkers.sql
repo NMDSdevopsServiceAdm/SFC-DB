@@ -21,13 +21,12 @@ BEGIN;
     SELECT COUNT(0) FROM cqc."WorkerAudit";
     SELECT COUNT(0) FROM cqc."WorkerQualifications";
 	DELETE FROM 
-		cqc."WorkerQualification2s" quals
+		cqc."WorkerQualifications" quals
 	USING dw 
     WHERE 
         dw."ID" = quals."WorkerFK"
     ;
     SELECT COUNT(0) FROM cqc."WorkerQualifications";
-    SELECT COUNT(0) FROM cqc."WorkerAudit";
     SELECT COUNT(0) FROM cqc."WorkerJobs";
 	DELETE FROM 
 		cqc."WorkerJobs" jobs
