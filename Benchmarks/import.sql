@@ -10,35 +10,19 @@ BEGIN TRANSACTION;
 -------------------
 SELECT 'Creating temp source table';
 
-DROP TABLE IF EXISTS cqc."Benchmarks";
-
-CREATE TABLE cqc."Benchmarks"
-(
-    "CssrID" integer NOT NULL,
-    "MainServiceFK" integer NOT NULL,
-    "Pay" integer,
-    "Sickness" integer,
-    "Turnover" numeric(5,2),
-    "Qualifications" numeric(3,2),
-    "Workplaces" integer NOT NULL,
-    "Staff" integer NOT NULL,
-    CONSTRAINT "Benchmarks_pkey" PRIMARY KEY ("CssrID", "MainServiceFK"),
-    CONSTRAINT "Benchmarks_MainServiceFK_fkey1" FOREIGN KEY ("MainServiceFK")
-        REFERENCES cqc.services ("reportingID") MATCH SIMPLE
-        ON UPDATE NO ACTION
-        ON DELETE NO ACTION
-);
--- if local -- 
--- ALTER TABLE cqc."Benchmarks"
---     OWNER to sfcadmin;
-
 -------------------
 -- Import the new benchmark data from the csvs into your temp table
 -- !! Edit the path to the csvs !!
 -------------------
 SELECT 'Importing new benchmark data from the csvs into temp source table';
-TRUNCATE cqc."Benchmarks";
+TRUNCATE cqc."Benchmarks", cqc."BenchmarksPay", cqc."BenchmarksTurnover", cqc."BenchmarksQualifications", cqc."BenchmarksSickness";
 \copy cqc."Benchmarks" FROM '/mnt/c/Users/arussell/Downloads/benchmarks-aug2020.csv' WITH (FORMAT csv, ENCODING 'UTF8', HEADER);
+\copy cqc."BenchmarksPay" FROM '/mnt/c/Users/arussell/Downloads/benchmarksPay.csv' WITH (FORMAT csv, ENCODING 'UTF8', HEADER);
+\copy cqc."BenchmarksTurnover" FROM '/mnt/c/Users/arussell/Downloads/benchmarksTurnover.csv' WITH (FORMAT csv, ENCODING 'UTF8', HEADER);
+\copy cqc."BenchmarksQualifications" FROM '/mnt/c/Users/arussell/Downloads/benchmarksQualifications.csv' WITH (FORMAT csv, ENCODING 'UTF8', HEADER);
+\copy cqc."BenchmarksSickness" FROM '/mnt/c/Users/arussell/Downloads/benchmarksSickness.csv' WITH (FORMAT csv, ENCODING 'UTF8', HEADER);
+
+INSERT INTO cqc."DataImports" ("Type", "Date") VALUES ('Benchmarks', current_timestamp);
 -------------------
 -- Check new data successfully updated
 -------------------
@@ -46,6 +30,26 @@ SELECT
   COUNT(0)
 FROM 
   cqc."Benchmarks";
+
+  SELECT 
+  COUNT(0)
+FROM 
+  cqc."BenchmarksPay";
+  
+  SELECT 
+  COUNT(0)
+FROM 
+  cqc."BenchmarksTurnover";
+
+  SELECT 
+  COUNT(0)
+FROM 
+  cqc."BenchmarksQualifications";
+
+  SELECT 
+  COUNT(0)
+FROM 
+  cqc."BenchmarksSickness";
 
 ----------------
 END TRANSACTION;
