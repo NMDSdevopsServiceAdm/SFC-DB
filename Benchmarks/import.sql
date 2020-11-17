@@ -5,50 +5,42 @@ BEGIN TRANSACTION;
 -------------------
 \timing
 
--------------------
--- Create a temp table, "benchmarks-source", to hold the new postcode data from the csv
--------------------
-SELECT 'Creating temp source table';
-
--------------------
--- Import the new benchmark data from the csvs into your temp table
--- !! Edit the path to the csvs !!
--------------------
-SELECT 'Importing new benchmark data from the csvs into temp source table';
 TRUNCATE cqc."Benchmarks", cqc."BenchmarksPay", cqc."BenchmarksTurnover", cqc."BenchmarksQualifications", cqc."BenchmarksSickness";
-\copy cqc."Benchmarks" FROM '/mnt/c/Users/arussell/Downloads/benchmarks-aug2020.csv' WITH (FORMAT csv, ENCODING 'UTF8', HEADER);
-\copy cqc."BenchmarksPay" FROM '/mnt/c/Users/arussell/Downloads/benchmarksPay.csv' WITH (FORMAT csv, ENCODING 'UTF8', HEADER);
-\copy cqc."BenchmarksTurnover" FROM '/mnt/c/Users/arussell/Downloads/benchmarksTurnover.csv' WITH (FORMAT csv, ENCODING 'UTF8', HEADER);
-\copy cqc."BenchmarksQualifications" FROM '/mnt/c/Users/arussell/Downloads/benchmarksQualifications.csv' WITH (FORMAT csv, ENCODING 'UTF8', HEADER);
-\copy cqc."BenchmarksSickness" FROM '/mnt/c/Users/arussell/Downloads/benchmarksSickness.csv' WITH (FORMAT csv, ENCODING 'UTF8', HEADER);
+
+\copy cqc."Benchmarks" FROM '/efs/benchmarks/Benchmarks.csv' WITH (FORMAT csv, ENCODING 'UTF8', HEADER);
+\copy cqc."BenchmarksPay" ("CssrID", "MainServiceFK", "EstablishmentFK", "Pay") FROM '/efs/benchmarks/BenchmarksPay.csv' WITH (FORMAT csv, ENCODING 'UTF8', HEADER);
+\copy cqc."BenchmarksTurnover" ("CssrID", "MainServiceFK", "EstablishmentFK", "Turnover") FROM '/efs/benchmarks/BenchmarksTurnover.csv' WITH (FORMAT csv, ENCODING 'UTF8', HEADER);
+\copy cqc."BenchmarksQualifications" ("CssrID", "MainServiceFK", "EstablishmentFK", "Qualifications") FROM '/efs/benchmarks/BenchmarksQualifications.csv' WITH (FORMAT csv, ENCODING 'UTF8', HEADER);
+\copy cqc."BenchmarksSickness" ("CssrID", "MainServiceFK", "EstablishmentFK", "Sickness") FROM '/efs/benchmarks/BenchmarksSickness.csv' WITH (FORMAT csv, ENCODING 'UTF8', HEADER);
 
 INSERT INTO cqc."DataImports" ("Type", "Date") VALUES ('Benchmarks', current_timestamp);
+
 -------------------
 -- Check new data successfully updated
 -------------------
-SELECT 
+SELECT
   COUNT(0)
-FROM 
+FROM
   cqc."Benchmarks";
 
-  SELECT 
+  SELECT
   COUNT(0)
-FROM 
+FROM
   cqc."BenchmarksPay";
-  
-  SELECT 
+
+  SELECT
   COUNT(0)
-FROM 
+FROM
   cqc."BenchmarksTurnover";
 
-  SELECT 
+  SELECT
   COUNT(0)
-FROM 
+FROM
   cqc."BenchmarksQualifications";
 
-  SELECT 
+  SELECT
   COUNT(0)
-FROM 
+FROM
   cqc."BenchmarksSickness";
 
 ----------------
