@@ -7,7 +7,7 @@ BEGIN TRANSACTION;
 
 TRUNCATE cqc."Benchmarks", cqc."BenchmarksPay", cqc."BenchmarksTurnover", cqc."BenchmarksQualifications", cqc."BenchmarksSickness";
 
-\copy cqc."Benchmarks" FROM '/efs/benchmarks/Benchmarks.csv' WITH (FORMAT csv, ENCODING 'UTF8', HEADER);
+\copy cqc."Benchmarks" ("CssrID", "MainServiceFK", "Pay", "Sickness", "Turnover", "Qualifications", "Workplaces", "Staff", "PayWorkplaces", "PayStaff", "SicknessWorkplaces", "SicknessStaff", "QualificationsWorkplaces", "QualificationsStaff", "TurnoverWorkplaces", "TurnoverStaff", "PayGoodCQC", "PayLowTurnover", "SicknessGoodCQC", "SicknessLowTurnover", "QualificationsGoodCQC", "QualificationsLowTurnover", "TurnoverGoodCQC", "TurnoverLowTurnover") FROM '/efs/benchmarks/Benchmarks.csv' WITH (FORMAT csv, ENCODING 'UTF8', HEADER);
 \copy cqc."BenchmarksPay" ("CssrID", "MainServiceFK", "EstablishmentFK", "Pay") FROM '/efs/benchmarks/BenchmarksPay.csv' WITH (FORMAT csv, ENCODING 'UTF8', HEADER);
 \copy cqc."BenchmarksTurnover" ("CssrID", "MainServiceFK", "EstablishmentFK", "Turnover") FROM '/efs/benchmarks/BenchmarksTurnover.csv' WITH (FORMAT csv, ENCODING 'UTF8', HEADER);
 \copy cqc."BenchmarksQualifications" ("CssrID", "MainServiceFK", "EstablishmentFK", "Qualifications") FROM '/efs/benchmarks/BenchmarksQuals.csv' WITH (FORMAT csv, ENCODING 'UTF8', HEADER);
