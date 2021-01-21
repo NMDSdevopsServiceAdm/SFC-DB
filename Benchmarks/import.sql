@@ -43,5 +43,25 @@ FROM
 FROM
   cqc."BenchmarksSickness";
 
+DO
+$$
+BEGIN
+  IF (SELECT COUNT(0) FROM cqc."Benchmarks") = 0 THEN
+    RAISE EXCEPTION 'CANT HAVE NO ROWS IN BENCHMARKS';
+  END IF;
+  IF (SELECT COUNT(0) FROM cqc."BenchmarksPay") = 0 THEN
+    RAISE EXCEPTION 'CANT HAVE NO ROWS IN PAY';
+  END IF;
+  IF (SELECT COUNT(0) FROM cqc."BenchmarksTurnover") = 0 THEN
+    RAISE EXCEPTION 'CANT HAVE NO ROWS IN TURNOVER';
+  END IF;
+  IF (SELECT COUNT(0) FROM cqc."BenchmarksQualifications") = 0 THEN
+    RAISE EXCEPTION 'CANT HAVE NO ROWS IN QUALS';
+  END IF;
+  IF (SELECT COUNT(0) FROM cqc."BenchmarksSickness") = 0 THEN
+    RAISE EXCEPTION 'CANT HAVE NO ROWS IN SICKNESS';
+  END IF;
+END
+$$ LANGUAGE plpgsql;
 ----------------
 END TRANSACTION;
