@@ -22,17 +22,19 @@ FROM
                                         AND "EstablishmentID" = u."EstablishmentID"
                         ) = 0
                         AND u."EstablishmentID" IS NOT NULL
+                        AND u."UserRoleValue" = 'Edit'
         ) as accountsWithoutPrimary;
 
 -- List affected establishment ID's
 SELECT
-        DISTINCT ON (u."EstablishmentID") u."EstablishmentID"
+        DISTINCT ON (u."EstablishmentID") u."EstablishmentID", l."Username"
 FROM
         cqc."User" u
         JOIN cqc."Login" l ON l."RegistrationID" = u."RegistrationID"
 WHERE
         u."IsPrimary" = false
         AND u."EstablishmentID" IS NOT NULL
+        AND u."UserRoleValue" = 'Edit'
         AND (
                 SELECT
                         COUNT(*)
@@ -52,13 +54,11 @@ FROM
 WHERE
         (
                 u2."EstablishmentID",
-                u2."RegistrationID",
-                l2."FirstLogin"
+                u2."RegistrationID"
         ) IN (
                 SELECT
                         u."EstablishmentID",
-                        MIN(u."RegistrationID") userRegistrationID,
-                        MIN(l."FirstLogin") as loginFirstLogin
+                        MIN(u."RegistrationID") userRegistrationID
                 FROM
                         cqc."User" u
                         JOIN cqc."Login" l ON l."RegistrationID" = u."RegistrationID"
@@ -74,6 +74,7 @@ WHERE
                                         AND "EstablishmentID" = u."EstablishmentID"
                         ) = 0
                         AND u."EstablishmentID" IS NOT NULL
+                        AND u."UserRoleValue" = 'Edit'
                 GROUP BY
                         (u."EstablishmentID")
         );
@@ -93,13 +94,11 @@ WHERE
                 WHERE
                         (
                                 u2."EstablishmentID",
-                                u2."RegistrationID",
-                                l2."FirstLogin"
+                                u2."RegistrationID"
                         ) IN (
                                 SELECT
                                         u."EstablishmentID",
-                                        MIN(u."RegistrationID") userRegistrationID,
-                                        MIN(l."FirstLogin") as loginFirstLogin
+                                        MIN(u."RegistrationID") userRegistrationID
                                 FROM
                                         cqc."User" u
                                         JOIN cqc."Login" l ON l."RegistrationID" = u."RegistrationID"
@@ -115,6 +114,7 @@ WHERE
                                                         AND "EstablishmentID" = u."EstablishmentID"
                                         ) = 0
                                         AND u."EstablishmentID" IS NOT NULL
+                                        AND u."UserRoleValue" = 'Edit'
                                 GROUP BY
                                         (u."EstablishmentID")
                         )
@@ -142,6 +142,26 @@ FROM
                                         AND "EstablishmentID" = u."EstablishmentID"
                         ) = 0
                         AND u."EstablishmentID" IS NOT NULL
+                        AND u."UserRoleValue" = 'Edit'
         ) as accountsWithoutPrimary;
+
+SELECT
+        DISTINCT ON (u."EstablishmentID") u."EstablishmentID", l."Username"
+FROM
+        cqc."User" u
+        JOIN cqc."Login" l ON l."RegistrationID" = u."RegistrationID"
+WHERE
+        u."IsPrimary" = false
+        AND (
+                SELECT
+                        count(*)
+                FROM
+                        cqc."User"
+                WHERE
+                        "IsPrimary" = true
+                        AND "EstablishmentID" = u."EstablishmentID"
+        ) = 0
+        AND u."EstablishmentID" IS NOT NULL
+        AND u."UserRoleValue" = 'Edit';
 
 ROLLBACK;
