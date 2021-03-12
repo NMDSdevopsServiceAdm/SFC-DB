@@ -25,9 +25,10 @@ FROM
                         AND u."UserRoleValue" = 'Edit'
         ) as accountsWithoutPrimary;
 
--- List affected establishment ID's
+-- List the affected establishment ID's
 SELECT
-        DISTINCT ON (u."EstablishmentID") u."EstablishmentID", l."Username"
+        DISTINCT ON (u."EstablishmentID") u."EstablishmentID",
+        l."Username"
 FROM
         cqc."User" u
         JOIN cqc."Login" l ON l."RegistrationID" = u."RegistrationID"
@@ -79,7 +80,7 @@ WHERE
                         (u."EstablishmentID")
         );
 
--- Update oldest active user on account to be the Primary user
+-- Update oldest active Edit user on account to be the Primary user
 UPDATE
         cqc."User"
 SET
@@ -146,7 +147,8 @@ FROM
         ) as accountsWithoutPrimary;
 
 SELECT
-        DISTINCT ON (u."EstablishmentID") u."EstablishmentID", l."Username"
+        DISTINCT ON (u."EstablishmentID") u."EstablishmentID",
+        l."Username"
 FROM
         cqc."User" u
         JOIN cqc."Login" l ON l."RegistrationID" = u."RegistrationID"
