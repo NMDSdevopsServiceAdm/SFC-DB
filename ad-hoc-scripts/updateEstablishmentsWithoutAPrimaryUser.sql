@@ -166,4 +166,6 @@ WHERE
         AND u."EstablishmentID" IS NOT NULL
         AND u."UserRoleValue" = 'Edit';
 
-ROLLBACK;
+COMMIT;
+
+END;
