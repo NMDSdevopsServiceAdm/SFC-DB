@@ -167,5 +167,3 @@ WHERE
         AND u."UserRoleValue" = 'Edit';
 
 COMMIT;
-
-END;
