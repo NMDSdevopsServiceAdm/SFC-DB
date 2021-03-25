@@ -18,4 +18,4 @@ SELECT COUNT(1) FROM cqc."Worker" WHERE "SocialCareQualificationFKValue" IS NOT 
 
 SELECT COUNT(1) FROM cqc."Worker" WHERE "HighestQualificationFKValue" IS NOT NULL AND "OtherQualificationsValue" <> 'Yes';
 
-ROLLBACK;
+COMMIT;
