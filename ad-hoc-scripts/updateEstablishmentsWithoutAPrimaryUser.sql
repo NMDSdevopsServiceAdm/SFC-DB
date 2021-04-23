@@ -12,6 +12,7 @@ FROM
                         JOIN cqc."Login" l ON l."RegistrationID" = u."RegistrationID"
                 WHERE
                         u."IsPrimary" = false
+                        AND u."Archived" = false
                         AND (
                                 SELECT
                                         count(*)
@@ -19,6 +20,7 @@ FROM
                                         cqc."User"
                                 WHERE
                                         "IsPrimary" = true
+                                        AND "Archived" = false
                                         AND "EstablishmentID" = u."EstablishmentID"
                         ) = 0
                         AND u."EstablishmentID" IS NOT NULL
@@ -34,6 +36,7 @@ FROM
         JOIN cqc."Login" l ON l."RegistrationID" = u."RegistrationID"
 WHERE
         u."IsPrimary" = false
+        AND u."Archived" = false
         AND u."EstablishmentID" IS NOT NULL
         AND u."UserRoleValue" = 'Edit'
         AND (
@@ -43,6 +46,7 @@ WHERE
                         cqc."User"
                 WHERE
                         "IsPrimary" = true
+                        AND "Archived" = false
                         AND "EstablishmentID" = u."EstablishmentID"
         ) = 0;
 
@@ -65,6 +69,7 @@ WHERE
                         JOIN cqc."Login" l ON l."RegistrationID" = u."RegistrationID"
                 WHERE
                         u."IsPrimary" = false
+                        AND u."Archived" = false
                         AND (
                                 SELECT
                                         count(*)
@@ -72,6 +77,7 @@ WHERE
                                         cqc."User"
                                 WHERE
                                         "IsPrimary" = true
+                                        AND "Archived" = false
                                         AND "EstablishmentID" = u."EstablishmentID"
                         ) = 0
                         AND u."EstablishmentID" IS NOT NULL
@@ -105,6 +111,7 @@ WHERE
                                         JOIN cqc."Login" l ON l."RegistrationID" = u."RegistrationID"
                                 WHERE
                                         u."IsPrimary" = false
+                                        AND u."Archived" = false
                                         AND (
                                                 SELECT
                                                         count(*)
@@ -112,6 +119,7 @@ WHERE
                                                         cqc."User"
                                                 WHERE
                                                         "IsPrimary" = true
+                                                        AND "Archived" = false
                                                         AND "EstablishmentID" = u."EstablishmentID"
                                         ) = 0
                                         AND u."EstablishmentID" IS NOT NULL
@@ -140,6 +148,7 @@ FROM
                                         cqc."User"
                                 WHERE
                                         "IsPrimary" = true
+                                        AND "Archived" = false
                                         AND "EstablishmentID" = u."EstablishmentID"
                         ) = 0
                         AND u."EstablishmentID" IS NOT NULL
@@ -154,6 +163,7 @@ FROM
         JOIN cqc."Login" l ON l."RegistrationID" = u."RegistrationID"
 WHERE
         u."IsPrimary" = false
+        AND u."Archived" = false
         AND (
                 SELECT
                         count(*)
@@ -161,6 +171,7 @@ WHERE
                         cqc."User"
                 WHERE
                         "IsPrimary" = true
+                        AND "Archived" = false
                         AND "EstablishmentID" = u."EstablishmentID"
         ) = 0
         AND u."EstablishmentID" IS NOT NULL
