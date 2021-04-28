@@ -11,7 +11,7 @@ set "NationalInsuranceNumberEncryptedValue" = armor(pgp_pub_encrypt("NationalIns
 '::PUBLIC KEY'
 ,'base64'),'UTF8'))));
 
--- OR BOTH TOGETHER
+-- OR BOTH TOGETHER - this runs faster so best to do when deploying 
 
 update cqc."Worker"
 set "NationalInsuranceNumberEncryptedValue" = armor(pgp_pub_encrypt("NationalInsuranceNumberValue" :: text, dearmor(convert_from(decode(
