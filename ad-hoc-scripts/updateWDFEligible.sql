@@ -1,17 +1,18 @@
 BEGIN;
 
 SELECT
-    "WorkerUID",
-    "NameOrIdValue",
-    "WdfEligible"
+    COUNT(*)
 FROM
     cqc."Worker"
 WHERE
-    "WorkerUID" IN (
-        'af9d7738-9739-4330-bdec-a0a1120ac22f',
-        '6b24de31-e560-42ee-b826-d5552ad1deb9',
-        '6f494cab-7597-438e-bed6-33adace32c90'
-    );
+    "WdfEligible" = false;
+
+SELECT
+    COUNT(*)
+FROM
+    cqc."Worker"
+WHERE
+    "WdfEligible" = true;
 
 UPDATE
     cqc."Worker"
@@ -92,24 +93,20 @@ WHERE
         OR "OtherQualificationsValue" = 'No'
         OR "OtherQualificationsValue" = 'Don''t know'
     )
-    AND "HighestQualificationFKSavedAt" IS NOT NULL
-    AND "WorkerUID" IN (
-        'af9d7738-9739-4330-bdec-a0a1120ac22f',
-        '6b24de31-e560-42ee-b826-d5552ad1deb9',
-        '6f494cab-7597-438e-bed6-33adace32c90'
-    );
+    AND "HighestQualificationFKSavedAt" IS NOT NULL;
 
 SELECT
-    "WorkerUID",
-    "NameOrIdValue",
-    "WdfEligible"
+    COUNT(*)
 FROM
     cqc."Worker"
 WHERE
-    "WorkerUID" IN (
-        'af9d7738-9739-4330-bdec-a0a1120ac22f',
-        '6b24de31-e560-42ee-b826-d5552ad1deb9',
-        '6f494cab-7597-438e-bed6-33adace32c90'
-    );
+    "WdfEligible" = false;
+
+SELECT
+    COUNT(*)
+FROM
+    cqc."Worker"
+WHERE
+    "WdfEligible" = true;
 
 ROLLBACK;
