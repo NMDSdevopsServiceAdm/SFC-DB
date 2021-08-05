@@ -17,6 +17,7 @@ INSERT INTO cqc."LocalAuthorities" ("EstablishmentFK", "LocalAuthorityName", "La
   (1686, 'Bluebird Care Camden & Hampstead', 532, 'Not updated', 'This is a comment'),
   (1547, 'Alexandra Care Home', 71, 'Not updated', null),
   (1653, 'Flaxpits House', 999, 'Update, complete', null);
+  
 COMMIT;
 
 -- to run this sql script: psql -U <username> -h <host> -d <database name> -f ad-hoc-scripts/local-authorities-dev.sql
@@ -37,5 +38,3 @@ COMMIT;
 -- ((SELECT "EstablishmentID" FROM cqc."Establishment" WHERE "NmdsID"='H1002350'), 'Bluebird Care Camden & Hampstead', 532, 'Not updated', 'This is a comment'),
 -- ((SELECT "EstablishmentID" FROM cqc."Establishment" WHERE "NmdsID"='I1002211'), 'Alexandra Care Home', 71, 'Not updated', null),
 -- ((SELECT "EstablishmentID" FROM cqc."Establishment" WHERE "NmdsID"='J1002317'), 'Flaxpits House', 999, 'Update, complete' null);
-
-
